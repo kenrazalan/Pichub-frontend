@@ -1,5 +1,5 @@
-import React from 'react'
-import {Link} from 'react-router-dom'
+import React,{useState} from 'react'
+import {Link,useHistory} from 'react-router-dom'
 import styled from 'styled-components'
 
 const Wrapper = styled.div`
@@ -36,6 +36,25 @@ const Wrapper = styled.div`
 `
 
 const Login = () =>{
+    const history = useHistory()
+    const [password,setPassword] = useState("")
+    const [email,setEmail] = useState("")
+    const [load,setLoad] = useState(true)
+
+    // const PostData =()=>{
+    //     fetch("http://localhost:5000/signin",{
+    //         method:"post",
+    //         headers:{
+    //             "Content-Type":"application/json"
+    //         },
+    //         body:{
+    //             name:"",
+                
+
+    //         }
+    //     })
+    // }
+
     return(
         <Wrapper>
         <div className="mycard">
@@ -45,12 +64,20 @@ const Login = () =>{
                 className="login-input"
                  type="text"
                  placeholder="email"
+                 value={email.toLowerCase()}
+                 onChange={(e)=>{
+                     setEmail(e.target.value)
+                 }}
                  
                 />
                  <input
                    className="login-input"
                  type="password"
                  placeholder="password"
+                 value={password}
+                 onChange={(e)=>{
+                     setPassword(e.target.value)
+                 }}
                  
                 />
                   <button className="btn waves-effect waves-light #64b5f6 blue darken-2" >
