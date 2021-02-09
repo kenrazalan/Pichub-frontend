@@ -6,6 +6,7 @@ import Home from './components/Home'
 import Profile from './components/Profile'
 import Login from './components/Login'
 import Signup from './components/Signup'
+import Createpost from './components/Createpost'
 
 
 function App() {
@@ -23,6 +24,9 @@ function App() {
         </Route>
         <Route exact path="/signup">
             <Signup/>
+        </Route>
+        <Route exact path="/create">
+            <Createpost/>
         </Route>
       </BrowserRouter>
        

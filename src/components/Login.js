@@ -53,6 +53,9 @@ const Login = () =>{
                  placeholder="password"
                  
                 />
+                  <button className="btn waves-effect waves-light #64b5f6 blue darken-2" >
+                   Login
+                </button>
                  <div style={{marginTop: "1em"}}>
                    Dont have an account? <Link className="no-account" to="/signup">Sign up</Link>
                 </div>
