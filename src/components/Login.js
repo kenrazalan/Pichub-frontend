@@ -1,6 +1,7 @@
 import React,{useState} from 'react'
 import {Link,useHistory} from 'react-router-dom'
 import styled from 'styled-components'
+import M from 'materialize-css'
 
 const Wrapper = styled.div`
     .auth-card{
@@ -39,21 +40,31 @@ const Login = () =>{
     const history = useHistory()
     const [password,setPassword] = useState("")
     const [email,setEmail] = useState("")
-    const [load,setLoad] = useState(true)
+    const [url,setUrl] = useState(undefined)
 
-    // const PostData =()=>{
-    //     fetch("http://localhost:5000/signin",{
-    //         method:"post",
-    //         headers:{
-    //             "Content-Type":"application/json"
-    //         },
-    //         body:{
-    //             name:"",
-                
-
-    //         }
-    //     })
-    // }
+    const PostData =()=>{
+      
+        fetch("http://localhost:5000/signin",{
+            method:"post",
+            headers:{
+                "Content-Type":"application/json"
+            },
+            body:JSON.stringify({
+                email,
+                password
+            })
+        }).then(res=>res.json()).then(data=>{
+            console.log(data);
+            if(data.error){
+                M.toast({html:data.error ,classes:"#e53935 red darken-1"})
+            }else{
+                M.toast({html:"signed in success",classes:"#66bb6a green lighten-1"})
+                history.push('/')
+            }
+        }).catch(err=>{
+            console.log(err);
+        })
+    }
 
     return(
         <Wrapper>
@@ -61,26 +72,24 @@ const Login = () =>{
              <div className="card auth-card">
                 <h2 className="brand-logo">Logo</h2>
                 <input
-                className="login-input"
+                className="signup-input"
                  type="text"
                  placeholder="email"
                  value={email.toLowerCase()}
                  onChange={(e)=>{
                      setEmail(e.target.value)
                  }}
-                 
-                />
+                 />
                  <input
-                   className="login-input"
+                 className="signup-input"
                  type="password"
                  placeholder="password"
-                 value={password}
                  onChange={(e)=>{
-                     setPassword(e.target.value)
-                 }}
-                 
-                />
-                  <button className="btn waves-effect waves-light #64b5f6 blue darken-2" >
+                    setPassword(e.target.value)
+                }}/>
+                  <button onClick={()=>{
+                      PostData()
+                  }} className="btn waves-effect waves-light #64b5f6 blue darken-2" >
                    Login
                 </button>
                  <div style={{marginTop: "1em"}}>

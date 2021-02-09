@@ -59,6 +59,8 @@ const Signup = () =>{
                 M.toast({html:data.message,classes:"#66bb6a green lighten-1"})
                 history.push('/signin')
             }
+        }).catch(err=>{
+            console.log(err);
         })
     }
     return(
