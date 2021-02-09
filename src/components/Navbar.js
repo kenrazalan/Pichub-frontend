@@ -5,7 +5,7 @@ const Navbar = () =>{
         <nav>
         <div className="nav-wrapper white z-depth-0" >
           <Link className="brand-logo left">
-            Instagram
+            LOGO
           </Link>
           <ul id="nav-mobile" className="right">
             <li  key="6"><Link to="/signin">Signin</Link></li>
