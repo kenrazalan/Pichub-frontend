@@ -58,6 +58,8 @@ const Login = () =>{
             if(data.error){
                 M.toast({html:data.error ,classes:"#e53935 red darken-1"})
             }else{
+                localStorage.setItem("jwt",data.token)
+                localStorage.setItem("user",JSON.stringify(data.user))
                 M.toast({html:"signed in success",classes:"#66bb6a green lighten-1"})
                 history.push('/')
             }
