@@ -1,8 +1,8 @@
-import React,{useState} from 'react'
+import React,{useContext, useState} from 'react'
 import {Link,useHistory} from 'react-router-dom'
 import styled from 'styled-components'
 import M from 'materialize-css'
-
+import {UserContext} from '../App'
 const Wrapper = styled.div`
     .auth-card{
         border: 1px solid #DBDBDB !important;
@@ -37,6 +37,7 @@ const Wrapper = styled.div`
 `
 
 const Login = () =>{
+    const [state,dispatch] = useContext(UserContext)
     const history = useHistory()
     const [password,setPassword] = useState("")
     const [email,setEmail] = useState("")
@@ -60,6 +61,7 @@ const Login = () =>{
             }else{
                 localStorage.setItem("jwt",data.token)
                 localStorage.setItem("user",JSON.stringify(data.user))
+                dispatch({type:"USER",payload:data.user})
                 M.toast({html:"signed in success",classes:"#66bb6a green lighten-1"})
                 history.push('/')
             }
