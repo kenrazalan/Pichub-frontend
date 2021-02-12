@@ -1,33 +1,37 @@
-import React from 'react'
+import React,{useState,useEffect} from 'react'
 
 const Home = () =>{
+
+    const [data,setData] = useState([])
+    useEffect(()=>{
+        fetch("http://localhost:5000/allpost",{
+            headers:{
+                "Authorization":"Bearer "+ localStorage.getItem("jwt")
+            }
+        }).then((res)=>res.json())
+        .then(result=>{
+            console.log(result.posts);
+            setData(result.posts)
+        })
+    },[])
     return(
         <div className="home">
-            <div className="card home-card">
-                <h5>qwerty</h5>
-                <div className="card-image">
-                     <img src={"https://images.unsplash.com/photo-1506748686214-e9df14d4d9d0?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=334&q=80"}/>
-                </div>
-                <div className="card-content">
-                <i class="material-icons">favorite</i>
-                    <h6>Title</h6>
-                    <p>This is amazing post</p>
-                    <input type="text" placeholder="add comment"/>
-                </div>
-            </div>
-
-            <div className="card home-card">
-                <h5>qwerty</h5>
-                <div className="card-image">
-                     <img src={"https://images.unsplash.com/photo-1506748686214-e9df14d4d9d0?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=334&q=80"}/>
-                </div>
-                <div className="card-content">
-                <i class="material-icons">favorite</i>
-                    <h6>Title</h6>
-                    <p>This is amazing post</p>
-                    <input type="text" placeholder="add comment"/>
-                </div>
-            </div>
+            {data.map(item=>{
+                return(
+                    <div className="card home-card" key={item._id}>
+                      <h5>{item.postedBy.name}</h5>
+                     <div className="card-image">
+                          <img src={item.photo}/>
+                     </div>
+                    <div className="card-content">
+                        <i class="material-icons">favorite</i>
+                            <h6>{item.title}</h6>
+                            <p>{item.body}</p>
+                            <input type="text" placeholder="add comment"/>
+                    </div>
+                     </div>
+                )
+            })}
             
         </div>
     )
