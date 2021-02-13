@@ -15,7 +15,6 @@ const Profile = () =>{
             setPic(result.myposts)
         })
     },[])
-
     return(
         <div style={{
             maxWidth:"550px",
