@@ -40,9 +40,9 @@ const Profile = () =>{
                     justifyContent:"space-between",
                     width:"108%"
                 }}>
-                    <h5>40 followers</h5>
-                    <h5>40 post</h5>
-                    <h5>40 following</h5>
+                    <h5>{pic.length}</h5>
+                    <h5>{state?state.followers.length: "0"} followers</h5>
+                    <h5>{state? state.following.length: "0"} following</h5>
                 </div>
             </div>
             </div>
