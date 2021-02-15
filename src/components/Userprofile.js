@@ -9,9 +9,9 @@ const UserProfile = () =>{
     const {userid}= useParams()
 
     console.log(userid);
-    //   const [showFollow,setShowfollow] =useState(state?!state.following.includes(userid):true)
+    //    const [showFollow,setShowfollow] =useState(state?!state.following.includes(userid):true)
 
-    // const [showFollow,setShowfollow] =useState(true)
+    const [showFollow,setShowfollow] =useState(true)
     // useEffect(()=>{
     //     setShowfollow(state && !state.following.includes(userid))
     // },state)
@@ -40,9 +40,9 @@ const UserProfile = () =>{
             })
         }).then(res=>res.json())
         .then(data=>{
-           
-            dispatch({type:"UPDATE",payload: {following:data.following, followers: data.followers}})
-            localStorage.setItem("user",JSON.stringify(data))
+           console.log(data);
+             dispatch({type:"UPDATE",payload: {following:data.following, followers: data.followers}})
+             localStorage.setItem("user",JSON.stringify(data))
      
             setProfile(prevState=>{
             
@@ -54,7 +54,7 @@ const UserProfile = () =>{
                        }
                 }
             })
-             setShowfollow(false)
+              setShowfollow(false)
         })
     }
 
@@ -74,8 +74,8 @@ const UserProfile = () =>{
         }).then(res=>res.json())
         .then(data=>{
             console.log(data)
-            dispatch({type:"UPDATE",payload: {following:data.following, followers: data.followers}})
-            localStorage.setItem("user",JSON.stringify(data))
+             dispatch({type:"UPDATE",payload: {following:data.following, followers: data.followers}})
+             localStorage.setItem("user",JSON.stringify(data))
             
             setProfile(prevState=>{
                 const newFollower  = prevState.user.followers.filter(item=>item!== data._id)
@@ -127,26 +127,29 @@ const UserProfile = () =>{
                     width:"108%"
                 }}>
                     <h6>{userProfile.posts.length} posts</h6>
-                    {/* <h6>{userProfile? userProfile.user.followers.length: "loading"} followers</h6>
-                    <h6>{userProfile? userProfile.user.following.length: "loading .."} following</h6> */}
+                    <h6>{userProfile? userProfile.user.followers.length: "loading"} followers</h6>
+                    <h6>{userProfile? userProfile.user.following.length: "loading .."} following</h6>
              
                 </div>
-                                 {showFollow?
-                <button className="btn waves-effect waves-light #64b5f6 blue darken-2" 
+                                 {showFollow?<button className="btn waves-effect waves-light #64b5f6 blue darken-2" 
                  onClick={()=>followUser()}
                   style={{
                       margin:"10px"
                   }}>
-                      Follow
-                 </button>:
+                      test
+                 </button>
+                :
                  <button className="btn waves-effect waves-light #64b5f6 blue darken-2" 
                   onClick={()=>unfollowUser()}
                   style={{
                      margin:"10px"
                 }}>
-                     Unfollow
+                     tsst
                  </button>
                  }
+
+
+
             </div>
             </div>
             <div className="gallery">
