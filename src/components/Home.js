@@ -7,19 +7,20 @@ const Home = () =>{
     const [data,setData] = useState([])
     const {state,dispatch} = useContext(UserContext)
     useEffect(()=>{
-        fetch("http://localhost:5000/allpost",{
+        fetch(`${process.env.REACT_APP_BACKEND_URL}/allpost`,{
             headers:{
                 "Authorization":"Bearer "+ localStorage.getItem("jwt")
             }
         }).then((res)=>res.json())
         .then(result=>{
+            console.log(process.env.REACT_APP_BACKEND_URL);
             console.log(result);
             setData(result.posts)
         })
     },[])
 
     const likePost = (id)=>{
-        fetch('http://localhost:5000/like',{
+        fetch(`${process.env.REACT_APP_BACKEND_URL}/like`,{
             method:"put",
             headers:{
                 "Content-Type":"application/json",
@@ -43,7 +44,7 @@ const Home = () =>{
     }
     
     const unlikePost = (id)=>{
-        fetch('http://localhost:5000/unlike',{
+        fetch(`${process.env.REACT_APP_BACKEND_URL}/unlike`,{
             method:"put",
             headers:{
                 "Content-Type":"application/json",

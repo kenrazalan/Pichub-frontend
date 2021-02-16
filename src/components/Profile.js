@@ -8,7 +8,7 @@ const Profile = () =>{
  
 
     useEffect(()=>{
-        fetch('http://localhost:5000/myposts',{
+        fetch(`${process.env.REACT_APP_BACKEND_URL}/myposts`,{
             headers:{
                 "Authorization":"Bearer "+localStorage.getItem("jwt")
             }

@@ -7,7 +7,7 @@ const Followingpost = () =>{
     const [data,setData] = useState([])
     const {state,dispatch} = useContext(UserContext)
     useEffect(()=>{
-        fetch("http://localhost:5000/followingpost",{
+        fetch(`${process.env.REACT_APP_BACKEND_URL}/followingpost`,{
             headers:{
                 "Authorization":"Bearer "+ localStorage.getItem("jwt")
             }
@@ -19,7 +19,7 @@ const Followingpost = () =>{
     },[])
 
     const likePost = (id)=>{
-        fetch('http://localhost:5000/like',{
+        fetch(`${process.env.REACT_APP_BACKEND_URL}/like`,{
             method:"put",
             headers:{
                 "Content-Type":"application/json",
@@ -43,7 +43,7 @@ const Followingpost = () =>{
     }
     
     const unlikePost = (id)=>{
-        fetch('http://localhost:5000/unlike',{
+        fetch(`${process.env.REACT_APP_BACKEND_URL}/unlike`,{
             method:"put",
             headers:{
                 "Content-Type":"application/json",
