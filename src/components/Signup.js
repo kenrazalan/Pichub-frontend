@@ -52,7 +52,7 @@ const Signup = () =>{
             data.append("file",image)
             data.append("upload_preset","instagram-clone")
             data.append("cloud_name","dtwrzv0of")
-            fetch("https://api.cloudinary.com/v1_1/dtwrzv0of/image/upload",{
+            fetch(process.env.REACT_APP_CLOUDINARY_URL,{
                 method:"post",
                 body: data
             })
