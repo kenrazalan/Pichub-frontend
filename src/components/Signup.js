@@ -40,7 +40,33 @@ const Signup = () =>{
     const [image,setImage] = useState("")
     const [url,setUrl] = useState(undefined)
 
-    const PostData =()=>{
+    useEffect(()=>{
+        if(url){
+            uploadFields()
+        }
+        
+    },[url])
+
+        const uploadImage =() =>{
+            const data = new FormData()
+            data.append("file",image)
+            data.append("upload_preset","instagram-clone")
+            data.append("cloud_name","dtwrzv0of")
+            fetch("https://api.cloudinary.com/v1_1/dtwrzv0of/image/upload",{
+                method:"post",
+                body: data
+            })
+            .then(res=>res.json())
+            .then(data=>{
+                console.log(data.url)
+        
+                setUrl(data.secure_url)
+            }).catch(error=>{
+                console.log(error)
+            })
+        }
+
+        const uploadFields =()=> {
       
         fetch("http://localhost:5000/signup",{
             method:"post",
@@ -50,7 +76,8 @@ const Signup = () =>{
             body:JSON.stringify({
                 name,
                 email,
-                password
+                password,
+                pic: url
             })
         }).then(res=>res.json()).then(data=>{
             if(data.error){
@@ -63,6 +90,15 @@ const Signup = () =>{
             console.log(err);
         })
     }
+
+    const PostData =() =>{
+        if(image){
+             uploadImage()
+        }else{
+            uploadFields()
+        }
+}
+    
     return(
         <Wrapper>
         <div className="mycard">
@@ -102,6 +138,15 @@ const Signup = () =>{
                     setPassword(e.target.value)
                 }}
                  />
+                  <div className="file-field input-field">
+                    <div className="btn #64b5f6 blue darken-2">
+                    <span>Upload Picture</span>
+                    <input type="file" onChange={(e)=>{setImage(e.target.files[0])}}/>
+                        </div>
+                <div className="file-path-wrapper">
+                    <input className="file-path validate" type="text"/>
+                </div>
+                </div>
                  <button className="btn waves-effect waves-light #64b5f6 blue darken-2" 
                  onClick={()=>PostData()}>
                      Signup

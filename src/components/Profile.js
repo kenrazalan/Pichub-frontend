@@ -31,7 +31,8 @@ const Profile = () =>{
                     width:"160px",
                     height:"160px",
                     borderRadius:"80px"
-                }} src={"https://images.unsplash.com/photo-1506748686214-e9df14d4d9d0?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=334&q=80"}/>
+                }} src={state?state.pic:"loading"}
+                alt="profile"/>
                 </div>
             <div>
                 <h4>{state?state.name:"loading"}</h4>
@@ -39,7 +40,9 @@ const Profile = () =>{
                     display: 'flex',
                     justifyContent:"space-between",
                     width:"108%"
-                }}>
+                    
+                }}
+                alt={state?state.name:""}>
                     <h5>{pic.length}</h5>
                     <h5>{state?state.followers.length: "0"} followers</h5>
                     <h5>{state? state.following.length: "0"} following</h5>
@@ -49,7 +52,7 @@ const Profile = () =>{
             <div className="gallery">
                 {pic.map(item=>{
                     return(
-                        <img className="item" src={item.photo}/>
+                        <img className="item" src={item.photo} alt={item.name} key={item._id}/>
                     )
                 })}
                

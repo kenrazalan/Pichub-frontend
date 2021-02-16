@@ -9,12 +9,12 @@ const UserProfile = () =>{
     const {userid}= useParams()
 
     console.log(userid);
-    //    const [showFollow,setShowfollow] =useState(state?!state.following.includes(userid):true)
+        const [showFollow,setShowfollow] =useState(state?!state.following.includes(userid):true)
 
-    const [showFollow,setShowfollow] =useState(true)
-    // useEffect(()=>{
-    //     setShowfollow(state && !state.following.includes(userid))
-    // },state)
+
+     useEffect(()=>{
+         setShowfollow(state && !state.following.includes(userid))
+     },state)
 
     useEffect(()=>{
         fetch(`/user/${userid}`,{
@@ -116,7 +116,8 @@ const UserProfile = () =>{
                     width:"160px",
                     height:"160px",
                     borderRadius:"80px"
-                }} src={"https://images.unsplash.com/photo-1506748686214-e9df14d4d9d0?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=334&q=80"}/>
+                }} src={userProfile.user.pic}
+                alt="post"/>
                 </div>
             <div>
                 <h4>{userProfile.user.name}</h4>
@@ -155,7 +156,7 @@ const UserProfile = () =>{
             <div className="gallery">
                 {userProfile.posts.map(item=>{
                     return(
-                        <img className="item" src={item.photo}/>
+                        <img className="item" src={item.photo} alt={item.name}/>
                     )
                 })}
                

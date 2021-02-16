@@ -30,7 +30,7 @@ const Home = () =>{
         }).then(res=>res.json())
         .then(result=>{
             const newData = data.map(item=>{
-                if(item._id==result._id){
+                if(item._id===result._id){
                     return result
                 }else{
                     return item
@@ -54,7 +54,7 @@ const Home = () =>{
         }).then(res=>res.json())
         .then(result=>{
             const newData = data.map(item=>{
-                if(item._id==result._id){
+                if(item._id===result._id){
                     return result
                 }else{
                     return item
@@ -81,7 +81,7 @@ const Home = () =>{
         .then(result=>{
             console.log(result)
             const newData = data.map(item=>{
-                if(item._id==result._id){
+                if(item._id===result._id){
                     return result
                 }else{
                     return item
@@ -116,16 +116,16 @@ const Home = () =>{
                 return(
                     <div className="card home-card" key={item._id}>
                       
-                      <h5><Link to={item.postedBy._id == state._id 
+                      <h5><Link to={item.postedBy._id === state._id 
                       ? `/profile`
                     : `/profile/${item.postedBy._id}`
                     }>
                           
-                          {item.postedBy.name} </Link>{item.postedBy._id==state._id && 
+                          {item.postedBy.name} </Link>{item.postedBy._id===state._id && 
                       <i className="material-icons" onClick={()=>deletePost(item._id)}
                       style={{float:"right"}}>delete</i>}  </h5>
                      <div className="card-image">
-                          <img src={item.photo}/>
+                          <img src={item.photo} alt={item.name}/>
                      </div>
                     <div className="card-content">
                         <i className="material-icons" >favorite</i>
