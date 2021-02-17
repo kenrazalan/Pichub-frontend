@@ -11,13 +11,14 @@ const Navbar = () =>{
          <li  key="9"><Link to="/create">Create Post</Link></li>,
          <li  key="10"><Link to="/followingpost">Following Post</Link></li>,
          <li key="11">
-           <button onClick={()=>{
+           <h5  style={{color:'black',padding:"8px 15px 0 15px",fontSize:"15px",}}
+           onClick={()=>{
              localStorage.clear()
              dispatch({type:"CLEAR"})
              history.push('/signin')
            }}>
              Logout
-           </button>
+           </h5>
          </li>]
         }else{
           return[
