@@ -122,11 +122,7 @@ const UserProfile = () =>{
             <div>
                 <h4>{userProfile.user.name}</h4>
                 {/* <h4>{userProfile.user.email}</h4> */}
-                <div style={{
-                    display: 'flex',
-                    justifyContent:"space-between",
-                    width:"108%"
-                }}>
+                <div>
                     <h6>{userProfile.posts.length} posts</h6>
                     <h6>{userProfile? userProfile.user.followers.length: "loading"} followers</h6>
                     <h6>{userProfile? userProfile.user.following.length: "loading .."} following</h6>

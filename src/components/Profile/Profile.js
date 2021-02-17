@@ -1,5 +1,6 @@
 import React,{useContext, useEffect, useState} from 'react'
 import {UserContext} from '../../App'
+import {useStyles} from './style'
 
 const Profile = () =>{
     const [pic,setPic] = useState([])
@@ -61,6 +62,8 @@ const Profile = () =>{
     const updatePhoto= (file)=>{
         setImage(file)
     }
+
+    const classes = useStyles()
     return(
         <div style={{
             maxWidth:"550px",
@@ -86,23 +89,20 @@ const Profile = () =>{
                  
                 </div>
             <div>
-                <h4>{state?state.name:"loading"}</h4>
-                <div style={{
-                    display: 'flex',
-                    justifyContent:"space-between",
-                    width:"108%"
-                    
-                }}
-                alt={state?state.name:""}>
-                    <h5>{pic.length}</h5>
-                    <h5>{state?state.followers.length: "0"} followers</h5>
-                    <h5>{state? state.following.length: "0"} following</h5>
+                    <h4> {state?state.name:"loading"}</h4>
+                    {/* <h4>{state?state.email:"loading"}</h4> */}
+                    <div className={classes.profileInfo}>
+                         <h6><span className={classes.numFollowers}>{pic.length}</span> posts</h6>
+                        <h6>{state?<span className={classes.numFollowers}>{state.followers.length}</span>
+                        :"0"} followers</h6>
+                        <h6>{state ? <span className={classes.numFollowers}>{state.following.length}</span>
+                        :"0"} following</h6>
                 </div>
             </div>
             </div>
                 <div className="file-field input-field">
-                    <div className="btn #64b5f6 blue darken-2">
-                    <span>Upload Picture</span>
+                     <div className={`btn ${classes.ggg}`}>
+                    <span>Change Picture</span>
                     <input type="file" onChange={(e)=>{updatePhoto(e.target.files[0])}}/>
                         </div>
                 <div className="file-path-wrapper">
