@@ -1,5 +1,5 @@
 import React,{useContext, useEffect, useState} from 'react'
-import {UserContext} from '../App'
+import {UserContext} from '../../App'
 
 const Profile = () =>{
     const [pic,setPic] = useState([])

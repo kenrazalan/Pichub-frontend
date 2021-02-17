@@ -1,6 +1,6 @@
 import React,{useContext} from 'react'
 import {Link, useHistory} from 'react-router-dom'
-import {UserContext} from '../App'
+import {UserContext} from '../../App'
 const Navbar = () =>{
   const {state,dispatch} = useContext(UserContext)
   const history = useHistory()

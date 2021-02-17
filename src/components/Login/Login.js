@@ -2,7 +2,7 @@ import React,{useContext, useState} from 'react'
 import {Link,useHistory} from 'react-router-dom'
 import styled from 'styled-components'
 import M from 'materialize-css'
-import {UserContext} from '../App'
+import {UserContext} from '../../App'
 const Wrapper = styled.div`
     .auth-card{
         border: 1px solid #DBDBDB !important;

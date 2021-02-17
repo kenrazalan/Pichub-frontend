@@ -1,14 +1,14 @@
 import React,{useEffect,createContext,useReducer, useContext}  from 'react'
 import './App.css';
 import {BrowserRouter,Route, Switch, useHistory} from 'react-router-dom'
-import Navbar from './components/Navbar'
-import Home from './components/Home'
-import Profile from './components/Profile'
-import Login from './components/Login'
-import Signup from './components/Signup'
-import Createpost from './components/Createpost'
-import UserProfile from './components/Userprofile'
-import Followingpost from './components/Followingpost'
+import Navbar from './components/Navbar/Navbar'
+import Home from './components/Home/Home'
+import Profile from './components/Profile/Profile'
+import Login from './components/Login/Login'
+import Signup from './components/Signup/Signup'
+import Createpost from './components/Createpost/Createpost'
+import UserProfile from './components/UserProfile/Userprofile'
+import Followingpost from './components/Followingpost/Followingpost'
 import {reducer,initialState} from './reducers/userReducer'
 
 export const UserContext = createContext()
