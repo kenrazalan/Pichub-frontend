@@ -77,7 +77,8 @@ const Signup = () =>{
                 name,
                 email,
                 password,
-                pic: url
+                pic: url,
+                username
             })
         }).then(res=>res.json()).then(data=>{
             if(data.error){
@@ -122,14 +123,14 @@ const Signup = () =>{
                      setEmail(e.target.value)
                  }}
                  />
-                {/* <input
+                <input
                  className="signup-input"
                  type="text"
                  placeholder="username"
                  onChange={(e)=>{
                     setUsername(e.target.value)
                 }}
-               /> */}
+               />
                  <input
                  className="signup-input"
                  type="password"
