@@ -1,10 +1,10 @@
 import React, { useContext, useEffect, useState } from "react";
 import styled from "styled-components";
-import Button from "./Button";
-import { OptionsIcon ,PostIcon,SavedIcon} from "./Icons";
+import Button from "../assets/Button";
+import { OptionsIcon ,PostIcon,SavedIcon} from "../assets/Icons";
 import {UserContext} from '../../App'
 import {useParams} from 'react-router-dom'
-import Loader from './Loader'
+import Loader from '../assets/Loader'
 
 const WrapperPost = styled.div`
 margin-top: 1rem;
@@ -223,7 +223,7 @@ const ProfileOthers = () => {
   const [showFollow,setShowfollow] =useState(state?!state.following.includes(userid):true)
 
   useEffect(()=>{
-    fetch(`/user/${userid}`,{
+    fetch(`${process.env.REACT_APP_BACKEND_URL}/user/${userid}`,{
         headers:{
             "Authorization": "Bearer "+localStorage.getItem("jwt")
         }
@@ -236,7 +236,7 @@ const ProfileOthers = () => {
 
 
 const followUser = ()=>{
-    fetch("/follow",{
+    fetch(`${process.env.REACT_APP_BACKEND_URL}/follow`,{
         method:"put",
         headers: {
             "Content-Type": "application/json",
@@ -267,7 +267,7 @@ const followUser = ()=>{
 
 
 const unfollowUser = ()=>{
-    fetch("/unfollow",{
+    fetch(`${process.env.REACT_APP_BACKEND_URL}/follow`,{
         method:"put",
         headers: {
             "Content-Type": "application/json",

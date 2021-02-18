@@ -11,6 +11,7 @@ import Createpost from './components/Createpost/Createpost'
 import UserProfile from './components/UserProfile/Userprofile'
 import Followingpost from './components/Followingpost/Followingpost'
 import ProfileHeader from './components/ProfileHeader.js/ProfileHeader'
+import ProfileOthers from './components/ProfileOthers/ProfileOthers'
 import {reducer,initialState} from './reducers/userReducer'
 
 export const UserContext = createContext()
@@ -47,7 +48,7 @@ const Routing = () =>{
         <Createpost/>
     </Route>
     <Route exact path="/profile/:userid">
-        <UserProfile/>
+        <ProfileOthers/>
     </Route>
     <Route exact path="/followingpost">
         <Followingpost/>
