@@ -8,7 +8,7 @@ const Navbar = () =>{
   const renderList = ()=>{
     if(state){
       return[
-         <li  key="8"><Link to="/profile">Profile</Link></li>,
+         <li  key="8"><Link to="/profileheader">Profile</Link></li>,
          <li key ="9"><NewPost /></li>,
          <li  key="10"><Link to="/followingpost">Following Post</Link></li>,
          <li key="11">

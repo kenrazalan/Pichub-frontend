@@ -1,4 +1,5 @@
 import React,{useEffect,createContext,useReducer, useContext}  from 'react'
+import Container from './components/styles/Container'
 import './App.css';
 import {BrowserRouter,Route, Switch, useHistory} from 'react-router-dom'
 import Navbar from './components/Navbar/Navbar'
@@ -9,6 +10,7 @@ import Signup from './components/Signup/Signup'
 import Createpost from './components/Createpost/Createpost'
 import UserProfile from './components/UserProfile/Userprofile'
 import Followingpost from './components/Followingpost/Followingpost'
+import ProfileHeader from './components/ProfileHeader.js/ProfileHeader'
 import {reducer,initialState} from './reducers/userReducer'
 
 export const UserContext = createContext()
@@ -27,12 +29,13 @@ const Routing = () =>{
           }
     },[])
     return(
+        <Container>
         <Switch>
         <Route exact path="/">
         <Home/>
     </Route>
-    <Route exact path="/profile">
-        <Profile/>
+    <Route exact path="/profileheader">
+        <ProfileHeader/>
     </Route>
     <Route exact path="/signin">
         <Login/>
@@ -50,6 +53,7 @@ const Routing = () =>{
         <Followingpost/>
     </Route>
     </Switch>
+    </Container>
     )
 }
 
