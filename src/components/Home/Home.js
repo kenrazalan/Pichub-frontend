@@ -68,7 +68,7 @@ const Home = () =>{
     }
 
     const makeComment = (text,postId)=>{
-        fetch('/comment',{
+        fetch(`${process.env.REACT_APP_BACKEND_URL}/comment`,{
             method:"put",
             headers:{
                 "Content-Type": "application/json",
@@ -95,7 +95,7 @@ const Home = () =>{
         })
     }
     const deletePost= (postid)=>{
-        fetch(`/deletepost/${postid}`,{
+        fetch(`${process.env.REACT_APP_BACKEND_URL}/deletepost/${postid}`,{
             method:"delete",
             headers: {
                 "Authorization": "Bearer "+ localStorage.getItem("jwt"),
