@@ -4,7 +4,6 @@ import {useHistory} from 'react-router-dom'
 
 const Createpost = ()=>{
     const history = useHistory()
-    const [title,setTitle]= useState("")
     const [body,setBody] = useState("")
     const [image,setImage] = useState("")
     const [url,setUrl] = useState("")
@@ -13,13 +12,12 @@ const Createpost = ()=>{
          if(url){
             
         
-        fetch("/createpost",{
+        fetch(`${process.env.REACT_APP_BACKEND_URL}/createpost`,{
             method: "post",
             headers:{
                  "Authorization": "Bearer "+ localStorage.getItem("jwt"),
                 "Content-Type": "application/json"
             },body:JSON.stringify({
-                title,
                 body,
                 pic: url
             })
@@ -64,7 +62,6 @@ const Createpost = ()=>{
             padding:"20px",
             textAlign:"center"
         }}>
-            <input type="text" placeholder="title" onChange={(e)=>setTitle(e.target.value)} />
             <input type="text" placeholder="body" onChange={(e)=>setBody(e.target.value)}/>
             <div className="file-field input-field">
                 <div className="btn">

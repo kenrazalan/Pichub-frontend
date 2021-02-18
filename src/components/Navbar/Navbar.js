@@ -1,6 +1,7 @@
 import React,{useContext} from 'react'
 import {Link, useHistory} from 'react-router-dom'
 import {UserContext} from '../../App'
+import NewPost from '../Newpost/Newpost'
 const Navbar = () =>{
   const {state,dispatch} = useContext(UserContext)
   const history = useHistory()
@@ -8,7 +9,7 @@ const Navbar = () =>{
     if(state){
       return[
          <li  key="8"><Link to="/profile">Profile</Link></li>,
-         <li  key="9"><Link to="/create">Create Post</Link></li>,
+         <li key ="9"><NewPost /></li>,
          <li  key="10"><Link to="/followingpost">Following Post</Link></li>,
          <li key="11">
            <h5  style={{color:'black',padding:"8px 15px 0 15px",fontSize:"15px",}}
