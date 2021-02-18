@@ -119,7 +119,7 @@ const Home = () =>{
                     <div style={{padding:"10px"}}>
 
                           <Link to={item.postedBy._id === state._id 
-                             ? `/profile`
+                             ? `/profileheader`
                              : `/profile/${item.postedBy._id}`
                             }>
                           
