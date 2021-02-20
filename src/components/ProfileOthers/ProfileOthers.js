@@ -186,7 +186,7 @@ const Wrapper = styled.div`
   }
   @media screen and (max-width: 645px) {
     font-size: 1rem;
-    
+    .bio,
     .profile-stats {
       display: none;
     }
@@ -311,20 +311,23 @@ const unfollowUser = ()=>{
             <h4 className="pointer">{userProfile.user.username}</h4>
               <div className="options">
               {showFollow?
-                <button className="btn waves-effect waves-light #64b5f6 blue darken-2" 
-                 onClick={()=>followUser()}
-                 style={{
-                     margin:"10px"
-                 }}>
-                     Follow
-                </button>:
-                <button className="btn waves-effect waves-light #64b5f6 blue darken-2" 
-                 onClick={()=>unfollowUser()}
-                 style={{
-                    margin:"10px"
-                }}>
-                     Unfollow
-                </button>
+                // <button className="btn waves-effect waves-light #64b5f6 blue darken-2" 
+                //  onClick={()=>followUser()}
+                //  style={{
+                //      margin:"10px"
+                //  }}>
+                //      Follow
+                // </button>
+                <Button onClick={()=>followUser()}>Follow</Button>
+                :
+                // <button className="btn waves-effect waves-light #64b5f6 blue darken-2" 
+                //  onClick={()=>unfollowUser()}
+                //  style={{
+                //     margin:"10px"
+                // }}>
+                //      Unfollow
+                // </button>
+                <Button onClick={()=>unfollowUser()}>Unfollow</Button>
                 }
               </div>
           </div>
