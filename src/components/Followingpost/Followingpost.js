@@ -2,6 +2,22 @@ import React,{useState,useEffect, useContext} from 'react'
 import {UserContext} from './../../App'
 import {Link} from 'react-router-dom'
 import Loader from "./../assets/Loader";
+import styled from 'styled-components'
+
+const Wrapper = styled.div`
+.home-card{
+    border: 1px solid #DBDBDB !important;
+    box-shadow: none !important;
+}
+// .home-input{
+//     border-radius: 4px !important;
+//     border: 1px solid #DBDBDB !important;
+//     padding: 0.1rem 0.5rem !important;
+//     width: 100% !important;
+//     margin-left: 0;
+//     height: 2rem !important;
+// }
+`
 
 const Followingpost = () =>{
 
@@ -113,16 +129,17 @@ const Followingpost = () =>{
     }  
     return(
         <>
+         <Wrapper>
         {data?
         <div className="home">
             {data.map(item=>{
                 return(
                     <div className="card home-card" key={item._id}>
                       
-                      <div style={{padding: "10px"}}><Link to={item.postedBy._id === state._id 
+                      <div style={{padding:"10px",margin: "0"}}><Link to={item.postedBy._id === state._id 
                           ?`/profileheader`:`/profile/${item.postedBy._id}` }>
                           <span> 
-                      <img src={item.postedBy.pic} style={{width: "42px",height: "42px", borderRadius:"80px"}}/> </span>
+                      <img src={item.postedBy.pic} style={{width: "42px",height: "42px", borderRadius:"80px",marginBottom: "-10px"}}/> </span>
                       <span style={{ 
                           fontSize: '17px',
                           fontWeight: '600',
@@ -144,15 +161,15 @@ const Followingpost = () =>{
                         {/* <i className="material-icons" >favorite</i> */}
 
                         {item.likes.includes(state._id)?
-                          <i className="material-icons" onClick={()=>unlikePost(item._id)}>thumb_down</i>
+                          <i style={{marginTop: "-5px"}} className="material-icons" onClick={()=>unlikePost(item._id)}>thumb_down</i>
                           :
-                          <i className="material-icons" onClick={()=>likePost(item._id)}>thumb_up</i>
+                          <i style={{marginTop: "-5px"}} className="material-icons" onClick={()=>likePost(item._id)}>thumb_up</i>
                         }
                       
                        
-                        <h6>{item.likes.length} likes</h6>
-                        <h6>{item.title}</h6>
-                        <p>{item.body}</p>
+                         <div className="bold">{item.likes.length} likes</div>
+                         <div>{item.title}</div>
+                         <p style={{fontSize:"13px"}}>{item.body}</p>
 
                         {
                            item.comments.map(record=>{
@@ -175,7 +192,8 @@ const Followingpost = () =>{
             })}
             
             </div>  : <Loader/>
-            }</>
+            }
+            </Wrapper></>
     )
 
 }

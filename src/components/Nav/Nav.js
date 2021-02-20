@@ -64,7 +64,7 @@ const Nav = () =>{
     if(state){
         return[  
             // <li key="1"><i  data-target="modal1" className="large material-icons modal-trigger" style={{color:"black"}}>search</i></li>,
-            <li key="3"><Link to="/"><div data-target="modal1" className="modal-trigger"><SearchIcon/></div></Link></li>,
+            <li style={{margin: "auto !important"}} key="3"><Link to="/"><div data-target="modal1" className="modal-trigger"><SearchIcon/></div></Link></li>,
 
 
             <li key="1"><Link to="/"><HomeIcon/></Link></li>,
@@ -76,6 +76,7 @@ const Nav = () =>{
               <li key="2"><Link to="/profileheader">
                  <img
                   style={{
+                    marginBottom: "-15px",
                     width: "24px",
                     height: "24px",
                     objectFit: "cover",

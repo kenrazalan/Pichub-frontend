@@ -2,6 +2,7 @@ import React from "react";
 
 export const HomeIcon = () => (
   <svg
+  style={{marginBottom:"-15px"}}
     aria-label="Home"
     fill="#262626"
     height="22"
@@ -14,7 +15,7 @@ export const HomeIcon = () => (
 
 export const SearchIcon = () => (
 
-  <svg xmlns="http://www.w3.org/2000/svg" fill="#262626" width="44" height="44" viewBox="0 0 6 48"><path d="M23.822 20.88l-6.353-6.354c.93-1.465 1.467-3.2 1.467-5.059.001-5.219-4.247-9.467-9.468-9.467s-9.468 4.248-9.468 9.468c0 5.221 4.247 9.469 9.468 9.469 1.768 0 3.421-.487 4.839-1.333l6.396 6.396 3.119-3.12zm-20.294-11.412c0-3.273 2.665-5.938 5.939-5.938 3.275 0 5.94 2.664 5.94 5.938 0 3.275-2.665 5.939-5.94 5.939-3.274 0-5.939-2.664-5.939-5.939z"/></svg>
+  <svg xmlns="http://www.w3.org/2000/svg" fill="#262626" width="44" height="44" viewBox="0 -13 24  48"><path d="M23.822 20.88l-6.353-6.354c.93-1.465 1.467-3.2 1.467-5.059.001-5.219-4.247-9.467-9.468-9.467s-9.468 4.248-9.468 9.468c0 5.221 4.247 9.469 9.468 9.469 1.768 0 3.421-.487 4.839-1.333l6.396 6.396 3.119-3.12zm-20.294-11.412c0-3.273 2.665-5.938 5.939-5.938 3.275 0 5.94 2.664 5.94 5.938 0 3.275-2.665 5.939-5.94 5.939-3.274 0-5.939-2.664-5.939-5.939z"/></svg>
  
  );
 export const InboxIcon = (props) => (
@@ -45,6 +46,7 @@ export const HeartIcon = (props) => (
 
 export const ExploreIcon = () => (
   <svg
+  style={{marginBottom:"-15px"}}
     aria-label="Find People"
     fill="#262626"
     height="22"
@@ -225,6 +227,7 @@ export const LoaderIcon = (props) => (
 
 export const NewPostIcon = (props) => (
   <svg
+  style={{marginBottom:"-15px"}}
     {...props}
     aria-label="Posts"
     fill="#262626"
