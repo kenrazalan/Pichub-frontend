@@ -223,7 +223,7 @@ const ProfileOthers = () => {
   // const [showFollow,setShowfollow] =useState(state?!state.following.includes(userid):true)
   const [showFollow,setShowfollow] =useState(true)
   useEffect(()=>{
-      setShowfollow(state && !state.following.includes(userid))
+      setShowfollow(state && !state.following.some(i=> i._id==userid))
   },[state])
 
   useEffect(()=>{
@@ -261,7 +261,7 @@ const followUser = ()=>{
                 ...prevState,
                 user:{
                     ...prevState.user,
-                    followers:[...prevState.user.followers,data._id]
+                    followers:[...prevState.user.followers,data]
                    }
             }
         })
@@ -271,7 +271,7 @@ const followUser = ()=>{
 
 
 const unfollowUser = ()=>{
-    fetch(`${process.env.REACT_APP_BACKEND_URL}/follow`,{
+    fetch(`${process.env.REACT_APP_BACKEND_URL}/unfollow`,{
         method:"put",
         headers: {
             "Content-Type": "application/json",
