@@ -83,6 +83,7 @@ const Signup = () =>{
         }).then(res=>res.json()).then(data=>{
             if(data.error){
                 M.toast({html:data.error ,classes:"#e53935 red darken-1"})
+                setLoad(true)
             }else{
                 M.toast({html:data.message,classes:"#66bb6a green lighten-1"})
                 history.push('/signin')
@@ -104,7 +105,7 @@ const Signup = () =>{
         <Wrapper>
         <div className="mycard">
         <div className="card auth-card">
-        <h2 className="brand-logo">Logo</h2>
+        <h2 className="brand-logo">Instagram</h2>
                 <input
                 className="signup-input"
                  type="text"
@@ -148,10 +149,15 @@ const Signup = () =>{
                     <input className="file-path validate" type="text"/>
                 </div>
                 </div>
+                {load?
                  <button className="btn waves-effect waves-light #64b5f6 blue darken-2" 
-                 onClick={()=>PostData()}>
+                 onClick={()=>{PostData(); setLoad(false)}}>
                      Signup
-                </button>
+                     </button>: <button className="buttonload">
+                     <i className="fa fa-spinner fa-spin"></i>Loading
+                     </button>
+                    }
+
         <div style={{marginTop:"1em"}}>
                   Already have an account? <Link className="acc-already" to="/signin">Sign in</Link>
         </div>
