@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import styled from "styled-components";
 import { useHistory } from "react-router-dom";
 import Button from "../assets/Button";
+import Loader from './../assets/Loader'
 import { OptionsIcon ,PostIcon,SavedIcon} from "../assets/Icons";
 import {UserContext} from '../../App'
 
@@ -237,6 +238,7 @@ console.log(state)
 
   return (
     <>
+    {mypics ?
     <Wrappers>
       <Wrapper>
         <img className="avatar" src={state?state.pic:"loading"} alt="avatar" />
@@ -320,7 +322,7 @@ console.log(state)
 
 
       </Wrappers>
-
+     : <Loader/>}
     </>
   );
 };

@@ -1,6 +1,7 @@
 import React,{useState,useEffect, useContext} from 'react'
 import {UserContext} from '../../App'
 import {Link} from 'react-router-dom'
+import Loader from '../assets/Loader'
 
 const Home = () =>{
 
@@ -112,7 +113,9 @@ const Home = () =>{
         })
     }  
     return(
-        <div className="home">
+        <>
+        {data?
+       <div className="home"> 
             {data.map(item=>{
                 return(
                     <div className="card home-card" key={item._id} >
@@ -175,7 +178,9 @@ const Home = () =>{
                 )
             })}
             
-        </div>
+            </div>
+            : <Loader/>
+            }</>
     )
 
 }

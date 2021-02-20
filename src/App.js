@@ -2,7 +2,7 @@ import React,{useEffect,createContext,useReducer, useContext}  from 'react'
 import Container from './components/styles/Container'
 import './App.css';
 import {BrowserRouter,Route, Switch, useHistory} from 'react-router-dom'
-import Navbar from './components/Navbar/Navbar'
+import Nav from './components/Nav/Nav'
 import Home from './components/Home/Home'
 import Profile from './components/Profile/Profile'
 import Login from './components/Login/Login'
@@ -67,7 +67,7 @@ function App() {
   return (
       <UserContext.Provider value={{state,dispatch}}>
       <BrowserRouter>
-        <Navbar/>
+        <Nav/>
         <Routing/>
       </BrowserRouter>
        </UserContext.Provider>

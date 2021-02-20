@@ -1,6 +1,7 @@
 import React,{useState,useEffect, useContext} from 'react'
 import {UserContext} from './../../App'
 import {Link} from 'react-router-dom'
+import Loader from "./../assets/Loader";
 
 const Followingpost = () =>{
 
@@ -111,19 +112,31 @@ const Followingpost = () =>{
         })
     }  
     return(
+        <>
+        {data?
         <div className="home">
             {data.map(item=>{
                 return(
                     <div className="card home-card" key={item._id}>
                       
-                      <h5><Link to={item.postedBy._id === state._id 
-                      ? `/profile`
-                    : `/profile/${item.postedBy._id}`
-                    }>
+                      <div style={{padding: "10px"}}><Link to={item.postedBy._id === state._id 
+                          ?`/profileheader`:`/profile/${item.postedBy._id}` }>
+                          <span> 
+                      <img src={item.postedBy.pic} style={{width: "42px",height: "42px", borderRadius:"80px"}}/> </span>
+                      <span style={{ 
+                          fontSize: '17px',
+                          fontWeight: '600',
+                          verticalAlign: 'super',
+                          paddingLeft: '10px'
+  
+                      }}>{item.postedBy.name}</span>
+                      </Link>
+  
+                      {item.postedBy._id==state._id 
                           
-                          {item.postedBy.name} </Link>{item.postedBy._id===state._id && 
+                          && 
                       <i className="material-icons" onClick={()=>deletePost(item._id)}
-                      style={{float:"right"}}>delete</i>}  </h5>
+                      style={{float:"right"}}>delete</i>}  </div>
                      <div className="card-image">
                           <img src={item.photo} alt={item.name}/>
                      </div>
@@ -161,7 +174,8 @@ const Followingpost = () =>{
                 )
             })}
             
-        </div>
+            </div>  : <Loader/>
+            }</>
     )
 
 }

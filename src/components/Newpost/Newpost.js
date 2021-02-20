@@ -11,12 +11,22 @@ const NewPostWrapper = styled.div`
     display: flex;
     justify-content: space-between;
     padding: 0.5rem 1rem;
+    margin: 0px;
+    line-height: 1.7;
   }
   .newpost-header h3:first-child {
     color: #ED4956;
   }
   h3 {
     cursor: pointer;
+    display: block;
+    font-size: 1.17em;
+    margin-block-start: 1em;
+    margin-block-end: 1em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+    margin: 0px;
+    
   }
   .newpost-header h3:last-child {
     color: #0095F6;
