@@ -17,7 +17,7 @@ const Home = () =>{
             console.log(result);
             setData(result.posts)
         })
-    },[])
+    },[state])
 
     const likePost = (id)=>{
         fetch(`${process.env.REACT_APP_BACKEND_URL}/like`,{

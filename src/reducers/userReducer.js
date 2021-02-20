@@ -20,5 +20,13 @@ export const reducer = (state,action)=>{
             pic: action.payload
         }
     }
+    if(action.type==="UPDATEPROFILE"){
+        return {
+            ...state,
+            name: action.payload.name,
+            username: action.payload.username,
+            pic: action.payload.pic,
+        }
+    }
     return state
 }
