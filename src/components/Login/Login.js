@@ -42,6 +42,7 @@ const Login = () =>{
     const [password,setPassword] = useState("")
     const [email,setEmail] = useState("")
     const [url,setUrl] = useState(undefined)
+    const [load,setLoad] = useState(true)
 
     const PostData =()=>{
       
@@ -58,6 +59,7 @@ const Login = () =>{
             console.log(data);
             if(data.error){
                 M.toast({html:data.error ,classes:"#e53935 red darken-1"})
+                setLoad(true)
             }else{
                 localStorage.setItem("jwt",data.token)
                 localStorage.setItem("user",JSON.stringify(data.user))
@@ -74,7 +76,7 @@ const Login = () =>{
         <Wrapper>
         <div className="mycard">
              <div className="card auth-card">
-                <h2 className="brand-logo">Logo</h2>
+                <h2 className="brand-logo">Instagram</h2>
                 <input
                 className="signup-input"
                  type="text"
@@ -91,11 +93,13 @@ const Login = () =>{
                  onChange={(e)=>{
                     setPassword(e.target.value)
                 }}/>
-                  <button onClick={()=>{
-                      PostData()
-                  }} className="btn waves-effect waves-light #64b5f6 blue darken-2" >
-                   Login
-                </button>
+                    {load?
+                 <button className="btn waves-effect waves-light #64b5f6 blue darken-2" 
+                 onClick={()=>{PostData(); setLoad(false)}}>
+                 Login
+              </button> :<button className="buttonload">
+                <i className="fa fa-spinner fa-spin"></i>Loading
+                </button> }
                  <div style={{marginTop: "1em"}}>
                    Dont have an account? <Link className="no-account" to="/signup">Sign up</Link>
                 </div>
