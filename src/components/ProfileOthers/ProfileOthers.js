@@ -308,7 +308,7 @@ const unfollowUser = ()=>{
         <img className="avatar" src={userProfile.user.pic} alt="avatar" />
         <div className="profile-info">
           <div className="profile-meta">
-            <h4 className="pointer">{userProfile.user.username}</h4>
+            <h4 className="pointer">@<span className="bold">{userProfile.user.username}</span></h4>
               <div className="options">
               {showFollow?
                 // <button className="btn waves-effect waves-light #64b5f6 blue darken-2" 

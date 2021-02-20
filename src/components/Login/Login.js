@@ -64,7 +64,7 @@ const Login = () =>{
                 localStorage.setItem("jwt",data.token)
                 localStorage.setItem("user",JSON.stringify(data.user))
                 dispatch({type:"USER",payload:data.user})
-                M.toast({html:"signed in success",classes:"#66bb6a green lighten-1"})
+                //M.toast({html:"signed in success",classes:"#66bb6a green lighten-1"})
                 history.push('/')
             }
         }).catch(err=>{
@@ -78,7 +78,7 @@ const Login = () =>{
              <div className="card auth-card">
                 <h2 className="brand-logo">Instagram</h2>
                 <input
-                className="signup-input"
+                className="login-input"
                  type="text"
                  placeholder="email"
                  value={email.toLowerCase()}
@@ -87,7 +87,7 @@ const Login = () =>{
                  }}
                  />
                  <input
-                 className="signup-input"
+                 className="login-input"
                  type="password"
                  placeholder="password"
                  onChange={(e)=>{

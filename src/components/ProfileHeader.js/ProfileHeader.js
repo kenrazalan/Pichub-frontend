@@ -244,7 +244,7 @@ console.log(state)
         <img className="avatar" src={state?state.pic:"loading"} alt="avatar" />
         <div className="profile-info">
           <div className="profile-meta">
-            <h4 className="pointer">{state?state.username:"loading"}</h4>
+            <h4 className="pointer">@<span className="bold">{state?state.username:"loading"}</span></h4>
               <div className="options">
                 <Button
                   secondary

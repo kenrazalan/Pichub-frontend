@@ -36,7 +36,7 @@ export const Wrapper = styled.div`
     font-size: 1rem !important;
     border-radius: 4px !important;
     border: 1px solid #DBDBDB !important;
-    width: 350px !important;
+    width: 335px !important;
     height: 1rem !important;
   }
   .textarea-group {
@@ -75,7 +75,7 @@ export const Wrapper = styled.div`
   @media screen and (max-width: 430px) {
     input,
     textarea {
-      width: 99% !important;
+      width: 85% !important;
     }
   }
 `;
@@ -164,7 +164,7 @@ const ProfileForm = () => {
             />
           </div>
           <div className="change-avatar-meta">
-            <h2>{state.username}</h2>
+            <h2 className="bold">{state.username}</h2>
             <label htmlFor="change-avatar-link">
               <span>Change Profile Photo</span>
             </label>
