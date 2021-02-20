@@ -252,7 +252,10 @@ console.log(state)
                 >
                   Edit Profile
                 </Button>
-                <OptionsIcon/>
+                <OptionsIcon  onClick={()=>{
+                   localStorage.clear()
+                   dispatch({type:"CLEAR"})
+                   history.push('/signin')}}/>
               </div>
           </div>
 
