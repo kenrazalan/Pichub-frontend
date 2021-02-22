@@ -1,11 +1,11 @@
 import React, { useContext, useEffect, useState } from "react";
 import styled from "styled-components";
-import { useHistory } from "react-router-dom";
+import { useHistory,Link } from "react-router-dom";
 import Button from "../assets/Button";
 import Loader from './../assets/Loader'
-import { OptionsIcon ,PostIcon,SavedIcon} from "../assets/Icons";
+import { OptionsIcon ,PostIcon,SavedIcon,CloseIcon} from "../assets/Icons";
 import {UserContext} from '../../App'
-
+import Modal from '../Modal/Modal'
 
 const WrapperPost = styled.div`
 margin-top: 1rem;
@@ -212,7 +212,101 @@ const Wrapper = styled.div`
   }
 `;
 
+const modalHeaderStyle = {
+  display: "flex" ,
+  alignItems: "center" ,
+  justifyContent: "space-between",
+  borderBottom: "1px solid #DBDBDB",
+  padding: "1rem",
+};
 
+const ModalContentWrapper = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem ;
+  padding-right: 2rem ;
+  font-size: 0.9rem ;
+  width: 350px ;
+  img {
+    width: 40px !important;
+    object-fit: cover !important;
+    height: 40px !important;
+    border-radius: 20px !important;
+    margin-right: 1rem !important;
+  }
+  .profile-info {
+    display: flex !important;
+  }
+  span {
+    color: #B2B2B2 !important;
+  }
+  button {
+    font-size: 0.9rem !important;
+    position: relative !important;
+    top: -10px !important;
+  }
+  @media screen and (max-width: 480px) {
+    width: 340px !important;
+  }
+`;
+
+const ModalContent = ({ loggedInUser, users, closeModal, title,follow,unfollow }) => {
+  const history = useHistory();
+//   const[shFollow,setShFollow] = useState(true)
+  // useEffect(()=>{
+//     setShFollow(loggedInUser && !loggedInUser.following.includes(users._id))
+ //},[users])
+  console.log(loggedInUser)
+  return (
+    <div style={{ maxHeight: "400px", overflowY: "auto" }}>
+      <div style={{display: "flex", alignItems: "center" ,
+  justifyContent: "space-between",
+  borderBottom: "1px solid #DBDBDB",
+  padding: "1rem"}}>
+        <div>{title}</div>
+        <CloseIcon onClick={closeModal} />
+      </div>
+      {users.map((user) => (
+
+        <ModalContentWrapper key={user._id}>
+          <div className="profile-info">
+            <img
+              className="pointer"
+              onClick={() => {
+                closeModal();
+                history.push(`/${user.username}`);
+              }}
+              // src={loggedInUser._id==user._id?loggedInUser.pic:user.pic}
+              src={user.pic}
+              alt="avatar"
+            />
+            <div className="user-info">
+              <div
+                className="pointer"
+                onClick={() => {
+                  closeModal();
+
+                }}
+              >
+                <Link to={loggedInUser._id===user._id?`/profileheader`:`/profile/${user._id}`}>{user.username}</Link>
+              </div>
+              <span>{user.name}</span>
+            </div>
+          </div>
+          {/* {loggedInUser._id!==user._id?
+          <div className="options">
+              {shFollow?
+                <Button onClick={()=>follow(user._id)}>Follow</Button>
+                :
+                <Button onClick={()=>unfollow(user._id)}>Unfollow</Button>
+                }
+              </div>: <div>You</div>} */}
+        </ModalContentWrapper>
+      ))}
+    </div>
+  );
+};
 
 
 
@@ -222,6 +316,13 @@ const ProfileHeader = () => {
   const [mypics,setMypic] =useState([])
   const {state,dispatch}= useContext(UserContext)
   const history = useHistory()
+  const [showFollowersModal, setFollowersModal] = useState(false);
+  const [showFollowingModal, setFollowingModal] = useState(false);
+
+  const closeModal = () => {
+    setFollowersModal(false);
+    setFollowingModal(false);
+  };
 
 console.log(state)
   useEffect(()=>{
@@ -244,7 +345,7 @@ console.log(state)
         <img className="avatar" src={state?state.pic:"loading"} alt="avatar" />
         <div className="profile-info">
           <div className="profile-meta">
-            <h4 className="pointer">@<span className="bold">{state?state.username:"loading"}</span></h4>
+            <h5 className="pointer">@<span className="bold">{state?state.username:"loading"}</span></h5>
               <div className="options">
                 <Button
                   secondary
@@ -262,15 +363,43 @@ console.log(state)
           <div className="profile-stats">
             <span>{mypics.length} posts</span>
 
-            <span className="pointer" >
+            <span className="pointer" onClick={() => setFollowersModal(true)}>
               {state?state.followers.length: '0'} followers
             </span>
 
-            <span className="pointer" >
+            <span className="pointer" onClick={() => setFollowingModal(true)}>
               {state?state.following.length :"0"} following
             </span>
 
           </div>
+          {showFollowersModal && state.followers.length > 0 && (
+              <Modal>
+                <ModalContent
+                //  setShFollow={setShowfollow}
+                //   shFollow={showFollow}
+                  // follow={followUser}
+                  // unfollow={unfollowUser}
+                  users={state.followers}
+                  title="Followers"
+                  closeModal={closeModal}
+                  loggedInUser={state}
+                />
+              </Modal>
+            )}
+              {showFollowingModal && state.following.length > 0 && (
+              <Modal>
+                <ModalContent
+                //  setShFollow={setShowfollow}
+                //   shFollow={showFollow}
+                  // follow={followUser}
+                  // unfollow={unfollowUser}
+                  users={state.following}
+                  title="Followers"
+                  closeModal={closeModal}
+                  loggedInUser={state}
+                />
+              </Modal>
+            )}
           <div className="bio">
             <span className="bold">{state?state.name:"loading"}</span>
 

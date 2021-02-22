@@ -1,7 +1,7 @@
 import React,{useEffect,createContext,useReducer, useContext}  from 'react'
 import Container from './components/styles/Container'
 import './App.css';
-import {BrowserRouter,Route, Switch, useHistory} from 'react-router-dom'
+import {BrowserRouter as Router,Route, Switch, useHistory} from 'react-router-dom'
 import Nav from './components/Nav/Nav'
 import Home from './components/Home/Home'
 import Profile from './components/Profile/Profile'
@@ -48,8 +48,10 @@ const Routing = () =>{
     <Route exact path="/create">
         <Createpost/>
     </Route>
-    <Route exact path="/profile/:userid">
-        <ProfileOthers/>
+    <Route path='/profile/:userid'  render={(props) => {
+                    return ( <ProfileOthers {...props } key={window.location.pathname}/> )
+                }} >
+
     </Route>
     <Route exact path="/followingpost">
         <Followingpost/>
@@ -66,10 +68,10 @@ function App() {
     const [state,dispatch]= useReducer(reducer,initialState)
   return (
       <UserContext.Provider value={{state,dispatch}}>
-      <BrowserRouter>
+      <Router>
         <Nav/>
         <Routing/>
-      </BrowserRouter>
+      </Router>
        </UserContext.Provider>
   );
 }
