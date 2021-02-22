@@ -106,13 +106,15 @@ const Nav = () =>{
 
         //  </li>
         ]
-    }else{
-      return[
-        <li  key="6"><Link to="/signin">Signin</Link></li>,
-        <li  key="7"><Link to="/signup">Signup</Link></li>
-
-      ]
     }
+    
+    // else{
+    //   return[
+    //     <li  key="6"><Link to="/signin">Signin</Link></li>,
+    //     <li  key="7"><Link to="/signup">Signup</Link></li>
+
+    //   ]
+    // }
   }
 
   const fetchUsers = (query) =>{
