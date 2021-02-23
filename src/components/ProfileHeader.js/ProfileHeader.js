@@ -187,7 +187,7 @@ const Wrapper = styled.div`
   }
   @media screen and (max-width: 645px) {
     font-size: 1rem;
-    
+    .bio,
     .profile-stats {
       display: none;
     }
@@ -201,7 +201,7 @@ const Wrapper = styled.div`
     button {
       margin-left: 0;
     }
-}
+
   
   @media screen and (max-width: 420px) {
     font-size: 0.9rem;
@@ -209,6 +209,7 @@ const Wrapper = styled.div`
       width: 100px;
       height: 100px;
     }
+  }
   }
 `;
 
@@ -408,19 +409,47 @@ console.log(state)
         </div>
       </Wrapper>
       <MobileWrapper>
-        <div className="mobile-profile-stats">
+        <div className="mobile-profile-stats" >
           <span>{state?mypics.length:"0"} posts</span>
 
-          <span className="pointer">
+          <span className="pointer" onClick={() => setFollowersModal(true)}>
             {state?state.followers.length: '0'} followers
           </span>
 
-          <span className="pointer">
+          <span className="pointer" onClick={() => setFollowingModal(true)}>
             {state?state.following.length: '0'} following
           </span>
 
 
         </div>
+        {showFollowersModal && state.followers.length > 0 && (
+              <Modal>
+                <ModalContent
+                //  setShFollow={setShowfollow}
+                //   shFollow={showFollow}
+                  // follow={followUser}
+                  // unfollow={unfollowUser}
+                  users={state.followers}
+                  title="Followers"
+                  closeModal={closeModal}
+                  loggedInUser={state}
+                />
+              </Modal>
+            )}
+              {showFollowingModal && state.following.length > 0 && (
+              <Modal>
+                <ModalContent
+                //  setShFollow={setShowfollow}
+                //   shFollow={showFollow}
+                  // follow={followUser}
+                  // unfollow={unfollowUser}
+                  users={state.following}
+                  title="Followers"
+                  closeModal={closeModal}
+                  loggedInUser={state}
+                />
+              </Modal>
+            )}
         <div className="mobile-bio">
           <span className="bold">{state?state.name:"loading"}</span>
         </div>
