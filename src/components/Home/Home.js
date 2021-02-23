@@ -5,6 +5,7 @@ import Loader from '../assets/Loader'
 import styled from 'styled-components'
 import {MoreIcon} from '../assets/Icons'
 import Modal from '../Modal/Modal'
+import LikePost from '../../components/Likepost/Likepost'
 
 const Wrapper = styled.div`
 .home-card{
@@ -207,7 +208,7 @@ const Home = () =>{
                         </Modal>
                      )}
 
-                        {item.postedBy._id==state._id 
+                        {item.postedBy._id===state._id 
                              && <MoreIcon onClick={() =>{
                         setShowModal(true);
                         setDelete(item._id)
@@ -225,7 +226,7 @@ const Home = () =>{
                           :
                           <i style={{marginTop: "-5px"}} className="material-icons" onClick={()=>likePost(item._id)}>thumb_up</i>
                         }
-                      
+                      {/* <LikePost /> */}
                        
                       <div className="bold">{item.likes.length} {item.likes.length>1?'likes':'like'}</div>
                       <div >{item.title}</div>
