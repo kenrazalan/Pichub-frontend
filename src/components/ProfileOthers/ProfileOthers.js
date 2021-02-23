@@ -490,16 +490,44 @@ const unfollowUser = ()=>{
         <div className="mobile-profile-stats">
           <span>{userProfile.posts.length} posts</span>
 
-          <span className="pointer">
+          <span className="pointer"onClick={() => setFollowersModal(true)} >
             {userProfile.user.followers.length} followers
           </span>
 
-          <span className="pointer">
+          <span className="pointer" onClick={() => setFollowingModal(true)}>
             {userProfile.user.following.length} following
           </span>
 
 
         </div>
+        {showFollowersModal && state.followers.length > 0 && (
+              <Modal>
+                <ModalContent
+                //  setShFollow={setShowfollow}
+                //   shFollow={showFollow}
+                  // follow={followUser}
+                  // unfollow={unfollowUser}
+                  users={state.followers}
+                  title="Followers"
+                  closeModal={closeModal}
+                  loggedInUser={state}
+                />
+              </Modal>
+            )}
+              {showFollowingModal && state.following.length > 0 && (
+              <Modal>
+                <ModalContent
+                //  setShFollow={setShowfollow}
+                //   shFollow={showFollow}
+                  // follow={followUser}
+                  // unfollow={unfollowUser}
+                  users={state.following}
+                  title="Followers"
+                  closeModal={closeModal}
+                  loggedInUser={state}
+                />
+              </Modal>
+            )}
         <div className="mobile-bio">
           <span className="bold">{userProfile.user.name}</span>
         </div>
