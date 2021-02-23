@@ -392,7 +392,7 @@ const unfollowUser = ()=>{
         localStorage.setItem("user",JSON.stringify(data))
 
         setProfile(prevState=>{
-            const newFollower  = prevState.user.followers.filter(item=>item!== data._id)
+            const newFollower  = prevState.user.followers.filter(item=>item._id!== data._id)
             return {
                 ...prevState,
                 user:{
