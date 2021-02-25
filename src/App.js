@@ -55,7 +55,7 @@ const Routing = () =>{
                 }} >
 
     </Route>
-    <Route exact path="/followingpost">
+    <Route exact path="/explore">
         <Suggestions/>
     </Route>
     <Route path='/accounts/edit'>

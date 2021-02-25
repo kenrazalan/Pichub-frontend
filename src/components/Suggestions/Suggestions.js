@@ -10,6 +10,9 @@ const Wrapper = styled.div`
   padding: 1rem;
   justify-self: center;
   font-size: 0.9rem ;
+  h3{
+    font-size: 0.9rem ;
+  }
   img {
     width: 40px !important;
     object-fit: cover !important;
@@ -82,7 +85,8 @@ const Suggestions = () => {
 
   return (
     <div style={{ display: "flex", flexDirection: "column" }}>
-      <h3 style={{ marginBottom: "0.7rem" }}>Suggestions for you</h3>
+      <h4>Explore</h4>
+      <h3 style={{ marginBottom: "0.7rem",fontSize:"1.5rem" }}>Suggestions for you</h3>
       <Wrapper>
         {users.map((user) => (
           <div key={user._id} className="suggestion">

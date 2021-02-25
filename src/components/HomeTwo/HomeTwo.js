@@ -54,10 +54,7 @@ const HomeTwo= ()=>{
 
     return(
         <>
-        { myPost.length+ data.length> 0 ? (
-            <Followingpost/>
-        )
-        :<Suggestions/>}
+        { myPost.length>0 || data.length> 0 ?  <Followingpost/> : <Suggestions/>}
         </>
     )
 

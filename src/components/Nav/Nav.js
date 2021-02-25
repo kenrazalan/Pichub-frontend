@@ -81,7 +81,7 @@ const Nav = () =>{
             <li>
             <NewPost />
             </li>,
-            <li key="4"><Link to="/followingpost"><ExploreIcon/></Link></li>,
+            <li key="4"><Link to="/explore"><ExploreIcon/></Link></li>,
               <li key="2"><Link to="/profileheader">
                  <img
                   style={{
