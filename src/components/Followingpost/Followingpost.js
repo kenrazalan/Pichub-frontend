@@ -3,6 +3,9 @@ import {UserContext} from './../../App'
 import {Link} from 'react-router-dom'
 import Loader from "./../assets/Loader";
 import styled from 'styled-components'
+import {MoreIcon} from '../assets/Icons'
+import Modal from '../Modal/Modal'
+import {ModalContent} from '../Home/Home'
 
 const Wrapper = styled.div`
 .home-card{
@@ -22,7 +25,14 @@ const Wrapper = styled.div`
 const Followingpost = () =>{
 
     const [data,setData] = useState([])
+    const [myPost,setMyPost] =useState([])
+    const concat = myPost.concat(data)
     const {state,dispatch} = useContext(UserContext)
+    const [loading, setLoading] = useState(true);
+    const [showModal, setShowModal] = useState(false);
+    const closeModal = () => setShowModal(false);
+    const [del,setDelete]= useState("")
+
     useEffect(()=>{
         fetch(`${process.env.REACT_APP_BACKEND_URL}/followingpost`,{
             headers:{
@@ -33,7 +43,19 @@ const Followingpost = () =>{
             console.log(result);
             setData(result.posts)
         })
-    },[])
+    },[state])
+    useEffect(()=>{
+        fetch(`${process.env.REACT_APP_BACKEND_URL}/myposts`,{
+            headers:{
+                "Authorization":"Bearer "+ localStorage.getItem("jwt")
+            }
+        }).then((res)=>res.json())
+        .then(result=>{
+            console.log(result.myposts.length);
+            setMyPost(result.myposts)
+            setLoading(false)
+        })
+    },[state])
 
     const likePost = (id)=>{
         fetch(`${process.env.REACT_APP_BACKEND_URL}/like`,{
@@ -111,7 +133,7 @@ const Followingpost = () =>{
         })
     }
     const deletePost= (postid)=>{
-        fetch(`/deletepost/${postid}`,{
+        fetch(`${process.env.REACT_APP_BACKEND_URL}/deletepost/${postid}`,{
             method:"delete",
             headers: {
                 "Authorization": "Bearer "+ localStorage.getItem("jwt"),
@@ -120,19 +142,23 @@ const Followingpost = () =>{
         }).then(res=>res.json())
         .then(result=>{
             console.log(result)
-            const newData = data.filter(item=>{
+            const newData = myPost.filter(item=>{
                 return item._id !== result._id
             })
-            setData(newData)
+            setMyPost(newData)
            
         })
     }  
+
+    if (loading) {
+        return <Loader />;
+      }
     return(
         <>
          <Wrapper>
-        {data?
+        {concat?
         <div className="home">
-            {data.map(item=>{
+            {concat.map(item=>{
                 return(
                     <div className="card home-card" key={item._id}>
                       
@@ -148,12 +174,21 @@ const Followingpost = () =>{
   
                       }}>{item.postedBy.name}</span>
                       </Link>
+
+                      {showModal && (
+                        <Modal>
+                            <ModalContent postId={del} handleDeletePost={deletePost} state={state}   closeModal={closeModal} />
+                        </Modal>
+                     )}
   
-                      {item.postedBy._id==state._id 
+                      {item.postedBy._id===state._id 
                           
                           && 
-                      <i className="material-icons" onClick={()=>deletePost(item._id)}
-                      style={{float:"right"}}>delete</i>}  </div>
+                          <MoreIcon onClick={() =>{
+                            setShowModal(true);
+                            setDelete(item._id)
+                            } } style={{float:"right"}} />}  </div>
+                      
                      <div className="card-image">
                           <img src={item.photo} alt={item.name}/>
                      </div>
