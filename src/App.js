@@ -35,7 +35,7 @@ const Routing = () =>{
         <Container>
         <Switch>
         <Route exact path="/">
-        <Suggestions/>
+        <Home/>
     </Route>
     <Route exact path="/profileheader">
         <ProfileHeader/>
