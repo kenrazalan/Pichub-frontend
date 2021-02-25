@@ -13,6 +13,7 @@ import Followingpost from './components/Followingpost/Followingpost'
 import ProfileHeader from './components/ProfileHeader.js/ProfileHeader'
 import ProfileOthers from './components/ProfileOthers/ProfileOthers'
 import EditProfile from './components/EditProfile/EditProfile'
+import Suggestions from './components/Suggestions/Suggestions'
 import {reducer,initialState} from './reducers/userReducer'
 
 export const UserContext = createContext()
@@ -34,7 +35,7 @@ const Routing = () =>{
         <Container>
         <Switch>
         <Route exact path="/">
-        <Home/>
+        <Suggestions/>
     </Route>
     <Route exact path="/profileheader">
         <ProfileHeader/>

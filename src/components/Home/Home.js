@@ -192,7 +192,9 @@ const Home = () =>{
                             }>
                           
                           <span> 
-                    <img src={item.postedBy.pic} style={{width: "42px",height: "42px", borderRadius:"80px",marginBottom: "-10px"}}/> </span>
+                    <img src={item.postedBy.pic} 
+                         style={{width: "42px",height: "42px", borderRadius:"80px",marginBottom: "-10px"}}
+                         alt={item.name} /> </span>
                     <span style={{ 
                         fontSize: '17px',
                         fontWeight: '600',
@@ -222,9 +224,9 @@ const Home = () =>{
                         {/* <i className="material-icons" >favorite</i> */}
 
                         {item.likes.includes(state._id)?
-                          <i style={{marginTop: "-5px"}} className="material-icons" onClick={()=>unlikePost(item._id)}>thumb_down</i>
+                          <i style={{marginTop: "-5px"}} className="material-icons" onClick={()=>unlikePost(item._id)}>thumb_down_off_alt</i>
                           :
-                          <i style={{marginTop: "-5px"}} className="material-icons" onClick={()=>likePost(item._id)}>thumb_up</i>
+                          <i style={{marginTop: "-5px"}} className="material-icons" onClick={()=>likePost(item._id)}>thumb_up_off_alt</i>
                         }
                       {/* <LikePost /> */}
                        

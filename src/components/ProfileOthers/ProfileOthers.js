@@ -288,7 +288,7 @@ const ModalContent = ({ loggedInUser, users, closeModal, title,follow,unfollow }
 
                 }}
               >
-                <Link to={loggedInUser._id==user._id?`/profileheader`:`/profile/${user._id}`}>{user.username}</Link>
+                <Link to={loggedInUser._id===user._id?`/profileheader`:`/profile/${user._id}`}>{user.username}</Link>
               </div>
               <span>{user.name}</span>
             </div>
@@ -416,22 +416,9 @@ const unfollowUser = ()=>{
             <h4 className="pointer">@<span className="bold">{userProfile.user.username}</span></h4>
               <div className="options">
               {showFollow?
-                // <button className="btn waves-effect waves-light #64b5f6 blue darken-2" 
-                //  onClick={()=>followUser()}
-                //  style={{
-                //      margin:"10px"
-                //  }}>
-                //      Follow
-                // </button>
+        
                 <Button onClick={()=>followUser()}>Follow</Button>
                 :
-                // <button className="btn waves-effect waves-light #64b5f6 blue darken-2" 
-                //  onClick={()=>unfollowUser()}
-                //  style={{
-                //     margin:"10px"
-                // }}>
-                //      Unfollow
-                // </button>
                 <Button onClick={()=>unfollowUser()}>Unfollow</Button>
                 }
               </div>
