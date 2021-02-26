@@ -435,7 +435,7 @@ const unfollowUser = ()=>{
               {userProfile.user.following.length} following
             </span>
 
-          </div>
+          
           
 
           {showFollowersModal && userProfile.user.followers.length > 0 && (
@@ -460,12 +460,13 @@ const unfollowUser = ()=>{
                   // follow={followUser}
                   // unfollow={unfollowUser}
                   users={userProfile.user.following}
-                  title="Followers"
+                  title="Following"
                   closeModal={closeModal}
                   loggedInUser={state}
                 />
               </Modal>
             )}
+            </div>
           <div className="bio">
             <span className="bold">{userProfile.user.name}</span>
 
@@ -486,7 +487,7 @@ const unfollowUser = ()=>{
           </span>
 
 
-        </div>
+        
         {showFollowersModal && state.followers.length > 0 && (
               <Modal>
                 <ModalContent
@@ -509,12 +510,13 @@ const unfollowUser = ()=>{
                   // follow={followUser}
                   // unfollow={unfollowUser}
                   users={state.following}
-                  title="Followers"
+                  title="Following"
                   closeModal={closeModal}
                   loggedInUser={state}
                 />
               </Modal>
             )}
+            </div>
         <div className="mobile-bio">
           <span className="bold">{userProfile.user.name}</span>
         </div>
