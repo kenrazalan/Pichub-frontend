@@ -131,10 +131,10 @@ const Followingpost = () =>{
         }).then(res=>res.json())
         .then(result=>{
             console.log(result)
-            const newData = myPost.filter(item=>{
+            const newData = data.filter(item=>{
                 return item._id !== result._id
             })
-            setMyPost(newData)
+            setData(newData)
            
         })
     }  
