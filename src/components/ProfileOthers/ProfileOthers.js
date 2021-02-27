@@ -314,7 +314,7 @@ const ProfileOthers = (props) => {
   const [userProfile,setProfile] =useState(null)
   const [showFollowersModal, setFollowersModal] = useState(false);
   const [showFollowingModal, setFollowingModal] = useState(false);
-
+  const [load,setLoad] = useState(true)
   const closeModal = () => {
     setFollowersModal(false);
     setFollowingModal(false);
@@ -359,7 +359,7 @@ const followUser = ()=>{
 
         dispatch({type:"UPDATE",payload: {following:data.following, followers: data.followers}})
         localStorage.setItem("user",JSON.stringify(data))
-
+        setLoad(false)
         setProfile(prevState=>{
 
             return {
@@ -370,6 +370,7 @@ const followUser = ()=>{
                    }
             }
         })
+         setLoad(true)
          setShowfollow(false)
     })
 }
@@ -390,7 +391,7 @@ const unfollowUser = ()=>{
         console.log(data)
         dispatch({type:"UPDATE",payload: {following:data.following, followers: data.followers}})
         localStorage.setItem("user",JSON.stringify(data))
-
+     
         setProfile(prevState=>{
             const newFollower  = prevState.user.followers.filter(item=>item._id!== data._id)
             return {
@@ -400,7 +401,9 @@ const unfollowUser = ()=>{
                     followers:newFollower
                    }
             }
+            
         })
+        setLoad(true)
         setShowfollow(true)
     })
 }
@@ -413,13 +416,17 @@ const unfollowUser = ()=>{
         <img className="avatar" src={userProfile.user.pic} alt="avatar" />
         <div className="profile-info">
           <div className="profile-meta">
-            <h4 className="pointer">@<span className="bold">{userProfile.user.username}</span></h4>
+            <h4 className="pointer">@<span>{userProfile.user.username}</span></h4>
               <div className="options">
               {showFollow?
-        
-                <Button onClick={()=>followUser()}>Follow</Button>
+                load?
+                <Button onClick={()=>{followUser();setLoad(false)}}>Follow</Button>
+                :<Button><i className="fa fa-spinner fa-spin"></i></Button>
                 :
-                <Button onClick={()=>unfollowUser()}>Unfollow</Button>
+                load?
+                <Button onClick={()=>{unfollowUser();setLoad(false)}}>Unfollow</Button>
+                :<Button><i className="fa fa-spinner fa-spin"></i></Button>
+
                 }
               </div>
           </div>
