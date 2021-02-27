@@ -19,18 +19,18 @@ const HomeTwo= ()=>{
     const [data,setData] = useState([])
     const [myPost,setMyPost] =useState([])
 
-    useEffect(()=>{
-        fetch(`${process.env.REACT_APP_BACKEND_URL}/myposts`,{
-            headers:{
-                "Authorization":"Bearer "+ localStorage.getItem("jwt")
-            }
-        }).then((res)=>res.json())
-        .then(result=>{
-            console.log(result.myposts.length);
-            setMyPost(result.myposts)
-            setLoading(false)
-        })
-    },[])
+    // useEffect(()=>{
+    //     fetch(`${process.env.REACT_APP_BACKEND_URL}/myposts`,{
+    //         headers:{
+    //             "Authorization":"Bearer "+ localStorage.getItem("jwt")
+    //         }
+    //     }).then((res)=>res.json())
+    //     .then(result=>{
+    //         console.log(result.myposts.length);
+    //         setMyPost(result.myposts)
+    //         setLoading(false)
+    //     })
+    // },[])
 
 
     useEffect(()=>{
@@ -54,7 +54,7 @@ const HomeTwo= ()=>{
 
     return(
         <>
-        { myPost.length>0 || data.length> 0 ?  <Followingpost/> : <Suggestions/>}
+        { data.length> 0 ?  <Followingpost/> : <Suggestions/>}
         </>
     )
 

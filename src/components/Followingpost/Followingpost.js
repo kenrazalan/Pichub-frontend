@@ -44,18 +44,7 @@ const Followingpost = () =>{
             setData(result.posts)
         })
     },[state])
-    useEffect(()=>{
-        fetch(`${process.env.REACT_APP_BACKEND_URL}/myposts`,{
-            headers:{
-                "Authorization":"Bearer "+ localStorage.getItem("jwt")
-            }
-        }).then((res)=>res.json())
-        .then(result=>{
-            console.log(result.myposts.length);
-            setMyPost(result.myposts)
-            setLoading(false)
-        })
-    },[state])
+
 
     const likePost = (id)=>{
         fetch(`${process.env.REACT_APP_BACKEND_URL}/like`,{
@@ -150,15 +139,12 @@ const Followingpost = () =>{
         })
     }  
 
-    if (loading) {
-        return <Loader />;
-      }
+  
     return(
         <>
          <Wrapper>
-        {concat?
         <div className="home">
-            {concat.map(item=>{
+            {data.map(item=>{
                 return(
                     <div className="card home-card" key={item._id}>
                       
@@ -227,8 +213,8 @@ const Followingpost = () =>{
                 )
             })}
             
-            </div>  : <Loader/>
-            }
+            </div>  
+            
             </Wrapper></>
     )
 
