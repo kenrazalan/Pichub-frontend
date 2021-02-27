@@ -174,7 +174,7 @@ const Wrapper = styled.div`
     display: flex;
     margin-bottom: 1rem;
   }
-  .options svg {
+  .material-icons {
     position: relative;
     top: 7px;
     margin-left: 1rem;
@@ -346,7 +346,7 @@ console.log(state)
         <img className="avatar" src={state?state.pic:"loading"} alt="avatar" />
         <div className="profile-info">
           <div className="profile-meta">
-            <h5 className="pointer">@<span className="bold">{state?state.username:"loading"}</span></h5>
+            <h5 className="pointer">@<span>{state?state.username:"loading"}</span></h5>
               <div className="options">
                 <Button
                   secondary
@@ -354,10 +354,15 @@ console.log(state)
                 >
                   Edit Profile
                 </Button>
-                <OptionsIcon  onClick={()=>{
+                <i className="material-icons" 
+                  onClick={()=>{
+                    localStorage.clear()
+                    dispatch({type:"CLEAR"})
+                    history.push('/signin')}}>power_settings_new</i>
+                {/* <OptionsIcon  onClick={()=>{
                    localStorage.clear()
                    dispatch({type:"CLEAR"})
-                   history.push('/signin')}}/>
+                   history.push('/signin')}}/> */}
               </div>
           </div>
 

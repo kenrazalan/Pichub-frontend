@@ -25,10 +25,7 @@ const Wrapper = styled.div`
 const Followingpost = () =>{
 
     const [data,setData] = useState([])
-    const [myPost,setMyPost] =useState([])
-    const concat = myPost.concat(data)
     const {state,dispatch} = useContext(UserContext)
-    const [loading, setLoading] = useState(true);
     const [showModal, setShowModal] = useState(false);
     const closeModal = () => setShowModal(false);
     const [del,setDelete]= useState("")
