@@ -135,7 +135,7 @@ const unfollowUser = (id)=>{
   return (
     <div style={{ display: "flex", flexDirection: "column" }}>
       <h4>Explore</h4>
-      <h3 style={{ marginBottom: "0.7rem",fontSize:"1.5rem" }}>Suggestions for you</h3>
+      <h3 style={{ marginBottom: "0.7rem",fontSize:"1.3rem",}}>Suggestions for you</h3>
       <Wrapper>
         {users.map((user) => (
           <div key={user._id} className="suggestion">

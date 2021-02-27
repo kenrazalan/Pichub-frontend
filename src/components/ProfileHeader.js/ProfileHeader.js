@@ -118,6 +118,9 @@ const Wrappers = styled.div`
   hr {
     border: 0.5px solid #DBDBDB;
   }
+  .pointers{
+    font-size: 1.5rem;
+  }
 `;
 
 
@@ -142,10 +145,12 @@ const MobileWrapper = styled.div`
       display: block;
       margin-bottom: 0.4rem;
     }
+    
   }
   a {
     color: #0095F6;
   }
+
 `;
 
 const Wrapper = styled.div`
@@ -200,6 +205,10 @@ const Wrapper = styled.div`
     }
     button {
       margin-left: 0;
+    }
+    .pointers{
+      font-size: 1.1rem;
+      font-weight: 100 !important;
     }
 
   
@@ -346,7 +355,7 @@ console.log(state)
         <img className="avatar" src={state?state.pic:"loading"} alt="avatar" />
         <div className="profile-info">
           <div className="profile-meta">
-            <h5 className="pointer">@<span>{state?state.username:"loading"}</span></h5>
+            <div className="pointers">@<span>{state?state.username:"loading"}</span></div>
               <div className="options">
                 <Button
                   secondary
