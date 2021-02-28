@@ -40,7 +40,6 @@ const HomeTwo= ()=>{
             }
         }).then((res)=>res.json())
         .then(result=>{
-            console.log(result.posts.length);
             setData(result.posts)
             setLoading(false)
         })

@@ -27,7 +27,7 @@ const Wrapper = styled.div`
         font-weight: 100 !important;
     }
     .brand-logo{
-        font-family: 'Grand Hotel', cursive ;
+        font-family: 'Grand Hotel';
       }
     button{
         font-weight: 600 !important;

@@ -14,6 +14,7 @@ import ProfileHeader from './components/ProfileHeader.js/ProfileHeader'
 import ProfileOthers from './components/ProfileOthers/ProfileOthers'
 import EditProfile from './components/EditProfile/EditProfile'
 import HomeTwo from './components/HomeTwo/HomeTwo'
+import Reset from './components/Reset/Reset'
 import {reducer,initialState} from './reducers/userReducer'
 import Suggestions from './components/Suggestions/Suggestions';
 
@@ -60,6 +61,9 @@ const Routing = () =>{
     </Route>
     <Route path='/accounts/edit'>
               <EditProfile/>
+    </Route>
+    <Route exact path="/reset">
+        <Reset/>
     </Route>
     </Switch>
     </Container>
