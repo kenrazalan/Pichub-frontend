@@ -92,7 +92,7 @@ const Followingpost = () =>{
     }
 
     const makeComment = (text,postId)=>{
-        fetch('/comment',{
+        fetch(`${process.env.REACT_APP_BACKEND_URL}/comment`,{
             method:"put",
             headers:{
                 "Content-Type": "application/json",
