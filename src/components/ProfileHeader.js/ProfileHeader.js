@@ -345,7 +345,7 @@ console.log(state)
         console.log(result)
         setMypic(result.myposts) 
     })
-},[])
+},[state])
 
   return (
     <>

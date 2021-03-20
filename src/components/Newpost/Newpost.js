@@ -1,10 +1,10 @@
 import React, { useContext, useState } from "react";
-import styled from 'styled-components'
-import Modal from '../Modal/Modal'
-import {NewPostIcon} from '../assets/Icons'
-import M from 'materialize-css'
-import {useHistory} from 'react-router-dom'
-import Loader from '../assets/Loader'
+import styled from "styled-components";
+import Modal from "../Modal/Modal";
+import { NewPostIcon } from "../assets/Icons";
+import M from "materialize-css";
+import { useHistory } from "react-router-dom";
+import Loader from "../assets/Loader";
 
 const NewPostWrapper = styled.div`
   .newpost-header {
@@ -15,7 +15,7 @@ const NewPostWrapper = styled.div`
     line-height: 1.7;
   }
   .newpost-header h3:first-child {
-    color: #ED4956;
+    color: #ed4956;
   }
   h3 {
     cursor: pointer;
@@ -26,10 +26,9 @@ const NewPostWrapper = styled.div`
     margin-inline-start: 0px;
     margin-inline-end: 0px;
     margin: 0px;
-    
   }
   .newpost-header h3:last-child {
-    color: #0095F6;
+    color: #0095f6;
   }
   textarea {
     height: 100%;
@@ -50,149 +49,135 @@ const NewPostWrapper = styled.div`
   }
 `;
 
-
-
 const NewPost = () => {
-    const [showModal, setShowModal] = useState(false);
-    const [preview, setPreview] = useState("");
-    const [body,setBody] = useState("")
-    const [image,setImage] = useState("")
-    const [url,setUrl] = useState("")
-    const history = useHistory()
+  const [showModal, setShowModal] = useState(false);
+  const [preview, setPreview] = useState("");
+  const [body, setBody] = useState("");
+  const [image, setImage] = useState("");
+  const [url, setUrl] = useState("");
+  const history = useHistory();
 
+  const handleUploadImage = (e) => {
+    if (e.target.files[0]) {
+      const reader = new FileReader();
 
-    const handleUploadImage = (e) => {
-      if (e.target.files[0]) {
-        const reader = new FileReader();
+      reader.onload = (e) => {
+        setPreview(e.target.result);
+        setShowModal(true);
+      };
+      reader.readAsDataURL(e.target.files[0]);
 
-        reader.onload = (e) => {
-          setPreview(e.target.result);
-          setShowModal(true);
-        };
-        reader.readAsDataURL(e.target.files[0]);
+      // uploadImage(e.target.files[0]).then((res) => {
+      //   setPostImage(res.secure_url);
+      // });
 
-        // uploadImage(e.target.files[0]).then((res) => {
-        //   setPostImage(res.secure_url);
-        // });
+      const data = new FormData();
+      data.append("file", e.target.files[0]);
+      data.append("upload_preset", "instagram-clone");
+      data.append("cloud_name", "dtwrzv0of");
+      fetch(process.env.REACT_APP_CLOUDINARY_URL, {
+        method: "post",
+        body: data,
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          console.log(data.url);
 
-        const data = new FormData()
-        data.append("file",e.target.files[0])
-        data.append("upload_preset","instagram-clone")
-        data.append("cloud_name","dtwrzv0of")
-        fetch(process.env.REACT_APP_CLOUDINARY_URL,{
-            method:"post",
-            body: data
+          setUrl(data.url);
         })
-        .then(res=>res.json())
-        .then(data=>{
-            console.log(data.url)
-
-            setUrl(data.url)
-        }).catch(error=>{
-            console.log(error)
-        })
-
-      }
-    };
-
-
-
-    const handleSubmitPost = () => {
-
-
-        setShowModal(false);
-
-
-
-        // const cleanedCaption = body.value
-        //   .split(" ")
-        //   .filter((caption) => !caption.startsWith("#"))
-        //   .join(" ");
-
-        // body.setValue("");
-
-        // const newPost = {
-        //   body: body,
-        //   pic: url,
-
-        // };
-
-        // client(`/posts`, { body: newPost }).then((res) => {
-        //   const post = res.data;
-        //   post.isLiked = false;
-        //   post.isSaved = false;
-        //   post.isMine = true;
-        //   setFeed([post, ...feed]);
-        //   window.scrollTo(0, 0);
-        //   toast.success("Your post has been submitted successfully");
-        // });
-
-
-        fetch(`${process.env.REACT_APP_BACKEND_URL}/createpost`,{
-            method: "post",
-            headers:{
-                "Authorization": "Bearer "+ localStorage.getItem("jwt"),
-                "Content-Type": "application/json"
-            },body:JSON.stringify({
-                body,
-                pic:url
-            })
-        }).then(res => res.json()).then(data=>{
-            if(data.error){
-                M.toast({html: data.error, classes:"#e53935 red darken-1"})
-            }else{
-                M.toast({html: "Post Created",classes:"#66bb6a green lighten-1"})
-                             history.push('/')
-            }
-        }).catch((error)=>{
-            console.log(error)
-        })
+        .catch((error) => {
+          console.log(error);
+        });
     }
-
-
-
-
-
-
-
-
-
-
-
-    return (
-      <NewPostWrapper>
-        <label htmlFor="upload-post">
-          <NewPostIcon />
-        </label>
-        <input
-          id="upload-post"
-          type="file"
-          onChange={handleUploadImage}
-          accept="image/*"
-          style={{ display: "none" }}
-        />
-        {showModal && (
-          <Modal>
-            <div className="modal-content">
-              <div className="newpost-header">
-                <h3 onClick={() => setShowModal(false)}>Cancel</h3>
-                <h3 onClick={()=>handleSubmitPost()}>Share</h3>
-              </div>
-              {preview && url ?
-                (<img className="post-preview" src={preview} alt="preview" />
-              ) :<Loader/>}
-              <div>
-                <textarea
-                  placeholder="Add caption"
-                  value={body}
-                  onChange={(e)=>setBody(e.target.value)}
-                />
-              </div>
-            </div>
-          </Modal>
-        )}
-      </NewPostWrapper>
-    );
   };
 
-  export default NewPost;
+  const handleSubmitPost = () => {
+    setShowModal(false);
+
+    // const cleanedCaption = body.value
+    //   .split(" ")
+    //   .filter((caption) => !caption.startsWith("#"))
+    //   .join(" ");
+
+    // body.setValue("");
+
+    // const newPost = {
+    //   body: body,
+    //   pic: url,
+
+    // };
+
+    // client(`/posts`, { body: newPost }).then((res) => {
+    //   const post = res.data;
+    //   post.isLiked = false;
+    //   post.isSaved = false;
+    //   post.isMine = true;
+    //   setFeed([post, ...feed]);
+    //   window.scrollTo(0, 0);
+    //   toast.success("Your post has been submitted successfully");
+    // });
+
+    fetch(`${process.env.REACT_APP_BACKEND_URL}/createpost`, {
+      method: "post",
+      headers: {
+        Authorization: "Bearer " + localStorage.getItem("jwt"),
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        body,
+        pic: url,
+      }),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.error) {
+          M.toast({ html: data.error, classes: "#e53935 red darken-1" });
+        } else {
+          M.toast({ html: "Post Created", classes: "#66bb6a green lighten-1" });
+          history.push("/");
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
+  return (
+    <NewPostWrapper>
+      <label htmlFor="upload-post">
+        <NewPostIcon />
+      </label>
+      <input
+        id="upload-post"
+        type="file"
+        onChange={handleUploadImage}
+        accept="image/*"
+        style={{ display: "none" }}
+      />
+      {showModal && (
+        <Modal>
+          <div className="modal-content">
+            <div className="newpost-header">
+              <h3 onClick={() => setShowModal(false)}>Cancel</h3>
+              <h3 onClick={() => handleSubmitPost()}>Share</h3>
+            </div>
+            {preview && url ? (
+              <img className="post-preview" src={preview} alt="preview" />
+            ) : (
+              <Loader />
+            )}
+            <div>
+              <textarea
+                placeholder="Add caption"
+                value={body}
+                onChange={(e) => setBody(e.target.value)}
+              />
+            </div>
+          </div>
+        </Modal>
+      )}
+    </NewPostWrapper>
+  );
+};
+
+export default NewPost;
