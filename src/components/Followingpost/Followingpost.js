@@ -263,7 +263,7 @@ const Followingpost = () => {
                     </i>
                   )}
 
-                  <div className="bold">{item.likes.length} likes</div>
+                  <div className="bold">{item.likes.length} {item.likes.length>1?'likes':'like'}</div>
                   <div>{item.title}</div>
                   <p style={{ fontSize: "13px" }}>{item.body}</p>
 
