@@ -6,7 +6,6 @@ import styled from "styled-components";
 import { MoreIcon } from "../assets/Icons";
 import Modal from "../Modal/Modal";
 
-
 const Wrapper = styled.div`
   .home-card {
     border: 1px solid #dbdbdb !important;
@@ -32,31 +31,36 @@ const ModalContentWrapper = styled.div`
   span {
     display: block;
     padding: 1rem 0;
-    border-bottom: 1px solid #DBDBDB;
+    border-bottom: 1px solid #dbdbdb;
     cursor: pointer;
   }
 `;
-export const ModalContent = ({ postId, closeModal,handleDeletePost,state }) => {
-
-    // console.log(postId)
+export const ModalContent = ({
+  postId,
+  closeModal,
+  handleDeletePost,
+  state,
+}) => {
+  // console.log(postId)
   return (
     <ModalContentWrapper>
       <span className="danger" onClick={closeModal}>
         Cancel
       </span>
 
-      <span className="danger" onClick={()=>{
-
-          handleDeletePost(postId)
-          closeModal()
-          }} >
-      Delete Post
-    </span>
+      <span
+        className="danger"
+        onClick={() => {
+          handleDeletePost(postId);
+          closeModal();
+        }}
+      >
+        Delete Post
+      </span>
       {/* <DeletePost postId={postId} closeModal={closeModal} goToHome={true} /> */}
     </ModalContentWrapper>
   );
 };
-
 
 const Followingpost = () => {
   const [data, setData] = useState([]);
@@ -73,10 +77,9 @@ const Followingpost = () => {
     })
       .then((res) => res.json())
       .then((result) => {
-      
         setData(result.posts);
       });
-  }, [state,data]);
+  }, [state, data]);
 
   const likePost = (id) => {
     fetch(`${process.env.REACT_APP_BACKEND_URL}/like`, {

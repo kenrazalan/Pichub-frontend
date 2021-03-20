@@ -12,27 +12,29 @@ const LikePost = ({ isLiked, postId, incLikes, decLikes }) => {
     if (likedState) {
       setLiked(false);
       decLikes();
-      fetch(`${process.env.REACT_APP_BACKEND_URL}/like`,{
-        method:"get",
-        headers:{
-            "Content-Type":"application/json",
-            "Authorization": "Bearer "+localStorage.getItem("jwt")},
-        body:JSON.stringify({
-            postId
-        })
-    })
+      fetch(`${process.env.REACT_APP_BACKEND_URL}/like`, {
+        method: "get",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: "Bearer " + localStorage.getItem("jwt"),
+        },
+        body: JSON.stringify({
+          postId,
+        }),
+      });
     } else {
       setLiked(true);
       incLikes();
-      fetch(`${process.env.REACT_APP_BACKEND_URL}/like`,{
-        method:"put",
-        headers:{
-            "Content-Type":"application/json",
-            "Authorization": "Bearer "+localStorage.getItem("jwt")},
-        body:JSON.stringify({
-            postId
-        })
-    })
+      fetch(`${process.env.REACT_APP_BACKEND_URL}/like`, {
+        method: "put",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: "Bearer " + localStorage.getItem("jwt"),
+        },
+        body: JSON.stringify({
+          postId,
+        }),
+      });
     }
   };
 

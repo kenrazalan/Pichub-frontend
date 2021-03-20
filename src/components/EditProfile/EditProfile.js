@@ -1,13 +1,13 @@
 import React from "react";
-import styled from 'styled-components'
+import styled from "styled-components";
 import ProfileForm from "../ProfileForm/ProfileForm";
 
 const Wrappers = styled.div`
-   width: 930px;
-   border: 1px solid #DBDBDB;
+  width: 930px;
+  border: 1px solid #dbdbdb;
   display: grid;
-  background: #FFF;
-  
+  background: #fff;
+
   // .tabs {
   //   border-right: 1px solid #DBDBDB;
   //   padding: 1rem;
@@ -37,4 +37,4 @@ const EditProfile = () => {
   );
 };
 
-export default EditProfile; 
+export default EditProfile;

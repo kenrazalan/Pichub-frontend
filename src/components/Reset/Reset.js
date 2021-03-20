@@ -1,98 +1,104 @@
-import React,{useState} from 'react'
-import {Link,useHistory} from 'react-router-dom'
+import React, { useState } from "react";
+import { Link, useHistory } from "react-router-dom";
 
-import M from 'materialize-css'
-import styled from 'styled-components'
+import M from "materialize-css";
+import styled from "styled-components";
 
 const Wrapper = styled.div`
-.auth-card{
-    border: 1px solid #DBDBDB !important;
+  .auth-card {
+    border: 1px solid #dbdbdb !important;
     box-shadow: none !important;
-}
-.reset-input{
+  }
+  .reset-input {
     border-radius: 4px !important;
-    border: 1px solid #DBDBDB !important;
+    border: 1px solid #dbdbdb !important;
     padding: 0.1rem 0.5rem !important;
     width: 95% !important;
     height: 2rem !important;
-}
-.brand-logo{
-    font-family: 'Grand Hotel', cursive ;
   }
-.no-account{
-    color: #0095f6!important;
+  .brand-logo {
+    font-family: "Grand Hotel", cursive;
+  }
+  .no-account {
+    color: #0095f6 !important;
     font-weight: 600;
-}
-button{
+  }
+  button {
     font-weight: 600 !important;
     width: 100% !important;
     margin-bottom: 2em;
-}
+  }
+`;
+const Reset = () => {
+  const history = useHistory();
 
-`
-const Reset = () =>{
+  const [email, setEmail] = useState("");
 
+  const PostData = () => {
+    const emailValidation = `/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/`;
 
-    const history = useHistory()
- 
-    const [email,setEmail] = useState("")
-
-    const PostData =() =>{
-        const emailValidation = `/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/`
-
-        if(!/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(email)){
-            M.toast({html:"Invalid Email", classes:"#e53935 red darken-1"}) 
-            return
-        }
-        fetch("/resetpassword",{
-            method: "post",
-            headers:{
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify({
-                email
-            })
-        }).then(res=>res.json())
-        .then(data=>{
-          
-            if(data.error){
-                M.toast({html: data.error, classes:"#e53935 red darken-1"})
-            }else{
-         
-
-                M.toast({html: data.message,classes:"#66bb6a green lighten-1"})
-                history.push('/signin')
-            }
-        }).catch(error=>{
-            console.log(error)
-        })
+    if (
+      !/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(
+        email
+      )
+    ) {
+      M.toast({ html: "Invalid Email", classes: "#e53935 red darken-1" });
+      return;
     }
+    fetch("/resetpassword", {
+      method: "post",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        email,
+      }),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.error) {
+          M.toast({ html: data.error, classes: "#e53935 red darken-1" });
+        } else {
+          M.toast({ html: data.message, classes: "#66bb6a green lighten-1" });
+          history.push("/signin");
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
 
-    return(
-        <Wrapper>
-        <div className="mycard">
-            <div className="card auth-card">
-                <h2 className="brand-logo">Instagram</h2>
-                <input
-                className="reset-input"
-                 type="text"
-                 placeholder="email"
-                 value={email}
-                 onChange={(e)=>{
-                     setEmail(e.target.value)
-                 }}/>
-              
-                 <button className="btn waves-effect waves-light #64b5f6 blue darken-2" 
-                 onClick={()=>PostData()}>
-                     Reset Password
-                </button>
-                <div style={{marginBottom: "2em"}}>
-                   Dont have account? <Link className="no-account" to="/signup">Sign up</Link>
-                </div>
-            </div>
+  return (
+    <Wrapper>
+      <div className="mycard">
+        <div className="card auth-card">
+          <h2 className="brand-logo">Instagram</h2>
+          <input
+            className="reset-input"
+            type="text"
+            placeholder="email"
+            value={email}
+            onChange={(e) => {
+              setEmail(e.target.value);
+            }}
+          />
+
+          <button
+            className="btn waves-effect waves-light #64b5f6 blue darken-2"
+            onClick={() => PostData()}
+          >
+            Reset Password
+          </button>
+          <div style={{ marginBottom: "2em" }}>
+            Dont have account?{" "}
+            <Link className="no-account" to="/signup">
+              Sign up
+            </Link>
+          </div>
         </div>
-        </Wrapper>
-    )
-}
+      </div>
+    </Wrapper>
+  );
+};
 
-export default Reset
+export default Reset;

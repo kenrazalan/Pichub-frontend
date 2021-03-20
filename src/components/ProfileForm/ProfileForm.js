@@ -1,11 +1,11 @@
-import React, { useState, useContext,useEffect } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import { useHistory } from "react-router-dom";
-import useInput from '../hooks/useInput'
+import useInput from "../hooks/useInput";
 import styled from "styled-components";
 import Button from "../assets/Button";
 
-import {UserContext} from '../../App'
-import M from 'materialize-css'
+import { UserContext } from "../../App";
+import M from "materialize-css";
 
 export const Wrapper = styled.div`
   padding: 1rem !important;
@@ -13,7 +13,7 @@ export const Wrapper = styled.div`
     cursor: pointer !important;
     margin-right: 40px !important;
   }
-  h2{
+  h2 {
     display: block !important;
     font-size: 1.5em !important;
     margin-block-start: 0.83em !important;
@@ -35,7 +35,7 @@ export const Wrapper = styled.div`
     font-family: "Fira Sans", sans-serif !important;
     font-size: 1rem !important;
     border-radius: 4px !important;
-    border: 1px solid #DBDBDB !important;
+    border: 1px solid #dbdbdb !important;
     width: 335px !important;
     height: 1rem !important;
   }
@@ -50,7 +50,7 @@ export const Wrapper = styled.div`
     display: none !important;
   }
   span {
-    color: #0095F6 !important;
+    color: #0095f6 !important;
     cursor: pointer !important;
   }
   button {
@@ -82,69 +82,79 @@ export const Wrapper = styled.div`
 
 const ProfileForm = () => {
   const history = useHistory();
-  const {state,dispatch} = useContext(UserContext)
+  const { state, dispatch } = useContext(UserContext);
   const [newProfile, setNewProfile] = useState("");
 
   const name = useInput(state.name);
   const username = useInput(state.username);
- console.log(state)
+  console.log(state);
 
   const handleImageUpload = (e) => {
     if (e.target.files[0]) {
-        const data = new FormData()
-        data.append("file",e.target.files[0])
-        data.append("upload_preset","instagram-clone")
-        data.append("cloud_name","dtwrzv0of")
-        fetch(process.env.REACT_APP_CLOUDINARY_URL,{
-            method:"post",
-            body: data
+      const data = new FormData();
+      data.append("file", e.target.files[0]);
+      data.append("upload_preset", "instagram-clone");
+      data.append("cloud_name", "dtwrzv0of");
+      fetch(process.env.REACT_APP_CLOUDINARY_URL, {
+        method: "post",
+        body: data,
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          setNewProfile(data.url);
         })
-        .then(res=>res.json())
-        .then(data=>{
-            setNewProfile(data.url)
-
-        }).catch(error=>{
-            console.log(error)
-        })
-
-      }
+        .catch((error) => {
+          console.log(error);
+        });
     }
-
+  };
 
   const handleEditProfile = (e) => {
     e.preventDefault();
-
 
     const body = {
       name: name.value,
       username: username.value,
       pic: newProfile || state.pic,
-      };
+    };
 
-    fetch(`${process.env.REACT_APP_BACKEND_URL}/editprofile`,{
-        method:"put",
-        headers:{
-            "Content-Type": "application/json",
-            "Authorization": "Bearer "+ localStorage.getItem("jwt")
-        },
-        body:JSON.stringify({
-           ...body
-        })
-    }).then(res=>res.json())
-    .then(data=>{
-      if(data.error){
-        console.log(data.error)
-        if(data.error.keyValue){
-          return M.toast({html: "Username taken", classes:"#e53935 red darken-1"});
-        }
-
-      }
-        console.log(data)
-        localStorage.setItem("user", JSON.stringify({...state,name:data.name,username:data.username,pic: data.pic}))
-        dispatch({type:"UPDATEPROFILE",payload:{name:data.name,username:data.username,pic: data.pic}})
-        history.push(`/profileheader`);
+    fetch(`${process.env.REACT_APP_BACKEND_URL}/editprofile`, {
+      method: "put",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + localStorage.getItem("jwt"),
+      },
+      body: JSON.stringify({
+        ...body,
+      }),
     })
-
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.error) {
+          console.log(data.error);
+          if (data.error.keyValue) {
+            return M.toast({
+              html: "Username taken",
+              classes: "#e53935 red darken-1",
+            });
+          }
+        }
+        console.log(data);
+        localStorage.setItem(
+          "user",
+          JSON.stringify({
+            ...state,
+            name: data.name,
+            username: data.username,
+            pic: data.pic,
+          })
+        );
+        dispatch({
+          type: "UPDATEPROFILE",
+          payload: { name: data.name, username: data.username, pic: data.pic },
+        });
+        history.push(`/profileheader`);
+      });
   };
 
   return (
@@ -153,8 +163,10 @@ const ProfileForm = () => {
         <div className="input-group change-avatar">
           <div>
             <label htmlFor="change-avatar">
-            <img src={newProfile?newProfile: state.pic} style={{width: "42px",height: "42px", borderRadius:"80px"}}/>
-
+              <img
+                src={newProfile ? newProfile : state.pic}
+                style={{ width: "42px", height: "42px", borderRadius: "80px" }}
+              />
             </label>
             <input
               id="change-avatar"
@@ -179,11 +191,7 @@ const ProfileForm = () => {
 
         <div className="input-group">
           <label className="bold">Name</label>
-          <input
-            type="text"
-            value={name.value}
-            onChange={name.onChange}
-          />
+          <input type="text" value={name.value} onChange={name.onChange} />
         </div>
 
         <div className="input-group">
@@ -201,4 +209,4 @@ const ProfileForm = () => {
   );
 };
 
-export default ProfileForm; 
+export default ProfileForm;

@@ -1,18 +1,18 @@
-import React, { useState, useEffect,useContext } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { useHistory } from "react-router-dom";
 import styled from "styled-components";
 import Loader from "../assets/Loader";
-import Button from '../assets/Button'
-import {UserContext} from '../../App'
+import Button from "../assets/Button";
+import { UserContext } from "../../App";
 const Wrapper = styled.div`
-  background: #FFF;
-  border: 1px solid #DBDBDB;
+  background: #fff;
+  border: 1px solid #dbdbdb;
   width: 600px;
   padding: 1rem;
   justify-self: center;
-  font-size: 0.9rem ;
-  h3{
-    font-size: 0.9rem ;
+  font-size: 0.9rem;
+  h3 {
+    font-size: 0.9rem;
   }
   img {
     width: 40px !important;
@@ -21,8 +21,8 @@ const Wrapper = styled.div`
     border-radius: 20px !important;
     margin-right: 1rem !important;
   }
-  .pointer{
-    font-size: 0.9rem ;
+  .pointer {
+    font-size: 0.9rem;
   }
   .suggestion {
     display: flex;
@@ -67,87 +67,92 @@ const Suggestions = () => {
   const [users, setUsers] = useState([]);
   const [loading, setLoading] = useState(true);
   const history = useHistory();
-  const {state,dispatch}= useContext(UserContext)
-  const [showFollow,setShowfollow] =useState(true)
-
+  const { state, dispatch } = useContext(UserContext);
+  const [showFollow, setShowfollow] = useState(true);
 
   useEffect(() => {
-    fetch(`${process.env.REACT_APP_BACKEND_URL}/allusers`,{
-        headers:{
-            "Authorization":"Bearer "+ localStorage.getItem("jwt")
-        }
-    }).then(user=>user.json())
-    .then(result=>{
-        setLoading(false)
-        setUsers(result)
-        console.log(state);
+    fetch(`${process.env.REACT_APP_BACKEND_URL}/allusers`, {
+      headers: {
+        Authorization: "Bearer " + localStorage.getItem("jwt"),
+      },
     })
+      .then((user) => user.json())
+      .then((result) => {
+        setLoading(false);
+        setUsers(result);
+        console.log(state);
+      });
   }, []);
 
-  const followUser = (id)=>{
-    fetch(`${process.env.REACT_APP_BACKEND_URL}/follow`,{
-        method:"put",
-        headers: {
-            "Content-Type": "application/json",
-            "Authorization": "Bearer "+ localStorage.getItem("jwt")
-        },
-        body:JSON.stringify({
-            followId: id
-        })
-    }).then(res=>res.json())
-    .then(data=>{
-
-        dispatch({type:"UPDATE",payload: {following:data.following, followers: data.followers}})
-        localStorage.setItem("user",JSON.stringify(data))
-
-         setShowfollow(false)
+  const followUser = (id) => {
+    fetch(`${process.env.REACT_APP_BACKEND_URL}/follow`, {
+      method: "put",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + localStorage.getItem("jwt"),
+      },
+      body: JSON.stringify({
+        followId: id,
+      }),
     })
-}
+      .then((res) => res.json())
+      .then((data) => {
+        dispatch({
+          type: "UPDATE",
+          payload: { following: data.following, followers: data.followers },
+        });
+        localStorage.setItem("user", JSON.stringify(data));
 
+        setShowfollow(false);
+      });
+  };
 
-const unfollowUser = (id)=>{
-    fetch(`${process.env.REACT_APP_BACKEND_URL}/unfollow`,{
-        method:"put",
-        headers: {
-            "Content-Type": "application/json",
-            "Authorization": "Bearer "+ localStorage.getItem("jwt")
-        },
-        body:JSON.stringify({
-            unfollowId: id
-        })
-    }).then(res=>res.json())
-    .then(data=>{
-        console.log(data)
-        dispatch({type:"UPDATE",payload: {following:data.following, followers: data.followers}})
-        localStorage.setItem("user",JSON.stringify(data))
-
-
-        setShowfollow(true)
+  const unfollowUser = (id) => {
+    fetch(`${process.env.REACT_APP_BACKEND_URL}/unfollow`, {
+      method: "put",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + localStorage.getItem("jwt"),
+      },
+      body: JSON.stringify({
+        unfollowId: id,
+      }),
     })
-}
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+        dispatch({
+          type: "UPDATE",
+          payload: { following: data.following, followers: data.followers },
+        });
+        localStorage.setItem("user", JSON.stringify(data));
+
+        setShowfollow(true);
+      });
+  };
 
   if (loading) {
     return <Loader />;
   }
 
-  
-
   return (
     <div style={{ display: "flex", flexDirection: "column" }}>
       <h4>Explore</h4>
-      <h3 style={{ marginBottom: "0.7rem",fontSize:"1.3rem",}}>Suggestions for you</h3>
+      <h3 style={{ marginBottom: "0.7rem", fontSize: "1.3rem" }}>
+        Suggestions for you
+      </h3>
       <Wrapper>
         {users.map((user) => (
           <div key={user._id} className="suggestion">
             <div className="user-info">
-          
-            <img
-              className="pointer"
-              onClick={() => {
-              history.push(`/profile/${user._id}`);
-              }}
-               src={user.pic}
-               alt="avatar"/>
+              <img
+                className="pointer"
+                onClick={() => {
+                  history.push(`/profile/${user._id}`);
+                }}
+                src={user.pic}
+                alt="avatar"
+              />
 
               <div className="user-meta">
                 <h4
@@ -159,12 +164,11 @@ const unfollowUser = (id)=>{
                 <span className="secondary">{user.name}</span>
               </div>
             </div>
-            { !state.following.some(i=> i._id===user._id)?
-        
-        <Button onClick={()=>followUser(user._id)}>Follow</Button>
-        :
-        <Button onClick={()=>unfollowUser(user._id)}>Unfollow</Button>
-        }
+            {!state.following.some((i) => i._id === user._id) ? (
+              <Button onClick={() => followUser(user._id)}>Follow</Button>
+            ) : (
+              <Button onClick={() => unfollowUser(user._id)}>Unfollow</Button>
+            )}
             {/* <Follow isFollowing={user.isFollowing} userId={user._id} /> */}
           </div>
         ))}
