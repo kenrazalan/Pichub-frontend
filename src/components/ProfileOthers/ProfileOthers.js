@@ -6,6 +6,7 @@ import { UserContext } from "../../App";
 import { useParams, useHistory, Link } from "react-router-dom";
 import Loader from "../assets/Loader";
 import Modal from "../Modal/Modal";
+import verified from '../assets/correct.svg'
 
 const WrapperPost = styled.div`
   margin-top: 1rem;
@@ -102,6 +103,14 @@ const WrapperPost = styled.div`
 `;
 
 const Wrappers = styled.div`
+.verified{
+  height: 24px;
+  width: 24px;
+
+}
+.verified:hover{
+  
+}
   .profile-tab {
     display: flex;
     align-items: center;
@@ -265,7 +274,7 @@ const ModalContent = ({
   //  useEffect(()=>{
   //     setShFollow(loggedInUser && !loggedInUser.following.includes(users._id))
   //},[users])
-  console.log(users);
+  console.log(users.length);
   return (
     <div style={{ maxHeight: "400px", overflowY: "auto" }}>
       <div
@@ -289,7 +298,7 @@ const ModalContent = ({
                 closeModal();
                 history.push(`/${user.username}`);
               }}
-              src={loggedInUser._id == user._id ? loggedInUser.pic : user.pic}
+              src={loggedInUser._id === user._id ? loggedInUser.pic : user.pic}
               // src={user.pic}
               alt="avatar"
             />
@@ -355,6 +364,7 @@ const ProfileOthers = (props) => {
       .then((res) => res.json())
       .then((result) => {
         setProfile(result);
+        console.log(result)
       });
   }, []);
 
@@ -437,8 +447,11 @@ const ProfileOthers = (props) => {
             <div className="profile-info">
               <div className="profile-meta">
                 <h4 className="pointer">
+   
                   @<span>{userProfile.user.username}</span>
+                  <span>{userProfile.user.followers.length>=10 ? <img className="verified" src={verified} alt="verified"/> : null }</span>
                 </h4>
+                {/* <span>{userProfile.user.followers>=10 ? <img src={verified}/> : null }</span> */}
                 <div className="options">
                   {showFollow ? (
                     load ? (

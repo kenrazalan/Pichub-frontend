@@ -8,9 +8,15 @@ import styled from "styled-components";
 import { MoreIcon } from "../assets/Icons";
 import Modal from "../Modal/Modal";
 import moment from 'moment'
-
+import verified from '../assets/correct.svg'
 
 const Wrapper = styled.div`
+.verified{
+  height: 17px;
+  width: 30px;
+  margin-bottom: 3px;
+
+}
   .home-card {
     border: 1px solid #dbdbdb !important;
     box-shadow: none !important;
@@ -100,6 +106,7 @@ const Followingpost = () => {
     })
       .then((res) => res.json())
       .then((result) => {
+        console.log(result.posts)
         setData(result.posts);
         setLoading(false)
       });
@@ -242,8 +249,13 @@ const Followingpost = () => {
                       {item.postedBy.name}
                    
                     </span>
+                     </Link>
+                    {item.postedBy.followers.length >= 10 ? 
+                    <span><img src={verified} className="verified" alt="verified"/></span> 
+                    : null}
+                  
                        
-                  </Link>
+                 
                 
                   {showModal && (
                     <Modal>

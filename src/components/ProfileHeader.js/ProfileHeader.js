@@ -6,6 +6,7 @@ import Loader from "./../assets/Loader";
 import { OptionsIcon, PostIcon, SavedIcon, CloseIcon } from "../assets/Icons";
 import { UserContext } from "../../App";
 import Modal from "../Modal/Modal";
+import verified from '../assets/correct.svg'
 
 const WrapperPost = styled.div`
   margin-top: 1rem;
@@ -102,6 +103,12 @@ const WrapperPost = styled.div`
 `;
 
 const Wrappers = styled.div`
+.verified{
+  height: 24px;
+  width: 24px;
+  margin-bottom: -3px;
+
+}
   .profile-tab {
     display: flex;
     align-items: center;
@@ -375,6 +382,9 @@ const ProfileHeader = () => {
               <div className="profile-meta">
                 <div className="pointers">
                   @<span>{state ? state.username : "loading"}</span>
+                  {state && state.followers.length >= 10 ? 
+                    <span><img src={verified} className="verified" alt="verified"/></span> 
+                    : null}
                 </div>
                 <div className="options">
                   <Button
@@ -383,7 +393,7 @@ const ProfileHeader = () => {
                   >
                     Edit Profile
                   </Button>
-                  <i
+                  {/* <i
                     className="material-icons"
                     onClick={() => {
                       localStorage.clear();
@@ -392,11 +402,13 @@ const ProfileHeader = () => {
                     }}
                   >
                     power_settings_new
-                  </i>
-                  {/* <OptionsIcon  onClick={()=>{
+                  </i> */}
+                  <OptionsIcon 
+                  className="material-icons"
+                  onClick={()=>{
                    localStorage.clear()
                    dispatch({type:"CLEAR"})
-                   history.push('/signin')}}/> */}
+                   history.push('/signin')}}/>
                 </div>
               </div>
 
@@ -447,6 +459,7 @@ const ProfileHeader = () => {
               )}
               <div className="bio">
                 <span className="bold">{state ? state.name : "loading"}</span>
+               
               </div>
             </div>
           </Wrapper>

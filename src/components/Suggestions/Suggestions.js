@@ -4,6 +4,8 @@ import styled from "styled-components";
 import Loader from "../assets/Loader";
 import Button from "../assets/Button";
 import { UserContext } from "../../App";
+import verified from '../assets/correct.svg'
+
 const Wrapper = styled.div`
   background: #fff;
   border: 1px solid #dbdbdb;
@@ -14,14 +16,20 @@ const Wrapper = styled.div`
   h3 {
     font-size: 0.9rem;
   }
-  img {
-    width: 40px !important;
+  .verified{
+  height: 17px;
+  width: 30px;
+  margin-bottom: -3px;
+}
+  .pointer {
+   
+     width: 40px !important;
     object-fit: cover !important;
     height: 40px !important;
     border-radius: 20px !important;
     margin-right: 1rem !important;
   }
-  .pointer {
+  .username{
     font-size: 0.9rem;
   }
   .suggestion {
@@ -61,6 +69,7 @@ const Wrapper = styled.div`
       font-size: 0.8rem;
     }
   }
+
 `;
 
 const Suggestions = () => {
@@ -156,11 +165,15 @@ const Suggestions = () => {
 
               <div className="user-meta">
                 <h4
-                  className="pointer"
+                  className="username"
                   onClick={() => history.push(`/profile/${user._id}`)}
                 >
                   {user.username}
+                 {user.followers.length >= 10 ? 
+                    <span><img src={verified} className="verified" alt="verified"/></span> 
+                    : null}
                 </h4>
+                 
                 <span className="secondary">{user.name}</span>
               </div>
             </div>
