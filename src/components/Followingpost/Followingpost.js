@@ -3,6 +3,7 @@ import { UserContext } from "./../../App";
 import { Link } from "react-router-dom";
 import Loader from "./../assets/Loader";
 import {Skeleton} from '@material-ui/lab'
+import {HeartIcon,FilledHeartIcon} from '../assets/Icons'
 import styled from "styled-components";
 import { MoreIcon } from "../assets/Icons";
 import Modal from "../Modal/Modal";
@@ -276,21 +277,23 @@ const Followingpost = () => {
                   {/* <i className="material-icons" >favorite</i> */}
 
                   {item.likes.includes(state._id) ? (
-                    <i
-                      style={{ marginTop: "-5px" }}
-                      className="material-icons"
-                      onClick={() => unlikePost(item._id)}
-                    >
-                      thumb_down_off_alt
-                    </i>
+                    // <i
+                    //   style={{ marginTop: "-5px" }}
+                    //   className="material-icons"
+                    //   onClick={() => unlikePost(item._id)}
+                    // >
+                    //   thumb_down_off_alt
+                    // </i>
+                    <FilledHeartIcon onClick={() => unlikePost(item._id)}/>
                   ) : (
-                    <i
-                      style={{ marginTop: "-5px" }}
-                      className="material-icons"
-                      onClick={() => likePost(item._id)}
-                    >
-                      thumb_up_off_alt
-                    </i>
+                    // <i
+                    //   style={{ marginTop: "-5px" }}
+                    //   className="material-icons"
+                    //   onClick={() => likePost(item._id)}
+                    // >
+                    //   thumb_up_off_alt
+                    // </i>
+                    <HeartIcon  onClick={() => likePost(item._id)}/>
                   )}
 
                   <div className="bold">{item.likes.length} {item.likes.length>1?'likes':'like'}</div>
