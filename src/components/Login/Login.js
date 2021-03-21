@@ -3,6 +3,8 @@ import { Link, useHistory } from "react-router-dom";
 import styled from "styled-components";
 import M from "materialize-css";
 import { UserContext } from "../../App";
+import navlogo from "../../components/assets/logo.png";
+
 const Wrapper = styled.div`
   .auth-card {
     border: 1px solid #dbdbdb !important;
@@ -24,8 +26,9 @@ const Wrapper = styled.div`
 
     font-weight: 100 !important;
   }
-  .brand-logo {
-    font-family: "Grand Hotel";
+  .nav-logo {
+    margin-bottom: 30px;
+    margin-top: 30px;
   }
   button {
     font-weight: 600 !important;
@@ -76,7 +79,8 @@ const Login = () => {
     <Wrapper>
       <div className="mycard">
         <div className="card auth-card">
-          <h2 className="brand-logo">Instagram</h2>
+         <img className="nav-logo" src={navlogo} alt="logo" /> 
+          {/* <h2 className="brand-logo">Instagram</h2> */}
           <input
             className="login-input"
             type="text"

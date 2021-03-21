@@ -82,7 +82,7 @@ const Suggestions = () => {
         setUsers(result);
         console.log(state);
       });
-  }, []);
+  }, [state]);
 
   const followUser = (id) => {
     fetch(`${process.env.REACT_APP_BACKEND_URL}/follow`, {
@@ -131,9 +131,9 @@ const Suggestions = () => {
       });
   };
 
-  if (loading) {
-    return <Loader />;
-  }
+   if (loading) {
+     return <Loader />;
+   }
 
   return (
     <div style={{ display: "flex", flexDirection: "column" }}>

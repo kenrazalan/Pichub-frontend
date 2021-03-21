@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Link, useHistory } from "react-router-dom";
 import styled from "styled-components";
 import M from "materialize-css";
+import navlogo from "../../components/assets/logo.png";
 
 const Wrapper = styled.div`
   .auth-card {
@@ -19,8 +20,9 @@ const Wrapper = styled.div`
     color: #0095f6 !important;
     font-weight: 600;
   }
-  .brand-logo {
-    font-family: "Grand Hotel", cursive;
+  .nav-logo {
+    margin-bottom: 30px;
+    margin-top: 30px;
   }
   button {
     font-weight: 600 !important;
@@ -106,7 +108,8 @@ const Signup = () => {
     <Wrapper>
       <div className="mycard">
         <div className="card auth-card">
-          <h2 className="brand-logo">Instagram</h2>
+        <img className="nav-logo" src={navlogo} alt="logo" /> 
+          {/* <h2 className="brand-logo">Instagram</h2> */}
           <input
             className="signup-input"
             type="text"

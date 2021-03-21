@@ -2,10 +2,12 @@ import React, { useState, useEffect, useContext } from "react";
 import { UserContext } from "./../../App";
 import { Link } from "react-router-dom";
 import Loader from "./../assets/Loader";
+import {Skeleton} from '@material-ui/lab'
 import styled from "styled-components";
 import { MoreIcon } from "../assets/Icons";
 import Modal from "../Modal/Modal";
 import moment from 'moment'
+
 
 const Wrapper = styled.div`
   .home-card {
@@ -87,6 +89,7 @@ const Followingpost = () => {
   const [showModal, setShowModal] = useState(false);
   const closeModal = () => setShowModal(false);
   const [del, setDelete] = useState("");
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     fetch(`${process.env.REACT_APP_BACKEND_URL}/followingpost`, {
@@ -97,6 +100,7 @@ const Followingpost = () => {
       .then((res) => res.json())
       .then((result) => {
         setData(result.posts);
+        setLoading(false)
       });
   }, [state, data]);
 
@@ -262,7 +266,11 @@ const Followingpost = () => {
                 </div>
 
                 <div className="card-image">
-                  <img src={item.photo} alt={item.name} />
+                  {loading ?
+                   <Skeleton animation="wave" variant="rect"  /> 
+                   :<img src={item.photo} alt={item.name} />
+                  } 
+                 
                 </div>
                 <div className="card-content">
                   {/* <i className="material-icons" >favorite</i> */}
