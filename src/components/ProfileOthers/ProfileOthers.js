@@ -84,6 +84,10 @@ const WrapperPost = styled.div`
       height: 240px;
       width: 100%;
     }
+    .pointers {
+      font-size: 1.1rem;
+      font-weight: 100 !important;
+    }
   }
   @media screen and (max-width: 500px) {
     grid-gap: 1rem;
@@ -110,6 +114,9 @@ const Wrappers = styled.div`
 }
 .verified:hover{
   
+}
+.pointers{
+  font-size: 1.5rem;
 }
   .profile-tab {
     display: flex;
@@ -146,6 +153,8 @@ const MobileWrapper = styled.div`
     display: none;
   }
   @media screen and (max-width: 645px) {
+
+    
     .mobile-bio {
       display: block;
     }
@@ -157,6 +166,7 @@ const MobileWrapper = styled.div`
   a {
     color: #0095f6;
   }
+
 `;
 
 const Wrapper = styled.div`
@@ -211,6 +221,10 @@ const Wrapper = styled.div`
     }
     button {
       margin-left: 0;
+    }
+    .pointers {
+      font-size: 1.1rem;
+      font-weight: 100 !important;
     }
   }
   @media screen and (max-width: 420px) {
@@ -446,7 +460,7 @@ const ProfileOthers = (props) => {
             <img className="avatar" src={userProfile.user.pic} alt="avatar" />
             <div className="profile-info">
               <div className="profile-meta">
-                <h4 className="pointer">
+                <h4 className="pointers">
    
                   @<span>{userProfile.user.username}</span>
                   <span>{userProfile.user.followers.length>=10 ? <img className="verified" src={verified} alt="verified"/> : null }</span>
