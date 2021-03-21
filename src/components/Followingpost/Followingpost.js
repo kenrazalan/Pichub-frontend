@@ -5,6 +5,7 @@ import Loader from "./../assets/Loader";
 import styled from "styled-components";
 import { MoreIcon } from "../assets/Icons";
 import Modal from "../Modal/Modal";
+import moment from 'moment'
 
 const Wrapper = styled.div`
   .home-card {
@@ -216,8 +217,11 @@ const Followingpost = () => {
                       }}
                     >
                       {item.postedBy.name}
+                   
                     </span>
+                       
                   </Link>
+                
                   {showModal && (
                     <Modal>
                       <ModalContent
@@ -265,6 +269,7 @@ const Followingpost = () => {
 
                   <div className="bold">{item.likes.length} {item.likes.length>1?'likes':'like'}</div>
                   <div>{item.title}</div>
+                  <span style={{color:"rgb(178, 178, 178)"}}>{moment(item.createdAt).fromNow()}</span>
                   <p style={{ fontSize: "13px" }}>{item.body}</p>
 
                   {item.comments.map((record) => {
