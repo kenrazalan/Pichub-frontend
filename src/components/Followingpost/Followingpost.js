@@ -12,14 +12,25 @@ const Wrapper = styled.div`
     border: 1px solid #dbdbdb !important;
     box-shadow: none !important;
   }
-  // .home-input{
-  //     border-radius: 4px !important;
-  //     border: 1px solid #DBDBDB !important;
-  //     padding: 0.1rem 0.5rem !important;
-  //     width: 100% !important;
-  //     margin-left: 0;
-  //     height: 2rem !important;
-  // }
+  .home-input{
+      // border-radius: 4px !important;
+      border: 1px solid #DBDBDB !important;
+      //padding-left: 0.1rem 0.5rem !important;
+      text-align: left;
+      //padding-left: 30px !important;
+      width: 100% !important;
+      margin: auto !important;
+      //height: 2rem !important;
+      outline: none;
+      overflow: hidden !important;
+      
+  }
+  .home-input::placeholder{
+    padding: 20px !important;
+  }
+  .card-image{
+    min-height: 200px;
+  }
 `;
 const ModalContentWrapper = styled.div`
   width: 300px;
@@ -271,8 +282,7 @@ const Followingpost = () => {
                   <div>{item.title}</div>
                   <span style={{color:"rgb(178, 178, 178)"}}>{moment(item.createdAt).fromNow()}</span>
                   <p style={{ fontSize: "13px" }}>{item.body}</p>
-
-                  {item.comments.map((record) => {
+                    {item.comments.map((record) => {
                     //console.log(record)
                     return (
                       <div key={record._id}>
@@ -283,6 +293,10 @@ const Followingpost = () => {
                       </div>
                     );
                   })}
+               
+                </div>
+                {/* <hr /> */}
+                
                   <form
                     onSubmit={(e) => {
                       e.preventDefault();
@@ -296,7 +310,6 @@ const Followingpost = () => {
                       placeholder="add a comment"
                     />
                   </form>
-                </div>
               </div>
             );
           })}
