@@ -43,9 +43,9 @@ const HomeTwo = () => {
       });
   }, []);
 
-  // if (loading) {
-  //   return <Loader />;
-  // }
+   if (loading) {
+     return <Loader />;
+   }
 
   return <>{data.length > 0 ? <Followingpost /> : <Suggestions />}</>;
 };
