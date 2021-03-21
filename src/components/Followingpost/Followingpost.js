@@ -28,6 +28,13 @@ const Wrapper = styled.div`
   .home-input::placeholder{
     padding: 20px !important;
   }
+  input{
+    width:100%;
+    padding:20px;
+    height: 2rem;
+    outline: none;
+    border: 1px solid #DBDBDB;
+  }
   .card-image{
     min-height: 200px;
   }
@@ -305,7 +312,7 @@ const Followingpost = () => {
                     }}
                   >
                     <input
-                      className="home-input"
+                      className="browser-default"
                       type="text"
                       placeholder="add a comment"
                     />
