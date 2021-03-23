@@ -108,9 +108,13 @@ const WrapperPost = styled.div`
 
 const Wrappers = styled.div`
 .verified{
-  height: 24px;
-  width: 24px;
+  height: 17px;
+  width: 17px;
 
+}
+.numberOf{
+  font-weight: 900;
+  padding-right: 0.5rem !important;
 }
 .verified:hover{
   
@@ -462,7 +466,7 @@ const ProfileOthers = (props) => {
               <div className="profile-meta">
                 <h4 className="pointers">
    
-                  @<span>{userProfile.user.username}</span>
+                  <span>{userProfile.user.username}</span>
                   <span>{userProfile.user.followers.length>=10 ? <img className="verified" src={verified} alt="verified"/> : null }</span>
                 </h4>
                 {/* <span>{userProfile.user.followers>=10 ? <img src={verified}/> : null }</span> */}
@@ -500,20 +504,20 @@ const ProfileOthers = (props) => {
               </div>
 
               <div className="profile-stats">
-                <span>{userProfile.posts.length} posts</span>
+                <span><span className="numberOf">{userProfile.posts.length} posts</span></span>
 
                 <span
                   className="pointer"
                   onClick={() => setFollowersModal(true)}
                 >
-                  {userProfile.user.followers.length} followers
+                  <span className="numberOf">{userProfile.user.followers.length} followers</span>
                 </span>
 
                 <span
                   className="pointer"
                   onClick={() => setFollowingModal(true)}
                 >
-                  {userProfile.user.following.length} following
+                  <span className="numberOf">{userProfile.user.following.length} following</span>
                 </span>
 
                 {showFollowersModal && userProfile.user.followers.length > 0 && (
@@ -552,14 +556,14 @@ const ProfileOthers = (props) => {
           </Wrapper>
           <MobileWrapper>
             <div className="mobile-profile-stats">
-              <span>{userProfile.posts.length} posts</span>
+              <span><span className="numberOf">{userProfile.posts.length} posts</span></span>
 
               <span className="pointer" onClick={() => setFollowersModal(true)}>
-                {userProfile.user.followers.length} followers
+              <span className="numberOf"> {userProfile.user.followers.length} followers</span>
               </span>
 
               <span className="pointer" onClick={() => setFollowingModal(true)}>
-                {userProfile.user.following.length} following
+              <span className="numberOf">{userProfile.user.following.length} following</span>
               </span>
 
               {showFollowersModal && state.followers.length > 0 && (

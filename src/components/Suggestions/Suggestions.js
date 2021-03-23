@@ -17,7 +17,7 @@ const Wrapper = styled.div`
     font-size: 0.9rem;
   }
   .verified{
-  height: 17px;
+  height: 14px;
   width: 30px;
   margin-bottom: -3px;
 }
@@ -31,6 +31,11 @@ const Wrapper = styled.div`
   }
   .username{
     font-size: 0.9rem;
+    font-weight: 900;
+    margin: 0;
+  }
+  .secondary{
+    margin-top:0;
   }
   .suggestion {
     display: flex;
