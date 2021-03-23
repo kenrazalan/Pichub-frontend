@@ -5,6 +5,7 @@ import Loader from "../assets/Loader";
 import Button from "../assets/Button";
 import { UserContext } from "../../App";
 import verified from '../assets/correct.svg'
+import SuggestionList from '../SuggestionList.js/SuggestionList'
 
 const Wrapper = styled.div`
   background: #fff;
@@ -83,6 +84,7 @@ const Suggestions = () => {
   const history = useHistory();
   const { state, dispatch } = useContext(UserContext);
   const [showFollow, setShowfollow] = useState(true);
+  const [load,setLoad] = useState(false)
 
   useEffect(() => {
     fetch(`${process.env.REACT_APP_BACKEND_URL}/allusers`, {
@@ -116,7 +118,7 @@ const Suggestions = () => {
           payload: { following: data.following, followers: data.followers },
         });
         localStorage.setItem("user", JSON.stringify(data));
-
+        setLoad(false)
         setShowfollow(false);
       });
   };
@@ -140,7 +142,7 @@ const Suggestions = () => {
           payload: { following: data.following, followers: data.followers },
         });
         localStorage.setItem("user", JSON.stringify(data));
-
+        setLoad(false);
         setShowfollow(true);
       });
   };
@@ -157,38 +159,50 @@ const Suggestions = () => {
       </h3>
       <Wrapper>
         {users.map((user) => (
-          <div key={user._id} className="suggestion">
-            <div className="user-info">
-              <img
-                className="pointer"
-                onClick={() => {
-                  history.push(`/profile/${user._id}`);
-                }}
-                src={user.pic}
-                alt="avatar"
-              />
+          // <div key={user._id} className="suggestion">
+          //   <div className="user-info">
+          //     <img
+          //       className="pointer"
+          //       onClick={() => {
+          //         history.push(`/profile/${user._id}`);
+          //       }}
+          //       src={user.pic}
+          //       alt="avatar"
+          //     />
 
-              <div className="user-meta">
-                <h4
-                  className="username"
-                  onClick={() => history.push(`/profile/${user._id}`)}
-                >
-                  {user.username}
-                 {user.followers.length >= 10 ? 
-                    <span><img src={verified} className="verified" alt="verified"/></span> 
-                    : null}
-                </h4>
+          //     <div className="user-meta">
+          //       <h4
+          //         className="username"
+          //         onClick={() => history.push(`/profile/${user._id}`)}
+          //       >
+          //         {user.username}
+          //        {user.followers.length >= 10 ? 
+          //           <span><img src={verified} className="verified" alt="verified"/></span> 
+          //           : null}
+          //       </h4>
                  
-                <span className="secondary">{user.name}</span>
-              </div>
-            </div>
-            {!state.following.some((i) => i._id === user._id) ? (
-              <Button onClick={() => followUser(user._id)}>Follow</Button>
-            ) : (
-              <Button onClick={() => unfollowUser(user._id)}>Unfollow</Button>
-            )}
-            {/* <Follow isFollowing={user.isFollowing} userId={user._id} /> */}
-          </div>
+          //       <span className="secondary">{user.name}</span>
+          //     </div>
+          //   </div>
+          //   {!state.following.some((i) => i._id === user._id) ? (
+          //     !load ? 
+          //     <Button onClick={() => {followUser(user._id);setLoad(true);}}>Follow</Button>
+          //     : (
+          //       <Button>
+          //         <i className="fa fa-spinner fa-spin"></i>
+          //       </Button>
+          //     )
+          //   ) : ( !load ? 
+          //     <Button onClick={() => {unfollowUser(user._id); setLoad(true);}}>Unfollow</Button>
+          //     :  (
+          //       <Button>
+          //         <i className="fa fa-spinner fa-spin"></i>
+          //       </Button>
+          //     )
+          //   )}
+         
+          // </div>
+          <SuggestionList user={user}/>
         ))}
       </Wrapper>
     </div>
