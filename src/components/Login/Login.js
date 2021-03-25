@@ -35,6 +35,9 @@ const Wrapper = styled.div`
     width: 100% !important;
     margin-bottom: 2em;
   }
+  .error{
+    color:#ed4956;
+  }
 `;
 
 const Login = () => {
@@ -42,8 +45,9 @@ const Login = () => {
   const history = useHistory();
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
-  const [url, setUrl] = useState(undefined);
+  // const [url, setUrl] = useState(undefined);
   const [load, setLoad] = useState(true);
+  const [data,setData] = useState("")
 
   const PostData = () => {
     fetch(`${process.env.REACT_APP_BACKEND_URL}/signin`, {
@@ -60,7 +64,8 @@ const Login = () => {
       .then((data) => {
         console.log(data);
         if (data.error) {
-          M.toast({ html: data.error, classes: "#e53935 red darken-1" });
+          // M.toast({ html: data.error, classes: "#e53935 red darken-1" });
+          setData(data)
           setLoad(true);
         } else {
           localStorage.setItem("jwt", data.token);
@@ -74,6 +79,12 @@ const Login = () => {
         console.log(err);
       });
   };
+  const handleKeyPress = (e) => {
+    if(e.key === 'Enter'){
+      PostData();
+      setLoad(false)
+    }
+  }
 
   return (
     <Wrapper>
@@ -86,6 +97,7 @@ const Login = () => {
             type="text"
             placeholder="email"
             value={email.toLowerCase()}
+            onKeyPress={handleKeyPress}
             onChange={(e) => {
               setEmail(e.target.value);
             }}
@@ -94,25 +106,23 @@ const Login = () => {
             className="login-input"
             type="password"
             placeholder="password"
+            onKeyPress={handleKeyPress}
             onChange={(e) => {
               setPassword(e.target.value);
             }}
           />
-          {load ? (
+       
             <button
               className="btn waves-effect waves-light #64b5f6 blue darken-2"
               onClick={() => {
                 PostData();
                 setLoad(false);
               }}
-            >
-              Login
+            >{load? "Login" : "loading..."}
+              
             </button>
-          ) : (
-            <button className="buttonload">
-              <i className="fa fa-spinner fa-spin"></i>Loading
-            </button>
-          )}
+          
+          <p className="error">{data.error}</p>
           <div style={{ marginTop: "1em" }}>
             Dont have an account?{" "}
             <Link className="no-account" to="/signup">

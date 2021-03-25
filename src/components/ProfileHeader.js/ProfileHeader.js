@@ -107,6 +107,7 @@ const Wrappers = styled.div`
   height: 17px;
   width: 17px;
   margin-bottom: -3px;
+  margin-left:-12px;
 
 }
 .username{
@@ -355,6 +356,7 @@ const ProfileHeader = () => {
   const history = useHistory();
   const [showFollowersModal, setFollowersModal] = useState(false);
   const [showFollowingModal, setFollowingModal] = useState(false);
+  const [loading, setLoading] = useState(true);
 
   const closeModal = () => {
     setFollowersModal(false);
@@ -371,9 +373,14 @@ const ProfileHeader = () => {
       .then((res) => res.json())
       .then((result) => {
         console.log(result);
+        setLoading(false)
         setMypic(result.myposts);
       });
   }, [state]);
+
+  if (loading) {
+    return <Loader />;
+  }
 
   return (
     <>

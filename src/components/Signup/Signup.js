@@ -29,6 +29,9 @@ const Wrapper = styled.div`
     width: 100% !important;
     margin-bottom: 2em;
   }
+  .error{
+    color:#ed4956;
+  }
 `;
 
 const Signup = () => {
@@ -40,6 +43,7 @@ const Signup = () => {
   const [username, setUsername] = useState("");
   const [image, setImage] = useState("");
   const [url, setUrl] = useState(undefined);
+  const [data,setData] = useState("")
 
   useEffect(() => {
     if (url) {
@@ -84,7 +88,7 @@ const Signup = () => {
       .then((res) => res.json())
       .then((data) => {
         if (data.error) {
-          M.toast({ html: data.error, classes: "#e53935 red darken-1" });
+          setData(data.error)
           setLoad(true);
         } else {
           M.toast({ html: data.message, classes: "#66bb6a green lighten-1" });
@@ -153,21 +157,18 @@ const Signup = () => {
                     <input className="file-path validate" type="text"/>
                 </div>
                 </div> */}
-          {load ? (
-            <button
+          <button
               className="btn waves-effect waves-light #64b5f6 blue darken-2"
               onClick={() => {
                 PostData();
                 setLoad(false);
               }}
             >
-              Signup
+              {load? "Signup" : "loading..."}
             </button>
-          ) : (
-            <button className="buttonload">
-              <i className="fa fa-spinner fa-spin"></i>Loading
-            </button>
-          )}
+
+            <p className="error">{data}</p>
+
 
           <div style={{ marginTop: "1em" }}>
             Already have an account?{" "}

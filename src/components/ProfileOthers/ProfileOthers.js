@@ -110,6 +110,7 @@ const Wrappers = styled.div`
 .verified{
   height: 17px;
   width: 17px;
+  margin-left:-12px;
 
 }
 .numberOf{

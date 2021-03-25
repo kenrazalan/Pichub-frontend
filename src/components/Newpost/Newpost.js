@@ -133,7 +133,7 @@ const NewPost = () => {
         if (data.error) {
           M.toast({ html: data.error, classes: "#e53935 red darken-1" });
         } else {
-          M.toast({ html: "Post Created", classes: "#66bb6a green lighten-1" });
+          // M.toast({ html: "Post Created", classes: "#66bb6a green lighten-1" });
           history.push("/");
         }
       })
