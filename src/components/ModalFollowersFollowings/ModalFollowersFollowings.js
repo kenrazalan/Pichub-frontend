@@ -44,7 +44,7 @@ function ModalFollowersFollowings({
   }) {
     const history = useHistory();
         return (
-            <div style={{ maxHeight: "400px", overflowY: "auto" }}>
+            <div style={{ }}>
               <div
                 style={{
                   display: "flex",
@@ -56,10 +56,12 @@ function ModalFollowersFollowings({
               >
                 <div>{title}</div>
                 <CloseIcon onClick={closeModal} />
-              </div>
+              </div> 
+               <div style={{ overflowY:"auto",maxHeight: "400px" }}>
               {users.map((user) => (
                 <ModalContentWrapper key={user._id}>
-                  <div className="profile-info">
+                
+                  <div className="profile-info" >
                     <img
                       className="pointer"
                       onClick={() => {
@@ -90,6 +92,7 @@ function ModalFollowersFollowings({
                       <span>{user.name}</span>
                     </div>
                   </div>
+                  
                   {/* {loggedInUser._id!==user._id?
                   <div className="options">
                       {shFollow?
@@ -99,7 +102,8 @@ function ModalFollowersFollowings({
                         }
                       </div>: <div>You</div>} */}
                 </ModalContentWrapper>
-              ))}
+            
+              ))}    </div>
             </div>
     )
 }
