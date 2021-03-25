@@ -179,8 +179,9 @@ const Wrapper = styled.div`
     width: 180px;
     height: 180px;
     object-fit: cover;
-    border-radius: 90px;
+    border-radius: 50%;
     margin-right: 2rem;
+    border: 3px solid #d6249f;
   }
   .profile-meta {
     display: flex;

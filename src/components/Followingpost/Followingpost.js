@@ -9,6 +9,7 @@ import { MoreIcon } from "../assets/Icons";
 import Modal from "../Modal/Modal";
 import moment from 'moment'
 import verified from '../assets/correct.svg'
+import DeleteModal from '../DeleteModal/DeleteModal'
 
 const Wrapper = styled.div`
 .verified{
@@ -47,48 +48,19 @@ const Wrapper = styled.div`
   .card-image{
     min-height: 200px;
   }
-`;
-const ModalContentWrapper = styled.div`
-  width: 300px;
-  display: flex;
-  flex-direction: column;
-  text-align: center;
-  span:last-child {
-    border: none;
-  }
-  span {
-    display: block;
-    padding: 1rem 0;
-    border-bottom: 1px solid #dbdbdb;
-    cursor: pointer;
-  }
-`;
-export const ModalContent = ({
-  postId,
-  closeModal,
-  handleDeletePost,
-  state,
-}) => {
-  // console.log(postId)
-  return (
-    <ModalContentWrapper>
-      <span className="danger" onClick={closeModal}>
-        Cancel
-      </span>
+  .postedby-img{
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    margin-bottom: -10px;
+    border: 3px solid #d6249f;
 
-      <span
-        className="danger"
-        onClick={() => {
-          handleDeletePost(postId);
-          closeModal();
-        }}
-      >
-        Delete Post
-      </span>
-      {/* <DeletePost postId={postId} closeModal={closeModal} goToHome={true} /> */}
-    </ModalContentWrapper>
-  );
-};
+  }
+  .border{
+    position: relative;
+  }
+`;
+
 
 const Followingpost = () => {
   const [data, setData] = useState([]);
@@ -227,16 +199,14 @@ const Followingpost = () => {
                     }
                   >
                     <span>
-                      <img
+                      <span className="border">
+                            <img
                         src={item.postedBy.pic}
-                        style={{
-                          width: "42px",
-                          height: "42px",
-                          borderRadius: "80px",
-                          marginBottom: "-10px",
-                        }}
+                        className="postedby-img"
                         alt={item.name}
-                      />{" "}
+                      /> {" "}
+                      </span>
+             
                     </span>
                     <span
                       style={{
@@ -259,7 +229,7 @@ const Followingpost = () => {
                 
                   {showModal && (
                     <Modal>
-                      <ModalContent
+                      <DeleteModal
                         postId={del}
                         handleDeletePost={deletePost}
                         state={state}
@@ -286,25 +256,13 @@ const Followingpost = () => {
                  
                 </div>
                 <div className="card-content">
-                  {/* <i className="material-icons" >favorite</i> */}
+
 
                   {item.likes.includes(state._id) ? (
-                    // <i
-                    //   style={{ marginTop: "-5px" }}
-                    //   className="material-icons"
-                    //   onClick={() => unlikePost(item._id)}
-                    // >
-                    //   thumb_down_off_alt
-                    // </i>
+
                     <FilledHeartIcon onClick={() => unlikePost(item._id)}/>
                   ) : (
-                    // <i
-                    //   style={{ marginTop: "-5px" }}
-                    //   className="material-icons"
-                    //   onClick={() => likePost(item._id)}
-                    // >
-                    //   thumb_up_off_alt
-                    // </i>
+
                     <HeartIcon  onClick={() => likePost(item._id)}/>
                   )}
 
