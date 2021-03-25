@@ -6,6 +6,7 @@ import Loader from "./../assets/Loader";
 import { OptionsIcon, PostIcon, SavedIcon, CloseIcon } from "../assets/Icons";
 import { UserContext } from "../../App";
 import Modal from "../Modal/Modal";
+import LogoutModal from './LogoutModal'
 import verified from '../assets/correct.svg'
 import ModalFollowersFollowings from '../ModalFollowersFollowings/ModalFollowersFollowings'
 
@@ -257,10 +258,13 @@ const ProfileHeader = () => {
   const [showFollowersModal, setFollowersModal] = useState(false);
   const [showFollowingModal, setFollowingModal] = useState(false);
   const [loading, setLoading] = useState(true);
+  const [showModal, setShowModal] = useState(false);
+
 
   const closeModal = () => {
     setFollowersModal(false);
     setFollowingModal(false);
+    setShowModal(false);
   };
 
   console.log(state);
@@ -277,6 +281,13 @@ const ProfileHeader = () => {
         setMypic(result.myposts);
       });
   }, [state]);
+
+  const handleLogout = ()=>{
+    localStorage.clear()
+    dispatch({type:"CLEAR"})
+    history.push('/signin')
+  }
+  
 
   if (loading) {
     return <Loader />;
@@ -320,12 +331,25 @@ const ProfileHeader = () => {
                   </i> */}
                   <OptionsIcon 
                   className="material-icons"
-                  onClick={()=>{
-                   localStorage.clear()
-                   dispatch({type:"CLEAR"})
-                   history.push('/signin')}}/>
+                   onClick={()=>{
+                  //  localStorage.clear()
+                  //  dispatch({type:"CLEAR"})
+                  //  history.push('/signin')
+                  setShowModal(true);
+                }}
+                  
+                  />
+                    
                 </div>
               </div>
+              {showModal && (
+                    <Modal>
+                      <LogoutModal
+                        handleLogout={handleLogout}
+                        closeModal={closeModal}
+                      />
+                    </Modal>
+                  )}
 
               <div className="profile-stats">
                 <span><span className="numberOf">{mypics.length} posts</span></span>
