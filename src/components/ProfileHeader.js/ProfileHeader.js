@@ -111,6 +111,13 @@ const Wrappers = styled.div`
   margin-left:-12px;
 
 }
+.edit-button{
+      border: 1px solid #dbdbdb !important;
+      background: transparent !important;
+      color: black;
+      font-weight: bold;
+
+    }
 .username{
   font-weight: 300;
 }
@@ -227,6 +234,8 @@ const Wrapper = styled.div`
       font-size: 1.1rem;
       font-weight: 100 !important;
     }
+    
+
 
     @media screen and (max-width: 420px) {
       font-size: 0.9rem;
@@ -238,13 +247,6 @@ const Wrapper = styled.div`
   }
 `;
 
-const modalHeaderStyle = {
-  display: "flex",
-  alignItems: "center",
-  justifyContent: "space-between",
-  borderBottom: "1px solid #DBDBDB",
-  padding: "1rem",
-};
 
 
 
@@ -301,6 +303,7 @@ const ProfileHeader = () => {
                 <div className="options">
                   <Button
                     secondary
+                    className="edit-button"
                     onClick={() => history.push("/accounts/edit")}
                   >
                     Edit Profile

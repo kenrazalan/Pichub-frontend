@@ -85,8 +85,8 @@ const ProfileForm = () => {
   const { state, dispatch } = useContext(UserContext);
   const [newProfile, setNewProfile] = useState("");
 
-  const name = useInput(state.name);
-  const username = useInput(state.username);
+  const name = useInput(state && state.name);
+  const username = useInput(state && state.username);
   console.log(state);
 
   const handleImageUpload = (e) => {
@@ -164,8 +164,9 @@ const ProfileForm = () => {
           <div>
             <label htmlFor="change-avatar">
               <img
-                src={newProfile ? newProfile : state.pic}
+                src={newProfile ? newProfile : state && state.pic}
                 style={{ width: "42px", height: "42px", borderRadius: "80px" }}
+                alt="profile"
               />
             </label>
             <input
@@ -176,7 +177,7 @@ const ProfileForm = () => {
             />
           </div>
           <div className="change-avatar-meta">
-            <h2 className="bold">{state.username}</h2>
+            <h2 className="bold">{ state && state.username}</h2>
             <label htmlFor="change-avatar-link">
               <span>Change Profile Photo</span>
             </label>
