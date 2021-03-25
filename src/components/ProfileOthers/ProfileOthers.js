@@ -7,6 +7,7 @@ import { useParams, useHistory, Link } from "react-router-dom";
 import Loader from "../assets/Loader";
 import Modal from "../Modal/Modal";
 import verified from '../assets/correct.svg'
+import ModalFollowersFollowings from '../ModalFollowersFollowings/ModalFollowersFollowings'
 
 const WrapperPost = styled.div`
   margin-top: 1rem;
@@ -249,111 +250,8 @@ const modalHeaderStyle = {
   padding: "1rem",
 };
 
-const ModalContentWrapper = styled.div`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 1rem;
-  padding-right: 2rem;
-  font-size: 0.9rem;
-  width: 350px;
-  img {
-    width: 40px !important;
-    object-fit: cover !important;
-    height: 40px !important;
-    border-radius: 20px !important;
-    margin-right: 1rem !important;
-  }
-  .profile-info {
-    display: flex !important;
-  }
-  span {
-    color: #b2b2b2 !important;
-  }
-  button {
-    font-size: 0.9rem !important;
-    position: relative !important;
-    top: -10px !important;
-  }
-  @media screen and (max-width: 480px) {
-    width: 340px !important;
-  }
-`;
 
-const ModalContent = ({
-  loggedInUser,
-  users,
-  closeModal,
-  title,
-  follow,
-  unfollow,
-}) => {
-  const history = useHistory();
-  //   const[shFollow,setShFollow] = useState(true)
-  //  useEffect(()=>{
-  //     setShFollow(loggedInUser && !loggedInUser.following.includes(users._id))
-  //},[users])
-  console.log(users.length);
-  return (
-    <div style={{ maxHeight: "400px", overflowY: "auto" }}>
-      <div
-        style={{
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "space-between",
-          borderBottom: "1px solid #DBDBDB",
-          padding: "1rem",
-        }}
-      >
-        <div>{title}</div>
-        <CloseIcon onClick={closeModal} />
-      </div>
-      {users.map((user) => (
-        <ModalContentWrapper key={user._id}>
-          <div className="profile-info">
-            <img
-              className="pointer"
-              onClick={() => {
-                closeModal();
-                history.push(`/${user.username}`);
-              }}
-              src={loggedInUser._id === user._id ? loggedInUser.pic : user.pic}
-              // src={user.pic}
-              alt="avatar"
-            />
-            <div className="user-info">
-              <div
-                className="pointer"
-                onClick={() => {
-                  closeModal();
-                }}
-              >
-                <Link
-                  to={
-                    loggedInUser._id === user._id
-                      ? `/profileheader`
-                      : `/profile/${user._id}`
-                  }
-                >
-                  {user.username}
-                </Link>
-              </div>
-              <span>{user.name}</span>
-            </div>
-          </div>
-          {/* {loggedInUser._id!==user._id?
-          <div className="options">
-              {shFollow?
-                <Button onClick={()=>follow(user._id)}>Follow</Button>
-                :
-                <Button onClick={()=>unfollow(user._id)}>Unfollow</Button>
-                }
-              </div>: <div>You</div>} */}
-        </ModalContentWrapper>
-      ))}
-    </div>
-  );
-};
+
 
 const ProfileOthers = (props) => {
   const [userProfile, setProfile] = useState(null);
@@ -523,7 +421,7 @@ const ProfileOthers = (props) => {
 
                 {showFollowersModal && userProfile.user.followers.length > 0 && (
                   <Modal>
-                    <ModalContent
+                    <ModalFollowersFollowings
                       //  setShFollow={setShowfollow}
                       //   shFollow={showFollow}
                       // follow={followUser}
@@ -537,7 +435,7 @@ const ProfileOthers = (props) => {
                 )}
                 {showFollowingModal && userProfile.user.following.length > 0 && (
                   <Modal>
-                    <ModalContent
+                    <ModalFollowersFollowings
                       //  setShFollow={setShowfollow}
                       //   shFollow={showFollow}
                       // follow={followUser}
@@ -569,7 +467,7 @@ const ProfileOthers = (props) => {
 
               {showFollowersModal && state.followers.length > 0 && (
                 <Modal>
-                  <ModalContent
+                  <ModalFollowersFollowings
                     //  setShFollow={setShowfollow}
                     //   shFollow={showFollow}
                     // follow={followUser}
@@ -583,7 +481,7 @@ const ProfileOthers = (props) => {
               )}
               {showFollowingModal && state.following.length > 0 && (
                 <Modal>
-                  <ModalContent
+                  <ModalFollowersFollowings
                     //  setShFollow={setShowfollow}
                     //   shFollow={showFollow}
                     // follow={followUser}
