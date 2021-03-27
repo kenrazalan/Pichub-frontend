@@ -10,6 +10,7 @@ import Modal from "../Modal/Modal";
 import moment from 'moment'
 import verified from '../assets/correct.svg'
 import DeleteModal from '../DeleteModal/DeleteModal'
+import SideSuggestions from "../SideSuggestions/SideSuggestions";
 
 const Wrapper = styled.div`
 .verified{
@@ -18,9 +19,17 @@ const Wrapper = styled.div`
   margin-bottom: 3px;
 
 }
+.home{
+  
+
+ // margin: 26px auto;
+}
   .home-card {
+    margin-right: 10px;
     border: 1px solid #dbdbdb !important;
     box-shadow: none !important;
+      max-width: 600px;
+  height: max-content;
   }
   .home-input{
       // border-radius: 4px !important;
@@ -184,7 +193,7 @@ const Followingpost = () => {
   };
 
   return (
-    <>
+    <div style={{display: "flex"}}>
       <Wrapper>
         <div className="home">
           {data.map((item) => {
@@ -250,7 +259,7 @@ const Followingpost = () => {
 
                 <div className="card-image">
                   {loading ?
-                   <Skeleton animation="wave" variant="rect"  /> 
+                   <Skeleton animation="wave" variant="rect" width={550} height={300} /> 
                    :<img src={item.photo} alt={item.name} />
                   } 
                  
@@ -303,7 +312,12 @@ const Followingpost = () => {
           })}
         </div>
       </Wrapper>
-    </>
+    
+        {/* <SideSuggestions/> */}
+     
+      
+      
+    </div>
   );
 };
 

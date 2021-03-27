@@ -22,6 +22,7 @@ import HomeTwo from "./components/HomeTwo/HomeTwo";
 import Reset from "./components/Reset/Reset";
 import { reducer, initialState } from "./reducers/userReducer";
 import Suggestions from "./components/Suggestions/Suggestions";
+import SideSuggestions from "./components/SideSuggestions/SideSuggestions";
 
 export const UserContext = createContext();
 
@@ -69,6 +70,9 @@ const Routing = () => {
         </Route>
         <Route exact path="/reset">
           <Reset />
+        </Route>
+        <Route exact path="/test">
+          <SideSuggestions/>
         </Route>
       </Switch>
     </Container>

@@ -47,7 +47,8 @@ const HomeTwo = () => {
      return <Loader />;
    }
 
-  return <>{data.length > 0 ? <Followingpost /> : <Suggestions />}</>;
+   return <>{data.length > 0 ? <Followingpost /> : <Suggestions />}</>;
+  // return <Suggestions/>
 };
 
 export default HomeTwo;
