@@ -1,5 +1,5 @@
 import React,{useContext, useState,useEffect} from 'react'
-import iii from '../assets/correct.svg'
+import {Skeleton} from '@material-ui/lab'
 import styled from "styled-components";
 import { UserContext } from "../../App";
 
@@ -71,6 +71,7 @@ h6{
 function SideSuggestions() {
     const {state,dispatch} = useContext(UserContext)
     const [users, setUsers] = useState([])
+    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
         fetch(`${process.env.REACT_APP_BACKEND_URL}/allusers`, {
@@ -80,16 +81,21 @@ function SideSuggestions() {
         })
           .then((user) => user.json())
           .then((result) => {
-            //setLoading(false);
+            setLoading(false);
             setUsers(result);
             console.log(state);
           });
       }, [state]);
+
+    
     return (
         <Wrapper>
         <div className="containers">
             <div className="profile-container">
-                <img className="profile" src={state && state.pic} alt="asas"/>
+         
+             
+               <img className="profile" src={state && state.pic} alt="asas"/>
+            
                 <div className="list">
                       <div className="name"><b>{state && state.name}</b></div>
                       <div className="username" style={{color:"#8e8e8e"}}>{state && state.username}</div>
@@ -103,7 +109,36 @@ function SideSuggestions() {
             </div>
 
             <div >
-                {users.slice(0,5).map(user=>(
+                {loading? 
+                 <> 
+                    <div style={{display: "flex"}}>
+                    <Skeleton style={{marginBottom: "10px"}} animation="wave" variant="circle" width={40} height={40} />
+                    <Skeleton style={{alignSelf: "center",marginBottom: "10px",
+                               marginLeft: "10px"}} animation="wave" height={30} width="80%" />
+                    </div>
+                    <div style={{display: "flex"}}>
+                    <Skeleton style={{marginBottom: "10px"}} animation="wave" variant="circle" width={40} height={40} />
+                    <Skeleton style={{alignSelf: "center",marginBottom: "10px",
+                               marginLeft: "10px"}} animation="wave" height={30} width="80%" />
+                    </div>
+                    <div style={{display: "flex"}}>
+                    <Skeleton style={{marginBottom: "10px"}} animation="wave" variant="circle" width={40} height={40} />
+                    <Skeleton style={{alignSelf: "center",marginBottom: "10px",
+                               marginLeft: "10px"}} animation="wave" height={30} width="80%" />
+                    </div>
+                    <div style={{display: "flex"}}>
+                    <Skeleton style={{marginBottom: "10px"}} animation="wave" variant="circle" width={40} height={40} />
+                    <Skeleton style={{alignSelf: "center",marginBottom: "10px",
+                               marginLeft: "10px"}} animation="wave" height={30} width="80%" />
+                    </div>
+                    <div style={{display: "flex"}}>
+                    <Skeleton style={{marginBottom: "10px"}} animation="wave" variant="circle" width={40} height={40} />
+                    <Skeleton style={{alignSelf: "center",marginBottom: "10px",
+                               marginLeft: "10px"}} animation="wave" height={30} width="80%" />
+                    </div>
+                            
+                </>
+               : users.slice(0,5).map(user=>(
                  <div className="profile-container-list">
                 <img className="profile2" src={user.pic} alt="asas"/>
                 <div className="list">
@@ -112,9 +147,7 @@ function SideSuggestions() {
                      
                 </div>
                 <span className="btns">Follow</span>
-            </div>
-
-
+            </div> 
                 ))}
          
              </div>

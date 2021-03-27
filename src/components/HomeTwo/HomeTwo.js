@@ -47,8 +47,8 @@ const HomeTwo = () => {
      return <Loader />;
    }
 
-   return <>{data.length > 0 ? <Followingpost /> : <Suggestions />}</>;
-  // return <Suggestions/>
+   return <>{  data.length > 0 ? <Followingpost /> : <Suggestions />}</>;
+  // return <Followingpost/>
 };
 
 export default HomeTwo;

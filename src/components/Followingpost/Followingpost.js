@@ -68,7 +68,17 @@ const Wrapper = styled.div`
   .border{
     position: relative;
   }
+  
+  
 `;
+const MWrapper = styled.div`
+@media (max-width:920px)  {
+    .sideSuggestions{
+     display: none;
+    }
+  }
+`
+
 
 
 const Followingpost = () => {
@@ -196,7 +206,24 @@ const Followingpost = () => {
     <div style={{display: "flex"}}>
       <Wrapper>
         <div className="home">
-          {data.map((item) => {
+
+         {loading ? 
+         <> 
+         <div style={{display: "flex"}}>
+         
+            <Skeleton style={{marginBottom: "10px"}} animation="wave" variant="circle" width={40} height={40} />
+            <Skeleton style={{alignSelf: "center",marginBottom: "10px",
+                             marginLeft: "10px"}} animation="wave" height={30} width="40%" />
+         </div>
+        
+         
+         <Skeleton animation="wave" variant="rect" width={600} height={500} /> 
+         </>  
+
+          :
+          
+         
+          data.map((item) => {
             return (
               <div className="card home-card" key={item._id}>
                 <div style={{ padding: "10px", margin: "0" }}>
@@ -310,10 +337,14 @@ const Followingpost = () => {
               </div>
             );
           })}
+
         </div>
       </Wrapper>
-    
-        {/* <SideSuggestions/> */}
+      <MWrapper>
+          <div className="sideSuggestions">
+                  <SideSuggestions />
+          </div>
+     </MWrapper>
      
       
       
