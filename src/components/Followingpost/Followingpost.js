@@ -73,7 +73,7 @@ const Wrapper = styled.div`
   }
   @media (max-width: 646px){
     .rect{
-      width: 380px ;
+      width: 330px ;
     }
   }
   
@@ -214,7 +214,7 @@ const Followingpost = () => {
       <Wrapper>
         <div className="home">
 
-         {loading ? 
+         {!loading ? 
          <> 
          <div style={{display: "flex"}}>
          
