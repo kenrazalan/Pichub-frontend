@@ -95,6 +95,8 @@ const Followingpost = () => {
   const closeModal = () => setShowModal(false);
   const [del, setDelete] = useState("");
   const [loading, setLoading] = useState(true);
+  const [isLike,setIsLike] = useState(true)
+  //const [likes,setLikes] = useState(null)
 
   useEffect(() => {
     fetch(`${process.env.REACT_APP_BACKEND_URL}/followingpost`, {
@@ -104,11 +106,14 @@ const Followingpost = () => {
     })
       .then((res) => res.json())
       .then((result) => {
-        console.log(result.posts)
+        //console.log(result.posts.map(item=>item.likes.length))
         setData(result.posts);
         setLoading(false)
       });
-  }, [state, data]);
+  }, [state,data]);
+
+  // const incLikes = () => setLikes(likesState + 1);
+  // const decLikes = () => setLikes(likesState - 1);
 
   const likePost = (id) => {
     fetch(`${process.env.REACT_APP_BACKEND_URL}/like`, {
@@ -303,10 +308,10 @@ const Followingpost = () => {
 
                   {item.likes.includes(state._id) ? (
 
-                    <FilledHeartIcon onClick={() => unlikePost(item._id)}/>
+                    <FilledHeartIcon onClick={() =>{setIsLike(false); unlikePost(item._id)}}/>
                   ) : (
 
-                    <HeartIcon  onClick={() => likePost(item._id)}/>
+                    <HeartIcon  onClick={() =>{setIsLike(true); likePost(item._id)}}/>
                   )}
 
                   <div className="bold">{item.likes.length} {item.likes.length>1?'likes':'like'}</div>

@@ -96,7 +96,7 @@ export const FilledHeartIcon = (props) => (
     {...props}
     aria-label="Unlike"
     fill="#ed4956"
-    height="24"
+    height="22"
     viewBox="0 0 48 48"
     width="24"
   >
