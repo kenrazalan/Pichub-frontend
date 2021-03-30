@@ -3,6 +3,10 @@ import { Skeleton } from "@material-ui/lab";
 import styled from "styled-components";
 import { UserContext } from "../../App";
 import { OptionsIcon } from "../assets/Icons";
+import Modal from "../Modal/Modal";
+import LogoutModal from "../ProfileHeader.js/LogoutModal";
+import { useHistory } from "react-router-dom";
+import SideSuggestionsList from "./SideSuggestionsList";
 
 const Wrapper = styled.div`
   .containers {
@@ -31,12 +35,14 @@ const Wrapper = styled.div`
     border-radius: 50%;
     margin-right: 12px;
     border: 3px solid #d6249f;
+    cursor: pointer;
   }
   .profile2 {
     width: 35px;
     height: 35px;
     border-radius: 50%;
     margin-right: 19px;
+    cursor: pointer;
   }
   h6 {
     font-size: 14px;
@@ -44,6 +50,7 @@ const Wrapper = styled.div`
   }
   .list {
     margin-right: 19px;
+    cursor: pointer;
   }
   .suggestion {
     display: flex;
@@ -53,6 +60,7 @@ const Wrapper = styled.div`
   }
   .btns {
     margin: auto 0 auto auto;
+    cursor: pointer;
   }
   .name {
     font-size: 14px;
@@ -92,6 +100,12 @@ function SideSuggestions() {
   const { state, dispatch } = useContext(UserContext);
   const [users, setUsers] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [showModal, setShowModal] = useState(false);
+  const history = useHistory();
+
+  const closeModal = () => {
+    setShowModal(false);
+  };
 
   useEffect(() => {
     fetch(`${process.env.REACT_APP_BACKEND_URL}/allusers`, {
@@ -107,13 +121,20 @@ function SideSuggestions() {
       });
   }, [state]);
 
+
+  const handleLogout = ()=>{
+    localStorage.clear()
+    dispatch({type:"CLEAR"})
+    history.push('/signin')
+  }
+
   return (
     <Wrapper>
       <div className="containers">
         <div className="profile-container">
-          <img className="profile" src={state && state.pic} alt="asas" />
+          <img className="profile" src={state && state.pic} alt="asas" onClick={() => { history.push(`/profileheader`);}}/>
 
-          <div className="list">
+          <div className="list" onClick={() => { history.push(`/profileheader`);}}>
             <div className="name">
               <b>{state && state.name}</b>
             </div>
@@ -121,15 +142,24 @@ function SideSuggestions() {
               {state && state.username}
             </div>
           </div>
-          <span className="btns"><OptionsIcon/></span>
+          <span className="btns"><OptionsIcon  onClick={()=>{
+                  setShowModal(true);
+                }}/></span>
         </div>
-
+                 {showModal && (
+                    <Modal>
+                      <LogoutModal
+                        handleLogout={handleLogout}
+                        closeModal={closeModal}
+                      />
+                    </Modal>
+                  )}
         <div className="suggestion">
           <div style={{ color: "#8e8e8e", fontWeight: 900 }}>
             Suggestions For You
           </div>
           <h6 className="btns">
-            <b>See all</b>
+            <b onClick={() => {history.push('/explore')}}>See all</b>
           </h6>
         </div>
 
@@ -138,16 +168,7 @@ function SideSuggestions() {
             <>{list}</>
           ) : (
             users.slice(0, 5).map((user) => (
-              <div className="profile-container-list">
-                <img className="profile2" src={user.pic} alt="asas" />
-                <div className="list">
-                  <div className="name">
-                    <b>{user.name}</b>
-                  </div>
-                  <div className="username">{user.username}</div>
-                </div>
-                <span className="btns">Follow</span>
-              </div>
+                <SideSuggestionsList user={user}/>
             ))
           )}
         </div>
