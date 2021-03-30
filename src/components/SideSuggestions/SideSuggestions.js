@@ -58,9 +58,15 @@ const Wrapper = styled.div`
     justify-content: stretch;
     margin: 20px 0 10px 0;
   }
-  .btns {
+  .seeall{
     margin: auto 0 auto auto;
     cursor: pointer;
+  }
+  .btns {
+    min-width: 80px; 
+    margin: auto 0 auto auto;
+    cursor: pointer;
+    font-size: 12px;
   }
   .name {
     font-size: 14px;
@@ -142,7 +148,7 @@ function SideSuggestions() {
               {state && state.username}
             </div>
           </div>
-          <span className="btns"><OptionsIcon  onClick={()=>{
+          <span className="seeall"><OptionsIcon  onClick={()=>{
                   setShowModal(true);
                 }}/></span>
         </div>
@@ -158,7 +164,7 @@ function SideSuggestions() {
           <div style={{ color: "#8e8e8e", fontWeight: 900 }}>
             Suggestions For You
           </div>
-          <h6 className="btns">
+          <h6 className="seeall">
             <b onClick={() => {history.push('/explore')}}>See all</b>
           </h6>
         </div>
