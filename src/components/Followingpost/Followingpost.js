@@ -214,7 +214,7 @@ const Followingpost = () => {
       <Wrapper>
         <div className="home">
 
-         {!loading ? 
+         {loading ? 
          <> 
          <div style={{display: "flex"}}>
          

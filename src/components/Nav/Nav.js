@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { ExploreIcon, HomeIcon, SearchIcon } from "../assets/Icons";
 import { Link, useHistory } from "react-router-dom";
 import { UserContext } from "../../App";
-import navlogo from "../../components/assets/logo.png";
+import navlogo from "../../components/assets/logo1.png";
 import NewPost from "../../components/Newpost/Newpost";
 import M from "materialize-css";
 
@@ -13,13 +13,13 @@ const NavWrapper = styled.div`
   width: 100%;
   background-color: #fff;
   border-bottom: 1px solid #dbdbdb;
-  padding: 1rem 0;
+  //padding: 1rem 0;
   z-index: 10;
 
   .nav-logo {
     position: relative;
     top: 6px;
-    height: 35px;
+    height: 29px;
   }
 
   .nav {
