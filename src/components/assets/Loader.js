@@ -18,7 +18,7 @@ const Wrapper = styled.div`
   align-items: center;
   height: 100vh;
   //animation: 2s linear infinite;
-  img {
+  svg {
     height: 50px;
     width: 50px;
     fill: #B2B2B2;
@@ -34,8 +34,8 @@ const Wrapper = styled.div`
 const Loader = () => {
   return (
      <Wrapper>
-    
-     <img src={load} alt="loader" />
+     <LoaderIcon/>
+     {/* <img src={load} alt="loader" /> */}
      </Wrapper>
    
   );

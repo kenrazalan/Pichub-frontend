@@ -19,6 +19,9 @@ const Wrapper = styled.div`
   margin-bottom: 3px;
 
 }
+.rect{
+  width: 600px
+}
 .home{
   
 
@@ -68,7 +71,11 @@ const Wrapper = styled.div`
   .border{
     position: relative;
   }
-  
+  @media (max-width: 646px){
+    .rect{
+      width: 380px ;
+    }
+  }
   
 `;
 const MWrapper = styled.div`
@@ -217,7 +224,7 @@ const Followingpost = () => {
          </div>
         
          
-         <Skeleton animation="wave" variant="rect" width={600} height={500} /> 
+         <Skeleton className="rect" animation="wave" variant="rect"  height={500} /> 
          </>  
 
           :
