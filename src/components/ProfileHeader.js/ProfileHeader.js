@@ -232,8 +232,11 @@ const Wrapper = styled.div`
       margin-left: 0;
     }
     .pointers {
-      font-size: 1.1rem;
+      font-size: 1.5rem;
       font-weight: 100 !important;
+    }
+    .edit-button{
+      margin-top:0;
     }
     
 

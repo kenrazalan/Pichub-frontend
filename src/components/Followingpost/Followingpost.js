@@ -52,17 +52,16 @@ const Wrapper = styled.div`
     padding: 20px !important;
   }
   input{
-    width:90%;
+    width:85%;
     padding:20px;
     height: 2rem;
     outline: none;
     border: none;
-    /* border-top: 1px solid #DBDBDB; */
- 
   }
+
   hr{
     border: none;
-  border-bottom:1px solid #DBDBDB;
+    border-bottom:1px solid #DBDBDB;
   }
   .post-btn{
     border:none;
@@ -70,7 +69,13 @@ const Wrapper = styled.div`
     font-weight: 500;
     font-size: 14px;
     background: none;
+    margin-right: 20px;
   }
+  /* @media (max-width: 646px){
+    .post-btn{
+      padding-right: 10px ;
+    }
+  } */
   .post-btn:disabled{
     opacity: 0.3;
   }
