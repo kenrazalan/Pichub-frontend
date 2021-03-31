@@ -19,6 +19,7 @@ function Post({ item }) {
   const [loading, setLoading] = useState(true);
   const [likes,setLikes] = useState(null)
   const [comments,setComments] = useState([])
+  const [text,setText] = useState("")
 
   useEffect(() => {
     fetch(`${process.env.REACT_APP_BACKEND_URL}/followingpost`, {
@@ -39,6 +40,10 @@ function Post({ item }) {
     setLikes(item.likes.length)
     setComments(item.comments)
   }, [item,state]);
+
+  const handleText=(e)=>{
+        setText(e.target.value)
+  }
 
   const incLikes = () => setLikes(likes + 1);
   const decLikes = () => setLikes(likes - 1);
@@ -239,27 +244,22 @@ function Post({ item }) {
           );
         })}
       </div>
-      {/* <hr /> */}
+      <hr />
 
       <form
         onSubmit={(e) => {
-          e.preventDefault();
-          const cmnt = {
-              text: e.target[0].value,
-              postedBy: item._id
-          }
-          
-          console.log(cmnt)
-          //setComments(...comments,cmnt)
-          makeComment(e.target[0].value, item._id);
-          e.target[0].value = "";
-        }}
-      >
+          e.preventDefault();      
+          makeComment(text, item._id);
+          setText("")
+        }}>
         <input
           className="browser-default"
           type="text"
-          placeholder="add a comment"
+          value={text}
+          onChange={handleText}
+          placeholder="Add a comment"
         />
+        <button disabled={!text} className="post-btn">Post</button>
       </form>
     </div>
   );

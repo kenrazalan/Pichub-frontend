@@ -52,11 +52,27 @@ const Wrapper = styled.div`
     padding: 20px !important;
   }
   input{
-    width:100%;
+    width:90%;
     padding:20px;
     height: 2rem;
     outline: none;
-    border: 1px solid #DBDBDB;
+    border: none;
+    /* border-top: 1px solid #DBDBDB; */
+ 
+  }
+  hr{
+    border: none;
+  border-bottom:1px solid #DBDBDB;
+  }
+  .post-btn{
+    border:none;
+    color:#0095f6;
+    font-weight: 500;
+    font-size: 14px;
+    background: none;
+  }
+  .post-btn:disabled{
+    opacity: 0.3;
   }
   .card-image{
     min-height: 200px;
