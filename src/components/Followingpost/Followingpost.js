@@ -11,6 +11,7 @@ import moment from 'moment'
 import verified from '../assets/correct.svg'
 import DeleteModal from '../DeleteModal/DeleteModal'
 import SideSuggestions from "../SideSuggestions/SideSuggestions";
+import Post from "../Post/Post";
 
 const Wrapper = styled.div`
 .verified{
@@ -98,13 +99,14 @@ const Followingpost = () => {
   const [isLike,setIsLike] = useState(true)
   //const [likes,setLikes] = useState(null)
 
+  // const incLikes = () => setLikes(likesState + 1);
+  // const decLikes = () => setLikes(likesState - 1);
   useEffect(() => {
     fetch(`${process.env.REACT_APP_BACKEND_URL}/followingpost`, {
       headers: {
         Authorization: "Bearer " + localStorage.getItem("jwt"),
       },
-    })
-      .then((res) => res.json())
+    }).then((res) => res.json())
       .then((result) => {
         //console.log(result.posts.map(item=>item.likes.length))
         setData(result.posts);
@@ -112,114 +114,13 @@ const Followingpost = () => {
       });
   }, [state,data]);
 
-  // const incLikes = () => setLikes(likesState + 1);
-  // const decLikes = () => setLikes(likesState - 1);
-
-  const likePost = (id) => {
-    fetch(`${process.env.REACT_APP_BACKEND_URL}/like`, {
-      method: "put",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: "Bearer " + localStorage.getItem("jwt"),
-      },
-      body: JSON.stringify({
-        postId: id,
-      }),
-    })
-      .then((res) => res.json())
-      .then((result) => {
-        const newData = data.map((item) => {
-          if (item._id === result._id) {
-            return result;
-          } else {
-            return item;
-          }
-        });
-        setData(newData);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  };
-
-  const unlikePost = (id) => {
-    fetch(`${process.env.REACT_APP_BACKEND_URL}/unlike`, {
-      method: "put",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: "Bearer " + localStorage.getItem("jwt"),
-      },
-      body: JSON.stringify({
-        postId: id,
-      }),
-    })
-      .then((res) => res.json())
-      .then((result) => {
-        const newData = data.map((item) => {
-          if (item._id === result._id) {
-            return result;
-          } else {
-            return item;
-          }
-        });
-        setData(newData);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  };
-
-  const makeComment = (text, postId) => {
-    fetch(`${process.env.REACT_APP_BACKEND_URL}/comment`, {
-      method: "put",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: "Bearer " + localStorage.getItem("jwt"),
-      },
-      body: JSON.stringify({
-        postId,
-        text,
-      }),
-    })
-      .then((res) => res.json())
-      .then((result) => {
-        console.log(result);
-        const newData = data.map((item) => {
-          if (item._id === result._id) {
-            return result;
-          } else {
-            return item;
-          }
-        });
-        setData(newData);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  };
-  const deletePost = (postid) => {
-    fetch(`${process.env.REACT_APP_BACKEND_URL}/deletepost/${postid}`, {
-      method: "delete",
-      headers: {
-        Authorization: "Bearer " + localStorage.getItem("jwt"),
-      },
-    })
-      .then((res) => res.json())
-      .then((result) => {
-        console.log(result);
-        const newData = data.filter((item) => {
-          return item._id !== result._id;
-        });
-        setData(newData);
-      });
-  };
 
   return (
-    <div style={{display: "flex"}}>
+     
+       <div style={{display: "flex"}}>
       <Wrapper>
         <div className="home">
-
-         {loading ? 
+        {loading ? 
          <> 
          <div style={{display: "flex"}}>
          
@@ -227,140 +128,23 @@ const Followingpost = () => {
             <Skeleton style={{alignSelf: "center",marginBottom: "10px",
                              marginLeft: "10px"}} animation="wave" height={30} width="40%" />
          </div>
-        
-         
          <Skeleton className="rect" animation="wave" variant="rect"  height={500} /> 
          </>  
 
           :
-          
-         
-          data.map((item) => {
+          data.map((post) => {
             return (
-              <div className="card home-card" key={item._id}>
-                <div style={{ padding: "10px", margin: "0" }}>
-                  <Link
-                    to={
-                      item.postedBy._id === state._id
-                        ? `/profileheader`
-                        : `/profile/${item.postedBy._id}`
-                    }
-                  >
-                    <span>
-                      <span className="border">
-                            <img
-                        src={item.postedBy.pic}
-                        className="postedby-img"
-                        alt={item.name}
-                      /> {" "}
-                      </span>
-             
-                    </span>
-                    <span
-                      style={{
-                        fontSize: "17px",
-                        fontWeight: "600",
-                        verticalAlign: "super",
-                        paddingLeft: "10px",
-                      }}
-                    >
-                      {item.postedBy.name}
-                   
-                    </span>
-                     </Link>
-                    {item.postedBy.followers.length >= 10 ? 
-                    <span><img src={verified} className="verified" alt="verified"/></span> 
-                    : null}
-                  
-                       
-                 
-                
-                  {showModal && (
-                    <Modal>
-                      <DeleteModal
-                        postId={del}
-                        handleDeletePost={deletePost}
-                        state={state}
-                        closeModal={closeModal}
-                      />
-                    </Modal>
-                  )}
-                  {item.postedBy._id === state._id && (
-                    <MoreIcon
-                      onClick={() => {
-                        setShowModal(true);
-                        setDelete(item._id);
-                      }}
-                      style={{ float: "right" }}
-                    />
-                  )}{" "}
-                </div>
-
-                <div className="card-image">
-                  {loading ?
-                   <Skeleton animation="wave" variant="rect" width={550} height={300} /> 
-                   :<img src={item.photo} alt={item.name} />
-                  } 
-                 
-                </div>
-                <div className="card-content">
-
-
-                  {item.likes.includes(state._id) ? (
-
-                    <FilledHeartIcon onClick={() =>{setIsLike(false); unlikePost(item._id)}}/>
-                  ) : (
-
-                    <HeartIcon  onClick={() =>{setIsLike(true); likePost(item._id)}}/>
-                  )}
-
-                  <div className="bold">{item.likes.length} {item.likes.length>1?'likes':'like'}</div>
-                  <div>{item.title}</div>
-                  <span style={{color:"rgb(178, 178, 178)"}}>{moment(item.createdAt).fromNow()}</span>
-                  <p style={{ fontSize: "13px" }}>{item.body}</p>
-                    {item.comments.map((record) => {
-                    //console.log(record)
-                    return (
-                      <div key={record._id}>
-                        <span style={{ fontWeight: "600" }}>
-                          {record.postedBy.name}
-                        </span>{" "}
-                        {record.text}
-                      </div>
-                    );
-                  })}
-               
-                </div>
-                {/* <hr /> */}
-                
-                  <form
-                    onSubmit={(e) => {
-                      e.preventDefault();
-                      makeComment(e.target[0].value, item._id);
-                      e.target[0].value = "";
-                    }}
-                  >
-                    <input
-                      className="browser-default"
-                      type="text"
-                      placeholder="add a comment"
-                    />
-                  </form>
-              </div>
-            );
+              <Post item={post}/>
+            )
           })}
-
         </div>
       </Wrapper>
       <MWrapper>
           <div className="sideSuggestions">
                   <SideSuggestions />
           </div>
-     </MWrapper>
-     
-      
-      
-    </div>
+     </MWrapper>   
+     </div>
   );
 };
 

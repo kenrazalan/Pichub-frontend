@@ -30,11 +30,10 @@ const Wrapper = styled.div`
   }
 
   .profile {
-    width: 66px;
-    height: 66px;
+    width: 56px;
+    height: 56px;
     border-radius: 50%;
     margin-right: 12px;
-    border: 3px solid #d6249f;
     cursor: pointer;
   }
   .profile2 {
@@ -138,7 +137,7 @@ function SideSuggestions() {
     <Wrapper>
       <div className="containers">
         <div className="profile-container">
-          <img className="profile" src={state && state.pic} alt="asas" onClick={() => { history.push(`/profileheader`);}}/>
+          <img className="profile" src={state && state.pic} alt="profile" onClick={() => { history.push(`/profileheader`);}}/>
 
           <div className="list" onClick={() => { history.push(`/profileheader`);}}>
             <div className="name">
