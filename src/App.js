@@ -8,13 +8,9 @@ import {
   useHistory,
 } from "react-router-dom";
 import Nav from "./components/Nav/Nav";
-import Home from "./components/Home/Home";
-import Profile from "./components/Profile/Profile";
 import Login from "./components/Login/Login";
 import Signup from "./components/Signup/Signup";
 import Createpost from "./components/Createpost/Createpost";
-import UserProfile from "./components/UserProfile/Userprofile";
-import Followingpost from "./components/Followingpost/Followingpost";
 import ProfileHeader from "./components/ProfileHeader.js/ProfileHeader";
 import ProfileOthers from "./components/ProfileOthers/ProfileOthers";
 import EditProfile from "./components/EditProfile/EditProfile";
@@ -84,7 +80,8 @@ function App() {
   return (
     <UserContext.Provider value={{ state, dispatch }}>
       <Router>
-        <Nav />
+        { state ? <Nav /> : null }
+        
         <Routing />
       </Router>
     </UserContext.Provider>
