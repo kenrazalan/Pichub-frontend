@@ -6,6 +6,7 @@ import {
   Route,
   Switch,
   useHistory,
+  Redirect
 } from "react-router-dom";
 import Nav from "./components/Nav/Nav";
 import Login from "./components/Login/Login";
@@ -36,6 +37,7 @@ const Routing = () => {
   }, []);
   return (
     <Container>
+      
       <Switch>
         <Route exact path="/">
           <HomeTwo />
@@ -43,11 +45,15 @@ const Routing = () => {
         <Route exact path="/profileheader">
           <ProfileHeader />
         </Route>
-        <Route exact path="/signin">
-          <Login />
+        <Route exact path="/signin"
+          render={(props) => {
+            return  !state? <Login {...props} key={window.location.pathname}/>: <Redirect to="/" />;
+          }}>
         </Route>
-        <Route exact path="/signup">
-          <Signup />
+        <Route  exact path="/signup"
+          render={(props) => {
+            return  !state? <Signup {...props} key={window.location.pathname}/>: <Redirect to="/" />;
+          }}>
         </Route>
         <Route exact path="/create">
           <Createpost />
@@ -55,7 +61,7 @@ const Routing = () => {
         <Route
           path="/profile/:userid"
           render={(props) => {
-            return <ProfileOthers {...props} key={window.location.pathname} />;
+            return  <ProfileOthers {...props} key={window.location.pathname} />;
           }}
         ></Route>
         <Route exact path="/explore">
