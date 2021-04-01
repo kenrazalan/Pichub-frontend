@@ -24,7 +24,7 @@ function LoginGoogle() {
         console.log(res)
         axios({
           method:"POST",
-          url:"http://localhost:3000/googlelogin",
+          url:`${process.env.REACT_APP_BACKEND_URL}/googlelogin`,
           data: {tokenId: res.tokenId}
         }).then(res=>{
           console.log(res.data)
