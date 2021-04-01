@@ -1,9 +1,10 @@
 import React, { useContext, useState } from "react";
 import { Link, useHistory } from "react-router-dom";
 import styled from "styled-components";
-import M from "materialize-css";
 import { UserContext } from "../../App";
 import navlogo from "../../components/assets/logo.png";
+import LoginGoogle from "./GoogleLogin";
+
 
 const Wrapper = styled.div`
   .auth-card {
@@ -11,7 +12,7 @@ const Wrapper = styled.div`
     box-shadow: none !important;
   }
   .login-input {
-    border-radius: 4px !important;
+    border-radius: 999px !important;
     border: 1px solid #dbdbdb !important;
     padding: 0.1rem 0.5rem !important;
     width: 95% !important;
@@ -30,13 +31,53 @@ const Wrapper = styled.div`
     margin-bottom: 30px;
     margin-top: 30px;
   }
-  button {
+  .btn {
+    margin-top: 10px;
     font-weight: 600 !important;
     width: 100% !important;
     margin-bottom: 2em;
+    border-radius: 999px !important;
+  }
+ 
+  .google-btn{
+    border-radius: 999px !important;
+    overflow: hidden;
+    box-shadow: rgb(0 0 0 / 24%) 0px 0px 0px 0px, rgb(0 0 0 / 24%) 0px 0px 1px 0px !important;
+    border: 1px solid red;
+    margin-top: 10px;
   }
   .error{
     color:#ed4956;
+  }
+  .hr-text {
+  line-height: 1em;
+  position: relative;
+  outline: 0;
+  border: 0;
+  color: black;
+  text-align: center;
+  height: 1.5em;
+  opacity: .5;
+  &:before {
+    content: '';
+    background: linear-gradient(to right, transparent, #818078, transparent);
+    position: absolute;
+    left: 0;
+    top: 50%;
+    width: 100%;
+    height: 1px;
+  }
+  &:after {
+    content: attr(data-content);
+    position: relative;
+    display: inline-block;
+    color: black;
+
+    padding: 0 .5em;
+    line-height: 1.5em;
+    color: #818078;
+    background-color: #fcfcfa;
+  }
   }
 `;
 
@@ -59,8 +100,7 @@ const Login = () => {
         email,
         password,
       }),
-    })
-      .then((res) => res.json())
+    }).then((res) => res.json())
       .then((data) => {
         console.log(data);
         if (data.error) {
@@ -85,6 +125,7 @@ const Login = () => {
       setLoad(false)
     }
   }
+
 
   return (
     <Wrapper>
@@ -121,6 +162,8 @@ const Login = () => {
             >{load? "Login" : "loading..."}
               
             </button>
+            <hr class="hr-text" data-content="OR"></hr>
+            <LoginGoogle/>
           
           <p className="error">{data.error}</p>
           <div style={{ marginTop: "1em" }}>
