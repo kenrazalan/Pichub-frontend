@@ -9,6 +9,7 @@ import Modal from "../Modal/Modal";
 import LogoutModal from './LogoutModal'
 import verified from '../assets/correct.svg'
 import ModalFollowersFollowings from '../ModalFollowersFollowings/ModalFollowersFollowings'
+import { Skeleton } from "@material-ui/lab";
 
 const WrapperPost = styled.div`
   margin-top: 1rem;
@@ -292,9 +293,9 @@ const ProfileHeader = () => {
   }
   
 
-  if (loading) {
-    return <Loader />;
-  }
+  // if (loading) {
+  //   return <Loader />;
+  // }
 
   return (
     <>
@@ -463,11 +464,18 @@ const ProfileHeader = () => {
           </div>
 
           <WrapperPost>
-            {mypics?.map((item) => (
+            {!loading ?
+            mypics?.map((item) => (
               <div key={item._id} className="container-overlay">
                 <img src={item.photo} alt="post" />
               </div>
-            ))}
+            )) :
+            <>
+            <Skeleton className="rect" animation="wave" variant="rect"  height={500} />
+            <Skeleton className="rect" animation="wave" variant="rect"  height={500} />
+            <Skeleton className="rect" animation="wave" variant="rect"  height={500} />
+            </>
+            }
           </WrapperPost>
         </Wrappers>
       ) : (

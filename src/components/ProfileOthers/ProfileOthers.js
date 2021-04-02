@@ -376,7 +376,6 @@ const ProfileOthers = (props) => {
                   {showFollow ? (
                     load ? (
                       <Button
-                      className="btn"
                         onClick={() => {
                           followUser();
                           setLoad(false);

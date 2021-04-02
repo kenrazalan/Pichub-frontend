@@ -6,6 +6,7 @@ import Button from "../assets/Button";
 import { UserContext } from "../../App";
 import verified from '../assets/correct.svg'
 import SuggestionList from '../SuggestionList.js/SuggestionList'
+import { Skeleton } from "@material-ui/lab";
 
 const Wrapper = styled.div`
   background: #fff;
@@ -109,9 +110,9 @@ const Suggestions = () => {
 
 
 
-   if (loading) {
-     return <Loader />;
-   }
+  //  if (loading) {
+  //    return <Loader />;
+  //  }
 
   return (
   
@@ -125,9 +126,21 @@ const Suggestions = () => {
       
 
       <Wrapper>
-        {users.map((user) => (
+        {!loading ?
+        users.map((user) => (
           <SuggestionList user={user}/>
-        ))}
+        )) 
+        :
+        <>
+        <Skeleton height={50}/>
+        <Skeleton height={50}/>
+        <Skeleton height={50}/>
+        <Skeleton height={50}/>
+        <Skeleton height={50}/>
+        <Skeleton height={50}/>
+        <Skeleton height={50}/>
+        </>
+      }
       </Wrapper>
     </div>
   );
