@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Link, useHistory } from "react-router-dom";
-
+import navlogo from "../../components/assets/logo.png";
 import M from "materialize-css";
 import styled from "styled-components";
 
@@ -72,7 +72,7 @@ const Reset = () => {
     <Wrapper>
       <div className="mycard">
         <div className="card auth-card">
-          <h2 className="brand-logo">Instagram</h2>
+        <img className="nav-logo" src={navlogo} alt="logo" /> 
           <input
             className="reset-input"
             type="text"

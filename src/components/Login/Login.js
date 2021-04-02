@@ -132,7 +132,7 @@ const Login = () => {
       <div className="mycard">
         <div className="card auth-card">
          <img className="nav-logo" src={navlogo} alt="logo" /> 
-          {/* <h2 className="brand-logo">Instagram</h2> */}
+      
           <input
             className="login-input"
             type="text"

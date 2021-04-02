@@ -37,13 +37,14 @@ const NavWrapper = styled.div`
     width: 100%;
     background-color: #fff;
     border-bottom: 1px solid #dbdbdb;
-   
+    left: 0%;
   }
  
 
   .nav-logo2{
     position: relative;
     top: 6px;
+   
     height: 29px;
     margin:5px 0 5px 0;
   }
