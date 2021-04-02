@@ -20,6 +20,7 @@ import Reset from "./components/Reset/Reset";
 import { reducer, initialState } from "./reducers/userReducer";
 import Suggestions from "./components/Suggestions/Suggestions";
 import SideSuggestions from "./components/SideSuggestions/SideSuggestions";
+import PostProvider from "./components/context/PostContext";
 
 export const UserContext = createContext();
 
@@ -85,11 +86,13 @@ function App() {
   const [state, dispatch] = useReducer(reducer, initialState);
   return (
     <UserContext.Provider value={{ state, dispatch }}>
+      <PostProvider>
       <Router>
         { state ? <Nav /> : null }
         
         <Routing />
       </Router>
+      </PostProvider>
     </UserContext.Provider>
   );
 }

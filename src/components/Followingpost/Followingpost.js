@@ -12,6 +12,7 @@ import verified from '../assets/correct.svg'
 import DeleteModal from '../DeleteModal/DeleteModal'
 import SideSuggestions from "../SideSuggestions/SideSuggestions";
 import Post from "../Post/Post";
+import {PostContext} from '../context/PostContext'
 
 const Wrapper = styled.div`
 .verified{
@@ -118,10 +119,8 @@ const Followingpost = () => {
   const [del, setDelete] = useState("");
   const [loading, setLoading] = useState(true);
   const [isLike,setIsLike] = useState(true)
-  //const [likes,setLikes] = useState(null)
+  const { feed, setFeed } = useContext(PostContext);
 
-  // const incLikes = () => setLikes(likesState + 1);
-  // const decLikes = () => setLikes(likesState - 1);
   useEffect(() => {
     fetch(`${process.env.REACT_APP_BACKEND_URL}/followingpost`, {
       headers: {
@@ -129,11 +128,17 @@ const Followingpost = () => {
       },
     }).then((res) => res.json())
       .then((result) => {
-        //console.log(result.posts.map(item=>item.likes.length))
-        setData(result.posts);
+      
+        console.log(result.posts) 
+        setFeed(result.posts)       
         setLoading(false)
       });
-  }, [state,data]);
+  }, [setFeed]);
+
+  
+    // if (loading) {
+    //   return <Loader />;
+    // }
 
 
   return (
@@ -153,7 +158,7 @@ const Followingpost = () => {
          </>  
 
           :
-          data.map((post) => {
+          feed.map((post) => {
             return (
               <Post item={post}/>
             )

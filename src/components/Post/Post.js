@@ -8,6 +8,7 @@ import { UserContext } from "./../../App";
 import { Skeleton } from "@material-ui/lab";
 import { HeartIcon, FilledHeartIcon } from "../assets/Icons";
 import moment from "moment";
+import {PostContext} from '../context/PostContext'
 
 function Post({ item }) {
   const { state, dispatch } = useContext(UserContext);
@@ -20,24 +21,11 @@ function Post({ item }) {
   const [likes,setLikes] = useState(null)
   const [comments,setComments] = useState([])
   const [text,setText] = useState("")
+  const { feed, setFeed } = useContext(PostContext);
 
   useEffect(() => {
-    fetch(`${process.env.REACT_APP_BACKEND_URL}/followingpost`, {
-      headers: {
-        Authorization: "Bearer " + localStorage.getItem("jwt"),
-      },
-    })
-      .then((res) => res.json())
-      .then((result) => {
-        //console.log(result.posts.map(item=>item.likes.length))
-        setData(result.posts);
-        setLoading(false);
-      });
-  }, [state, data]);
-
-  useEffect(() => {
-    setIsLike(item.likes.includes(state._id));
-    setLikes(item.likes.length)
+    setIsLike(item.likes?.includes(state._id));
+    setLikes(item.likes?.length)
     setComments(item.comments)
   }, [item,state]);
 
@@ -61,14 +49,16 @@ function Post({ item }) {
     })
       .then((res) => res.json())
       .then((result) => {
-        const newData = data.map((item) => {
+        
+        const newData = feed.map((item) => {
           if (item._id === result._id) {
             return result;
           } else {
             return item;
           }
         });
-        setData(newData);
+        console.log(newData)
+        setFeed(newData);
       })
       .catch((err) => {
         console.log(err);
@@ -88,14 +78,15 @@ function Post({ item }) {
     })
       .then((res) => res.json())
       .then((result) => {
-        const newData = data.map((item) => {
+        const newData = feed.map((item) => {
           if (item._id === result._id) {
             return result;
           } else {
             return item;
           }
-        });
-        setData(newData);
+        })
+        console.log(newData)
+        setFeed(newData);
       })
       .catch((error) => {
         console.log(error);
@@ -142,26 +133,29 @@ function Post({ item }) {
       .then((res) => res.json())
       .then((result) => {
         console.log(result);
-        const newData = data.filter((item) => {
+        const newData = feed.filter((item) => {
           return item._id !== result._id;
         });
-        setData(newData);
-      });
+        console.log(newData)
+        setFeed(newData);
+      }).catch((error=>{
+        console.log(error)
+      }));
   };
   return (
-    <div className="card home-card" key={item._id}>
+    <div className="card home-card" key={item?._id}>
       <div style={{ padding: "10px", margin: "0" }}>
         <Link
           to={
-            item.postedBy._id === state._id
+            item.postedBy?._id === state._id
               ? `/profileheader`
-              : `/profile/${item.postedBy._id}`
+              : `/profile/${item.postedBy?._id}`
           }
         >
           <span>
             <span className="border">
               <img
-                src={item.postedBy.pic}
+                src={item.postedBy?.pic}
                 className="postedby-img"
                 alt={item.name}
               />{" "}
@@ -175,10 +169,10 @@ function Post({ item }) {
               paddingLeft: "10px",
             }}
           >
-            {item.postedBy.name}
+            {item.postedBy?.name}
           </span>
         </Link>
-        {item.postedBy.followers.length >= 10 ? (
+        {item.postedBy?.followers.length >= 10 ? (
           <span>
             <img src={verified} className="verified" alt="verified" />
           </span>
@@ -193,7 +187,7 @@ function Post({ item }) {
             />
           </Modal>
         )}
-        {item.postedBy._id === state._id && (
+        {item.postedBy?._id === state._id && (
           <MoreIcon
             onClick={() => {
               setShowModal(true);
@@ -213,7 +207,7 @@ function Post({ item }) {
             onClick={() => {
               setIsLike(false);
               decLikes()
-              unlikePost(item._id);
+              unlikePost(item?._id);
             }}
           />
         ) : (
@@ -221,7 +215,7 @@ function Post({ item }) {
             onClick={() => {
               incLikes()
               setIsLike(true);
-              likePost(item._id);
+              likePost(item?._id);
             }}
           />
         )}
@@ -234,7 +228,7 @@ function Post({ item }) {
           {moment(item.createdAt).fromNow()}
         </span>
         <p style={{ fontSize: "13px" }}>{item.body}</p>
-        {comments.map((record) => {
+        {comments?.map((record) => {
           //console.log(record)
           return (
             <div key={record._id}>

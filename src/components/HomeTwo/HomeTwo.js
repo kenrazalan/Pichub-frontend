@@ -1,8 +1,9 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect,useContext } from "react";
 import styled from "styled-components";
 import Suggestions from "../Suggestions/Suggestions";
 import Followingpost from "../Followingpost/Followingpost";
 import Loader from "../assets/Loader";
+import {PostContext} from '../context/PostContext'
 
 // const Wrapper = styled.div`
 //   @media screen and (max-width: 1040px) {
@@ -15,7 +16,7 @@ import Loader from "../assets/Loader";
 const HomeTwo = () => {
   const [loading, setLoading] = useState(true);
   const [data, setData] = useState([]);
-
+  const { feed, setFeed } = useContext(PostContext);
 
 
 
@@ -27,17 +28,17 @@ const HomeTwo = () => {
     })
       .then((res) => res.json())
       .then((result) => {
-        setData(result.posts);
+        setFeed(result.posts);
         setLoading(false);
       });
-  }, []);
+  }, [feed,setFeed]);
 
   //  if (loading) {
   //    return <Loader />;
   //  }
 
-    //return <>{  data.length > 0 ? <Followingpost /> : <Suggestions />}</>;
-   return <Followingpost/>
+    return <>{  feed.length > 0 ? <Followingpost /> : <Suggestions />}</>;
+  // return <Followingpost/>
 };
 
 export default HomeTwo;

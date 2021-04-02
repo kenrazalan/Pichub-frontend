@@ -471,9 +471,9 @@ const ProfileHeader = () => {
               </div>
             )) :
             <>
-            <Skeleton className="rect" animation="wave" variant="rect"  height={500} />
-            <Skeleton className="rect" animation="wave" variant="rect"  height={500} />
-            <Skeleton className="rect" animation="wave" variant="rect"  height={500} />
+            <Skeleton className="rect" animation="wave" variant="rect"  height={200} />
+            <Skeleton className="rect" animation="wave" variant="rect"  height={200} />
+            <Skeleton className="rect" animation="wave" variant="rect"  height={200} />
             </>
             }
           </WrapperPost>

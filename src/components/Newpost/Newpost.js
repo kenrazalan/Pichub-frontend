@@ -5,6 +5,7 @@ import { NewPostIcon } from "../assets/Icons";
 import M from "materialize-css";
 import { useHistory } from "react-router-dom";
 import Loader from "../assets/Loader";
+import {PostContext} from '../context/PostContext'
 
 const NewPostWrapper = styled.div`
   .newpost-header {
@@ -60,6 +61,7 @@ const NewPost = () => {
   const [image, setImage] = useState("");
   const [url, setUrl] = useState("");
   const history = useHistory();
+  const { feed, setFeed } = useContext(PostContext);
 
   const handleUploadImage = (e) => {
     if (e.target.files[0]) {
@@ -70,10 +72,6 @@ const NewPost = () => {
         setShowModal(true);
       };
       reader.readAsDataURL(e.target.files[0]);
-
-      // uploadImage(e.target.files[0]).then((res) => {
-      //   setPostImage(res.secure_url);
-      // });
 
       const data = new FormData();
       data.append("file", e.target.files[0]);
@@ -98,29 +96,6 @@ const NewPost = () => {
   const handleSubmitPost = () => {
     setShowModal(false);
 
-    // const cleanedCaption = body.value
-    //   .split(" ")
-    //   .filter((caption) => !caption.startsWith("#"))
-    //   .join(" ");
-
-    // body.setValue("");
-
-    // const newPost = {
-    //   body: body,
-    //   pic: url,
-
-    // };
-
-    // client(`/posts`, { body: newPost }).then((res) => {
-    //   const post = res.data;
-    //   post.isLiked = false;
-    //   post.isSaved = false;
-    //   post.isMine = true;
-    //   setFeed([post, ...feed]);
-    //   window.scrollTo(0, 0);
-    //   toast.success("Your post has been submitted successfully");
-    // });
-
     fetch(`${process.env.REACT_APP_BACKEND_URL}/createpost`, {
       method: "post",
       headers: {
@@ -137,13 +112,16 @@ const NewPost = () => {
         if (data.error) {
           M.toast({ html: data.error, classes: "#e53935 red darken-1" });
         } else {
+          console.log(data)
+          setFeed([data.post,...feed])
           // M.toast({ html: "Post Created", classes: "#66bb6a green lighten-1" });
           history.push("/");
+          window.scrollTo(0, 0);
         }
-      })
-      .catch((error) => {
+      }).catch((error) => {
         console.log(error);
       });
+
   };
 
   return (
