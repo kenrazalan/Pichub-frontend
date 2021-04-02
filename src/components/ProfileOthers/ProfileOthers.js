@@ -202,6 +202,7 @@ const Wrapper = styled.div`
     display: flex;
     margin-bottom: 1rem;
   }
+
   .options svg {
     position: relative;
     top: 7px;
@@ -228,9 +229,10 @@ const Wrapper = styled.div`
     }
     button {
       margin-left: 0;
+      margin-top:0;
     }
     .pointers {
-      font-size: 1.1rem;
+      font-size: 1.5rem;
       font-weight: 100 !important;
     }
   }
@@ -374,6 +376,7 @@ const ProfileOthers = (props) => {
                   {showFollow ? (
                     load ? (
                       <Button
+                      className="btn"
                         onClick={() => {
                           followUser();
                           setLoad(false);
@@ -466,28 +469,28 @@ const ProfileOthers = (props) => {
               <span className="numberOf">{userProfile.user.following.length} following</span>
               </span>
 
-              {showFollowersModal && state.followers.length > 0 && (
+              {showFollowersModal && userProfile.user.followers.length > 0 && (
                 <Modal>
                   <ModalFollowersFollowings
                     //  setShFollow={setShowfollow}
                     //   shFollow={showFollow}
                     // follow={followUser}
                     // unfollow={unfollowUser}
-                    users={state.followers}
+                    users={userProfile.user.followers}
                     title="Followers"
                     closeModal={closeModal}
                     loggedInUser={state}
                   />
                 </Modal>
               )}
-              {showFollowingModal && state.following.length > 0 && (
+              {showFollowingModal && userProfile.user.following.length > 0 && (
                 <Modal>
                   <ModalFollowersFollowings
                     //  setShFollow={setShowfollow}
                     //   shFollow={showFollow}
                     // follow={followUser}
                     // unfollow={unfollowUser}
-                    users={state.following}
+                    users={userProfile.user.following}
                     title="Following"
                     closeModal={closeModal}
                     loggedInUser={state}
