@@ -1,4 +1,4 @@
-import React,{useState,useContext} from 'react'
+import React,{useState,useContext,useEffect} from 'react'
 import { useHistory } from 'react-router';
 import verified from '../assets/correct.svg'
 import Button from "../assets/Button";
@@ -10,7 +10,10 @@ function SuggestionList({user}) {
     const { state, dispatch } = useContext(UserContext);
     const [showFollow, setShowfollow] = useState(true);
 
-    console.log(user)
+    useEffect(() => {
+      setShowfollow(state && !state.following.some((i) => i._id === user._id));
+    }, [state,user]);
+ 
     const followUser = (id) => {
         fetch(`${process.env.REACT_APP_BACKEND_URL}/follow`, {
           method: "put",

@@ -271,7 +271,7 @@ const ProfileOthers = (props) => {
   const userId = props.match.params.userid;
   useEffect(() => {
     setShowfollow(state && !state.following.some((i) => i._id === userid));
-  }, [state]);
+  }, [state,userid]);
 
   useEffect(() => {
     fetch(`${process.env.REACT_APP_BACKEND_URL}/user/${userId}`, {
