@@ -31,7 +31,7 @@ const HomeTwo = () => {
         setFeed(result.posts);
         setLoading(false);
       });
-  }, [feed,setFeed]);
+  }, [setFeed]);
 
   //  if (loading) {
   //    return <Loader />;
