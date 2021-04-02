@@ -42,6 +42,10 @@ const NewPostWrapper = styled.div`
   .modal-content {
     width: 700px;
   }
+  .post-preview{
+    max-height: 80vh;
+    width: 100%;
+  }
   @media screen and (max-width: 780px) {
     .modal-content {
       width: 90vw;

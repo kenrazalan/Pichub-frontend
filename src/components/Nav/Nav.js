@@ -15,6 +15,38 @@ const NavWrapper = styled.div`
   border-bottom: 1px solid #dbdbdb;
   //padding: 1rem 0;
   z-index: 10;
+  @media only screen and (max-width: 600px) {
+    top: unset;
+    bottom:0;
+    .brand-logo{
+        display: none;
+    }
+    #nav-mobile{
+      width: 100% !important;
+      justify-content: space-between;
+    } 
+    .nav2{
+      display: unset !important;
+
+  }
+  }
+  .nav2{
+    display: none;
+    top: 0 !important;
+    position: fixed;
+    width: 100%;
+    background-color: #fff;
+    border-bottom: 1px solid #dbdbdb;
+   
+  }
+ 
+
+  .nav-logo2{
+    position: relative;
+    top: 6px;
+    height: 29px;
+    margin:5px 0 5px 0;
+  }
 
   .nav-logo {
     position: relative;
@@ -69,6 +101,12 @@ const Nav = () => {
     if (state) {
       return [
         // <li key="1"><i  data-target="modal1" className="large material-icons modal-trigger" style={{color:"black"}}>search</i></li>,
+      
+        <li key="1">
+          <Link to="/">
+            <HomeIcon />
+          </Link>
+        </li>,
         <li style={{ margin: "auto !important" }} key="3">
           <Link to="/">
             <div data-target="modal1" className="modal-trigger">
@@ -77,13 +115,7 @@ const Nav = () => {
           </Link>
         </li>,
 
-        <li key="1">
-          <Link to="/">
-            <HomeIcon />
-          </Link>
-        </li>,
-
-        <li>
+        <li key="12">
           <NewPost />
         </li>,
         <li key="4">
@@ -148,6 +180,13 @@ const Nav = () => {
   return (
     <NavWrapper>
       <div className="nav">
+
+      <div className="nav2 center">
+        <Link to={state ? "/" : "/signin"} className="brand-logo2">
+          <img className="nav-logo2" src={navlogo} alt="logo" />
+        </Link>
+      </div>
+
         <Link to={state ? "/" : "/signin"} className="brand-logo left">
           <img className="nav-logo" src={navlogo} alt="logo" />
         </Link>

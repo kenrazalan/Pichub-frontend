@@ -117,7 +117,7 @@ const Suggestions = () => {
   
         <div style={{ display: "flex", flexDirection: "column" }}>
     <WrapperHead>
-      <h4 className="explore">Explore People</h4>
+      
       <h3 style={{ marginBottom: "0.7rem", fontSize: "1.3rem" }}>
         Suggestions for you
       </h3>
