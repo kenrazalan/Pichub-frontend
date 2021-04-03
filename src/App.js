@@ -22,6 +22,7 @@ import Suggestions from "./components/Suggestions/Suggestions";
 import SideSuggestions from "./components/SideSuggestions/SideSuggestions";
 import PostProvider from "./components/context/PostContext";
 import ExplorePost from "./components/Post/ExplorePost";
+import GoToPost from "./components/Post/GoToPost";
 
 export const UserContext = createContext();
 
@@ -78,6 +79,11 @@ const Routing = () => {
         <Route exact path="/suggestions">
           <Suggestions/>
         </Route>
+        <Route exact path="/post/:id">
+          <GoToPost/>
+        </Route>
+        
+        
         
       </Switch>
     </Container>

@@ -145,30 +145,15 @@ function Post({ item }) {
   return (
     <div className="card home-card" key={item?._id}>
       <div style={{ padding: "10px", margin: "0" }}>
-        <Link
-          to={
-            item.postedBy?._id === state._id
+        <Link to={item.postedBy?._id === state._id
               ? `/profileheader`
-              : `/profile/${item.postedBy?._id}`
-          }
-        >
+              : `/profile/${item.postedBy?._id}`}>
           <span>
             <span className="border">
-              <img
-                src={item.postedBy?.pic}
-                className="postedby-img"
-                alt={item.name}
-              />{" "}
-            </span>
+              <img src={item.postedBy?.pic} className="postedby-img" alt={item.name} />{" "}
           </span>
-          <span
-            style={{
-              fontSize: "17px",
-              fontWeight: "600",
-              verticalAlign: "super",
-              paddingLeft: "10px",
-            }}
-          >
+          </span>
+          <span style={{fontSize: "17px",fontWeight: "600",verticalAlign: "super",paddingLeft: "10px",}}>
             {item.postedBy?.name}
           </span>
         </Link>

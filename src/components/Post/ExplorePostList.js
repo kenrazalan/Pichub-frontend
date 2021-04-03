@@ -1,4 +1,5 @@
 import React from "react";
+import { useHistory } from "react-router";
 import styled from "styled-components";
 import { CommentIcon, HeartIcon } from "../assets/Icons";
 
@@ -114,10 +115,11 @@ const Wrapper = styled.div`
 `;
 
 function ExplorePostList({ posts }) {
+  const history = useHistory()
   return (
     <Wrapper>
       {posts.map((post) => (
-        <div className="grid-container">
+        <div className="grid-container"  onClick={() => history.push(`/post/${post._id}`)}>
           <img src={post.photo} alt={post._id} />
           <div className="overlay">
             <div className="overlay-content">

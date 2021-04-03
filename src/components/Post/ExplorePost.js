@@ -1,9 +1,11 @@
 import React,{useContext,useEffect,useState} from 'react'
+import Loader from '../assets/Loader';
 import ExplorePostList from './ExplorePostList';
 
 
 function ExplorePost() {
     const [post,setPost] = useState([])
+    const [load, setLoad] = useState(true);
 
     useEffect(() => {
         fetch(`${process.env.REACT_APP_BACKEND_URL}/allpost`, {
@@ -15,9 +17,13 @@ function ExplorePost() {
           
             console.log(result.posts) 
             setPost(result.posts)       
-            //setLoading(false)
+            setLoad(false)
           });
       }, []);
+
+    if(load){
+      return <Loader/>
+    }
 
     return (
         <div>
