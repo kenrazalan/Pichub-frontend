@@ -12,8 +12,9 @@ const Wrapper = styled.div`
   @media screen and (max-width: 840px) {
     display: flex;
     flex-direction: column;
-
-    
+    .post-details{
+        margin-bottom: 100px;
+    }
     .comment-section {
       height: auto !important;
     }
