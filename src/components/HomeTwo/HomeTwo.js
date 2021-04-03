@@ -33,9 +33,9 @@ const HomeTwo = () => {
       });
   }, [setFeed]);
 
-  //  if (loading) {
-  //    return <Loader />;
-  //  }
+   if (loading) {
+     return <Loader />;
+   }
 
     return <>{  feed.length > 0 ? <Followingpost /> : <Suggestions />}</>;
   // return <Followingpost/>
