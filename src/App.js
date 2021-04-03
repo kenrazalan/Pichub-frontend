@@ -21,6 +21,7 @@ import { reducer, initialState } from "./reducers/userReducer";
 import Suggestions from "./components/Suggestions/Suggestions";
 import SideSuggestions from "./components/SideSuggestions/SideSuggestions";
 import PostProvider from "./components/context/PostContext";
+import ExplorePost from "./components/Post/ExplorePost";
 
 export const UserContext = createContext();
 
@@ -66,7 +67,7 @@ const Routing = () => {
           }}
         ></Route>
         <Route exact path="/explore">
-          <Suggestions />
+          <ExplorePost />
         </Route>
         <Route path="/accounts/edit">
           <EditProfile />
@@ -77,6 +78,7 @@ const Routing = () => {
         <Route exact path="/test">
           <SideSuggestions/>
         </Route>
+        
       </Switch>
     </Container>
   );

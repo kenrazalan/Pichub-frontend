@@ -109,7 +109,7 @@ const Nav = () => {
           </Link>
         </li>,
         <li style={{ margin: "auto !important" }} key="3">
-          <Link to="/">
+          <Link>
             <div data-target="modal1" className="modal-trigger">
               <SearchIcon />
             </div>

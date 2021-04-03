@@ -33,7 +33,8 @@ const Wrapper = styled.div`
     margin-right: 10px;
     border: 1px solid #dbdbdb !important;
     box-shadow: none !important;
-      max-width: 600px;
+    min-width: 300px;
+    max-width: 600px;
   height: max-content;
   }
   .home-input{
