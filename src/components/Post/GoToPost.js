@@ -15,8 +15,10 @@ const Wrapper = styled.div`
   @media screen and (max-width: 840px) {
     display: flex;
     flex-direction: column;
+
+     margin-bottom: 150px;
     .post-details{
-        margin-bottom: 150px;
+       
     }
     .comment-section {
       height: auto !important;
@@ -27,10 +29,10 @@ const Wrapper = styled.div`
     hr{
         border-bottom: none !important;
     }
-    /* .imahe{
+    .imahe{
         min-height: 350px;
-        max-height: 700px;
-    } */
+        max-height: 600px !important;
+    }
     .numLikes-container{
         display: none !important;
     }
@@ -470,11 +472,15 @@ function GoToPost() {
               />
              )}
             <CommentIcon/>
-
+            <div className="allowance" style={{height: "150px"}}>
+                <p>.</p>
+             </div>
             </div>
         </div>
         </div>
-        </div>
+      
+        </div>  
+
       </Wrapper>
     )
 }
