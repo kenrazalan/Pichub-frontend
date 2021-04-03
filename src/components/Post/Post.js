@@ -13,7 +13,6 @@ import {PostContext} from '../context/PostContext'
 function Post({ item }) {
   const { state, dispatch } = useContext(UserContext);
   const [showModal, setShowModal] = useState(false);
-  const [data, setData] = useState([]);
   const [del, setDelete] = useState("");
   const closeModal = () => setShowModal(false);
   const [isLike, setIsLike] = useState(true);

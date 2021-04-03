@@ -1,5 +1,6 @@
 import React from 'react'
 import styled from "styled-components";
+import {useHistory} from 'react-router-dom'
 
 const ModalContentWrapper = styled.div`
   width: 300px;
@@ -22,7 +23,10 @@ function DeleteModal({
     closeModal,
     handleDeletePost,
     state,
-  }) {
+  }) 
+  
+  {
+    const history = useHistory()
     return (
         <div>
             <ModalContentWrapper>
@@ -35,6 +39,7 @@ function DeleteModal({
         onClick={() => {
           handleDeletePost(postId);
           closeModal();
+          history.push('/')
         }}
       >
         Delete Post

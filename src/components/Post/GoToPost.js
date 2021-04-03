@@ -1,10 +1,13 @@
 import React,{useEffect,useState,useContext} from 'react'
-import { CommentIcon, FilledHeartIcon, HeartIcon, SavedIcon } from '../assets/Icons';
+import { CommentIcon, FilledHeartIcon, HeartIcon, MoreIcon, SavedIcon } from '../assets/Icons';
 import { useParams, useHistory, Link } from "react-router-dom";
 import styled from 'styled-components'
 import { UserContext } from "../../App";
 import moment from 'moment';
 import Loader from '../assets/Loader';
+import {PostContext} from '../context/PostContext'
+import DeleteModal from '../DeleteModal/DeleteModal';
+import Modal from '../Modal/Modal';
 
 const Wrapper = styled.div`
   display: grid;
@@ -13,7 +16,7 @@ const Wrapper = styled.div`
     display: flex;
     flex-direction: column;
     .post-details{
-        margin-bottom: 100px;
+        margin-bottom: 150px;
     }
     .comment-section {
       height: auto !important;
@@ -52,7 +55,7 @@ const Wrapper = styled.div`
    }
   }
 
-
+  
   hr{
     border: none;
     border-bottom:1px solid #DBDBDB;
@@ -86,6 +89,13 @@ const Wrapper = styled.div`
   }
   .header-info{
       display: flex;
+      justify-content: space-between;
+      align-items: center;
+     /*  padding: 10px;
+      margin-bottom: 10px; */
+  }
+  .header-info-link{
+    display: flex;
       align-items: center;
       padding: 10px;
       margin-bottom: 10px;
@@ -101,8 +111,8 @@ const Wrapper = styled.div`
         height: 0;
       }
   }
-.comment-list{
-       
+svg{
+    margin-right: 12px;   
 }
   
 .comment-info{
@@ -201,6 +211,13 @@ function GoToPost() {
     const { state, dispatch } = useContext(UserContext);
     const [text,setText] = useState("")
     const [load,setLoad] = useState(true)
+    const { feed, setFeed } = useContext(PostContext);
+    const [isLike, setIsLike] = useState(true);
+    const [likes,setLikes] = useState(null)
+    const [comments,setComments] = useState([])
+    const [showModal, setShowModal] = useState(false);
+    const [del, setDelete] = useState("");
+    const closeModal = () => setShowModal(false);
     
     useEffect(() => {
         fetch(`${process.env.REACT_APP_BACKEND_URL}/post/${id}`, {
@@ -216,44 +233,167 @@ function GoToPost() {
           });
       }, [id]);
 
+      useEffect(() => {
+        setIsLike(post.likes?.includes(state._id));
+        setLikes(post.likes?.length)
+        setComments(post?.comments)
+      }, [post,state]);
+      
+
       const handleText=(e)=>{
         setText(e.target.value)
-  }
+    }
+
+    const incLikes = () => setLikes(likes + 1);
+    const decLikes = () => setLikes(likes - 1);
+
+      const likePost = (id) => {
+    fetch(`${process.env.REACT_APP_BACKEND_URL}/like`, {
+      method: "put",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + localStorage.getItem("jwt"),
+      },
+      body: JSON.stringify({
+        postId: id,
+      }),
+    })
+      .then((res) => res.json())
+      .then((result) => {
+        
+        const newData = feed.map((item) => {
+          if (item._id === result._id) {
+            return result;
+          } else {
+            return item;
+          }
+        });
+        console.log(newData)
+        setFeed(newData);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+  const unlikePost = (id) => {
+    fetch(`${process.env.REACT_APP_BACKEND_URL}/unlike`, {
+      method: "put",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + localStorage.getItem("jwt"),
+      },
+      body: JSON.stringify({
+        postId: id,
+      }),
+    })
+      .then((res) => res.json())
+      .then((result) => {
+        const newData = feed.map((item) => {
+          if (item._id === result._id) {
+            return result;
+          } else {
+            return item;
+          }
+        })
+        console.log(newData)
+        setFeed(newData);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+  const makeComment = (text, postId) => {
+    fetch(`${process.env.REACT_APP_BACKEND_URL}/comment`, {
+      method: "put",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + localStorage.getItem("jwt"),
+      },
+      body: JSON.stringify({
+        postId,
+        text,
+      }),
+    }).then((res) => res.json())
+      .then((result) => {
+        
+        console.log(result.comments);
+        setComments(result.comments)
+
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+  const deletePost = (postid) => {
+    fetch(`${process.env.REACT_APP_BACKEND_URL}/deletepost/${postid}`, {
+      method: "delete",
+      headers: {
+        Authorization: "Bearer " + localStorage.getItem("jwt"),
+      },
+    })
+      .then((res) => res.json())
+      .then((result) => {
+        console.log(result);
+        const newData = feed.filter((item) => {
+          return item._id !== result._id;
+        });
+        //console.log(newData)
+        setFeed(newData);
+      }).catch((error=>{
+        console.log(error)
+      }));
+  };
+
+
     if(load){
         return <Loader/>
     }
 
     return (
         <Wrapper>
-        {/* <div className="card home-card" key={post?._id}>
-
-        <div className="card-image">
-          <img src={post && post.photo} alt={post?.name} />
-        </div>
-        <div className="card">
-            
-        <div className="card-image">
-          
-        </div>
-
-        </div>
-       
-      </div> */}
         <img className="imahe" src={post && post.photo} alt={post?.name} />
         <div className="post-details">
         
-        <Link>
-          <div className="header-info">
-            <img src={post.postedBy?.pic} className="postedby-img" alt={post.name} />{" "}
         
-            <div className="postedby-name">
-                 {post.postedBy?.name}<span>  •</span>
-            </div>
+      
+
+          <div className="header-info">
+        <div className="header-info-link">
+          <Link to={post.postedBy?._id === state._id ? `/profileheader` : `/profile/${post.postedBy?._id}`}>
+                <img src={post.postedBy?.pic} className="postedby-img" alt={post.name} />{" "}
+          </Link>
+          <Link to={post.postedBy?._id === state._id ? `/profileheader` : `/profile/${post.postedBy?._id}`}>
+                <div className="postedby-name">
+                    {post.postedBy?.name}<span>  •</span>
+                </div>
+          </Link> 
+          </div>
+            {post.postedBy?._id === state._id && (
+                <MoreIcon
+                    onClick={() => {
+                    setShowModal(true);
+                    setDelete(post?._id);
+                    }}
+                    style={{ float: "right"}}
+                />
+                )}{" "}
         </div>
-        </Link>
+      
+        {showModal && (
+          <Modal>
+            <DeleteModal
+              postId={del}
+              handleDeletePost={deletePost}
+              state={state}
+              closeModal={closeModal}
+            />
+          </Modal>
+        )}
+
         <hr/>
             <div className="numLikes-container2">
-                <div className="numLikes">  {post.likes?.length} {post.likes?.length > 1 ? "likes" : "like"} </div>
+                <div className="numLikes">   {likes} {likes > 1 ? "likes" : "like"} </div>
                 <div className="createdAt"> {moment(post?.createdAt).fromNow()} </div>
             </div>
         <div className="comment-footer">
@@ -261,14 +401,19 @@ function GoToPost() {
         <div className="footer">
         <div className="comment-section"> 
             <div className="comment-list">
-                {post?.comments.map((comment)=>{
+                {comments.map((comment)=>{
                     return(
-                             <div className="comment-info">
-                    <img src={comment.postedBy?.pic} className="comment-img" alt={comment.name} />{" "}
-                    <p>
-                        <span className="comment-name">
-                            {comment.postedBy?.name}{" "}
-                        </span>
+                    <div className="comment-info">
+                    <Link to={comment.postedBy?._id === state?._id ? `/profileheader` : `/profile/${comment.postedBy?._id}`}>   
+                         <img src={comment.postedBy?.pic} className="comment-img" alt={comment.name} />{" "}
+                    </Link>
+                    <p>  
+                        <Link to={comment.postedBy?._id === state?._id ? `/profileheader` : `/profile/${comment.postedBy?._id}`}>
+                            <span className="comment-name">
+                                {comment.postedBy?.name}{" "}
+                            </span>
+                        </Link>
+            
                         <span className="comment-text">
                           {comment.text}
                         </span>
@@ -283,10 +428,17 @@ function GoToPost() {
         </div>
       
             <div className="numLikes-container">
-                <div className="numLikes">  {post.likes?.length} {post.likes?.length > 1 ? "likes" : "like"} </div>
+                <div className="numLikes">   {likes} {likes > 1 ? "likes" : "like"}</div>
                 <div className="createdAt"> {moment(post?.createdAt).fromNow()} </div>
             </div>
-            <div className="input-container">
+            
+                <form
+                onSubmit={(e) => {
+                e.preventDefault();      
+                makeComment(text, post?._id);
+                setText("")
+                }}>
+                <div className="input-container">
                 <input
                 className="browser-default"
                 type="text"
@@ -295,9 +447,28 @@ function GoToPost() {
                 placeholder="Add a comment"
                 />
                 <button disabled={!text} className="post-btn">Post</button>
-            </div>
+                 </div>
+                </form>
+           
             <div className="reacts">
-            <HeartIcon/>
+
+             {isLike ? (
+             <FilledHeartIcon
+                onClick={() => {
+                setIsLike(false);
+                decLikes()
+                unlikePost(post?._id);
+                    }}
+                />
+                  ) : (
+              <HeartIcon
+              onClick={() => {
+              incLikes()
+              setIsLike(true);
+              likePost(post?._id);
+                }}
+              />
+             )}
             <CommentIcon/>
 
             </div>
