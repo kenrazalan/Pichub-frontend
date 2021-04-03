@@ -75,8 +75,8 @@ const Routing = () => {
         <Route exact path="/reset">
           <Reset />
         </Route>
-        <Route exact path="/test">
-          <SideSuggestions/>
+        <Route exact path="/suggestions">
+          <Suggestions/>
         </Route>
         
       </Switch>

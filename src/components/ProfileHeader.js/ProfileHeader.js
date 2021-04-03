@@ -473,7 +473,6 @@ const ProfileHeader = () => {
             <>
             <Skeleton className="rect" animation="wave" variant="rect"  height={200} />
             <Skeleton className="rect" animation="wave" variant="rect"  height={200} />
-            <Skeleton className="rect" animation="wave" variant="rect"  height={200} />
             </>
             }
           </WrapperPost>

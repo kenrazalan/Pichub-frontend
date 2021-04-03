@@ -81,13 +81,15 @@ const Wrapper = styled.div`
   }
 
   @media screen and (max-width: 700px) {
-    //grid-template-columns: 1fr 1fr;
     grid-gap: 0rem;
     font-size: 0.5rem;
     img,
     .overlay {
       height: 180px;
       width: 98%;
+    }
+    .overlay-content{
+        display: none;
     }
   }
   @media screen and (max-width: 500px) {
@@ -98,6 +100,7 @@ const Wrapper = styled.div`
       height: 150px;
       width: 98%;
     }
+
   }
   @media screen and (max-width: 400px) {
     grid-gap: 0rem;

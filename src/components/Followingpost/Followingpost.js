@@ -35,7 +35,7 @@ const Wrapper = styled.div`
     box-shadow: none !important;
     min-width: 300px;
     max-width: 600px;
-  height: max-content;
+   height: max-content;
   }
   .home-input{
       // border-radius: 4px !important;

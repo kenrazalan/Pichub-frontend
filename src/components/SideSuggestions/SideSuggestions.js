@@ -164,7 +164,7 @@ function SideSuggestions() {
             Suggestions For You
           </div>
           <h6 className="seeall">
-            <b onClick={() => {history.push('/explore')}}>See all</b>
+            <b onClick={() => {history.push('/suggestions')}}>See all</b>
           </h6>
         </div>
 
