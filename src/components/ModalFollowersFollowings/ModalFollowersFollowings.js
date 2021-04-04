@@ -1,7 +1,7 @@
 import React from 'react'
-import  {useHistory,Link} from 'react-router-dom'
-import { OptionsIcon, PostIcon, SavedIcon, CloseIcon } from "../assets/Icons";
+import { CloseIcon } from "../assets/Icons";
 import styled from "styled-components";
+import FollowersFollowingList from './FollowersFollowingList';
 
 const ModalContentWrapper = styled.div`
   display: flex;
@@ -11,12 +11,18 @@ const ModalContentWrapper = styled.div`
   padding-right: 2rem;
   font-size: 0.9rem;
   width: 350px;
+  //min-height: 450px;
   img {
     width: 40px !important;
     object-fit: cover !important;
     height: 40px !important;
     border-radius: 20px !important;
     margin-right: 1rem !important;
+  }
+  .following{
+     border: 1px solid #dbdbdb !important;
+      background: transparent !important;
+      color: black;
   }
   .profile-info {
     display: flex !important;
@@ -39,10 +45,11 @@ function ModalFollowersFollowings({
     users,
     closeModal,
     title,
-    follow,
-    unfollow,
+    load,
+    setLoad,
+    followUser,
+    unfollowUser,
   }) {
-    const history = useHistory();
         return (
             <div style={{ }}>
               <div
@@ -60,47 +67,13 @@ function ModalFollowersFollowings({
                <div style={{ overflowY:"auto",maxHeight: "400px" }}>
               {users.map((user) => (
                 <ModalContentWrapper key={user._id}>
-                
-                  <div className="profile-info" >
-                    <img
-                      className="pointer"
-                      onClick={() => {
-                        closeModal();
-                        history.push(`/${user.username}`);
-                      }}
-                      // src={loggedInUser._id==user._id?loggedInUser.pic:user.pic}
-                      src={user.pic}
-                      alt="avatar"
-                    />
-                    <div className="user-info">
-                      <div
-                        className="pointer"
-                        onClick={() => {
-                          closeModal();
-                        }}
-                      >
-                        <Link
-                          to={
-                            loggedInUser._id === user._id
-                              ? `/profileheader`
-                              : `/profile/${user._id}`
-                          }
-                        >
-                          {user.username}
-                        </Link>
-                      </div>
-                      <span>{user.name}</span>
-                    </div>
-                  </div>
-                  
-                  {/* {loggedInUser._id!==user._id?
-                  <div className="options">
-                      {shFollow?
-                        <Button onClick={()=>follow(user._id)}>Follow</Button>
-                        :
-                        <Button onClick={()=>unfollow(user._id)}>Unfollow</Button>
-                        }
-                      </div>: <div>You</div>} */}
+                  <FollowersFollowingList user={user}
+                                          loggedInUser={loggedInUser}
+                                          closeModal={closeModal}
+                                          unfollowUser={unfollowUser}
+                                          followUser={followUser}
+                                          load={load}
+                                          setLoad={setLoad} />
                 </ModalContentWrapper>
             
               ))}    </div>

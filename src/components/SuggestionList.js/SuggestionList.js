@@ -101,7 +101,6 @@ function SuggestionList({user}) {
                 </Button>
               )
             )}
-            {/* <Follow isFollowing={user.isFollowing} userId={user._id} /> */}
           </div>
     )
 }

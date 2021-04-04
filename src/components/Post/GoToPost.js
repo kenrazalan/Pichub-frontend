@@ -29,6 +29,7 @@ const Wrapper = styled.div`
     hr{
         border-bottom: none !important;
     }
+
     .imahe{
         min-height: 350px;
         max-height: 600px !important;
@@ -66,7 +67,7 @@ const Wrapper = styled.div`
     width: 100%;
     min-height: 500px;
     max-height: 500px;
-    object-fit: cover;
+    //object-fit: cover;
     border: 1px solid #DBDBDB;
     border-right: none;
   }
@@ -354,7 +355,9 @@ function GoToPost() {
 
     return (
         <Wrapper>
-        <img className="imahe" src={post && post.photo} alt={post?.name} />
+        
+           <img className="imahe" src={post && post.photo} alt={post?.name} />
+        
         <div className="post-details">
         
         

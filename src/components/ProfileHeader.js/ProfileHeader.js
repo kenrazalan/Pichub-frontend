@@ -30,6 +30,7 @@ const WrapperPost = styled.div`
   }
   .grid-container:hover .overlay {
     display: block;
+    cursor: pointer;
   }
 
   .overlay {
@@ -279,6 +280,7 @@ const ProfileHeader = () => {
   const [showFollowersModal, setFollowersModal] = useState(false);
   const [showFollowingModal, setFollowingModal] = useState(false);
   const [loading, setLoading] = useState(true);
+  const [load,setLoad] = useState(false)
   const [showModal, setShowModal] = useState(false);
 
 
@@ -288,7 +290,7 @@ const ProfileHeader = () => {
     setShowModal(false);
   };
 
-  console.log(state);
+ 
   useEffect(() => {
     fetch(`${process.env.REACT_APP_BACKEND_URL}/myposts`, {
       headers: {
@@ -308,6 +310,74 @@ const ProfileHeader = () => {
     dispatch({type:"CLEAR"})
     history.push('/signin')
   }
+  const followUser = (userId) => {
+    fetch(`${process.env.REACT_APP_BACKEND_URL}/follow`, {
+      method: "put",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + localStorage.getItem("jwt"),
+      },
+      body: JSON.stringify({
+        followId: userId,
+      }),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data)
+        dispatch({
+          type: "UPDATE",
+          payload: { following: data.following, followers: data.followers },
+        });
+        localStorage.setItem("user", JSON.stringify(data));
+        setLoad(false);
+        // setProfile((prevState) => {
+        //   return {
+        //     ...prevState,
+        //     user: {
+        //       ...prevState.user,
+        //       followers: [...prevState.user.followers, data],
+        //     },
+        //   };
+        // });
+        setLoading(true);
+      }).catch(error=>console.log(error));
+  };
+
+  const unfollowUser = (userId) => {
+    fetch(`${process.env.REACT_APP_BACKEND_URL}/unfollow`, {
+      method: "put",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + localStorage.getItem("jwt"),
+      },
+      body: JSON.stringify({
+        unfollowId: userId,
+      }),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+        dispatch({
+          type: "UPDATE",
+          payload: { following: data.following, followers: data.followers },
+        });
+        localStorage.setItem("user", JSON.stringify(data));
+        setLoad(false)
+        // setProfile((prevState) => {
+        //   const newFollower = prevState.user.followers.filter(
+        //     (item) => item._id !== data._id
+        //   );
+        //   return {
+        //     ...prevState,
+        //     user: {
+        //       ...prevState.user,
+        //       followers: newFollower,
+        //     },
+        //   };
+        // });
+        setLoading(true);
+      });
+  };
   
 
   // if (loading) {
@@ -384,6 +454,10 @@ const ProfileHeader = () => {
                     //   shFollow={showFollow}
                     // follow={followUser}
                     // unfollow={unfollowUser}
+                    followUser={followUser}
+                    unfollowUser={unfollowUser}
+                    load={load}
+                    setLoad={setLoad}
                     users={state.followers}
                     title="Followers"
                     closeModal={closeModal}
@@ -398,6 +472,10 @@ const ProfileHeader = () => {
                     //   shFollow={showFollow}
                     // follow={followUser}
                     // unfollow={unfollowUser}
+                    followUser={followUser}
+                    unfollowUser={unfollowUser}
+                    load={load}
+                    setLoad={setLoad}
                     users={state.following}
                     title="Followers"
                     closeModal={closeModal}
@@ -430,6 +508,10 @@ const ProfileHeader = () => {
                   //   shFollow={showFollow}
                   // follow={followUser}
                   // unfollow={unfollowUser}
+                  followUser={followUser}
+                  unfollowUser={unfollowUser}
+                  load={load}
+                  setLoad={setLoad}
                   users={state.followers}
                   title="Followers"
                   closeModal={closeModal}
@@ -444,8 +526,12 @@ const ProfileHeader = () => {
                   //   shFollow={showFollow}
                   // follow={followUser}
                   // unfollow={unfollowUser}
+                  followUser={followUser}
+                  unfollowUser={unfollowUser}
+                  load={load}
+                  setLoad={setLoad}
                   users={state.following}
-                  title="Followers"
+                  title="Following"
                   closeModal={closeModal}
                   loggedInUser={state}
                 />

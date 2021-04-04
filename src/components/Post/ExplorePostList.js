@@ -22,6 +22,7 @@ const Wrapper = styled.div`
   }
   .grid-container:hover .overlay {
     display: block;
+    cursor: pointer;
   }
 
   .overlay {

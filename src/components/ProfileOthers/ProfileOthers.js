@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import styled from "styled-components";
 import Button from "../assets/Button";
-import { CloseIcon, OptionsIcon, PostIcon, SavedIcon } from "../assets/Icons";
+import { CloseIcon, CommentIcon, HeartIcon, OptionsIcon, PostIcon, SavedIcon } from "../assets/Icons";
 import { UserContext } from "../../App";
 import { useParams, useHistory, Link } from "react-router-dom";
 import Loader from "../assets/Loader";
@@ -10,24 +10,28 @@ import verified from '../assets/correct.svg'
 import ModalFollowersFollowings from '../ModalFollowersFollowings/ModalFollowersFollowings'
 
 const WrapperPost = styled.div`
-  margin-top: 1rem;
-  cursor: pointer;
-  display: grid;
+ display: grid;
   grid-template-columns: repeat(3, 1fr);
-  grid-gap: 1.5rem;
+  grid-gap: 1rem;
+  //row-gap: 0;
+  margin-top: 5rem;
   img {
     border-radius: 4px;
     box-shadow: 0 1px 0 rgba(0, 0, 0, 0.2);
     width: 300px;
     height: 300px;
     object-fit: cover;
+    padding: 0;
+    
   }
-  .container-overlay {
+  .grid-container {
     position: relative;
   }
-  .container-overlay:hover .overlay {
+  .grid-container:hover .overlay {
     display: block;
+    cursor: pointer;
   }
+
   .overlay {
     border-radius: 4px;
     position: absolute;
@@ -41,6 +45,7 @@ const WrapperPost = styled.div`
     z-index: 4;
     display: none;
   }
+
   .overlay-content {
     display: flex;
     justify-content: center;
@@ -50,59 +55,69 @@ const WrapperPost = styled.div`
     font-weight: 500;
     font-size: 1.1rem;
   }
+
   svg {
     fill: #fff;
     position: relative;
     top: 4px;
   }
+
   span {
     display: flex;
     display: block;
     align-items: center;
     padding-right: 0.5rem;
   }
+
   span:first-child {
     margin-right: 1rem;
   }
+
   @media screen and (max-width: 1000px) {
     img,
     .overlay {
-      width: 233px;
+      width: 98%;
       height: 233px;
     }
   }
   @media screen and (max-width: 800px) {
+    grid-gap: 0rem;
     img,
     .overlay {
-      width: 200px;
+      width: 98%;
       height: 200px;
     }
   }
+
   @media screen and (max-width: 700px) {
-    grid-template-columns: 1fr 1fr;
+    grid-gap: 0rem;
+    font-size: 0.5rem;
     img,
     .overlay {
-      height: 240px;
-      width: 100%;
+      height: 180px;
+      width: 98%;
     }
-    .pointers {
-      font-size: 1.1rem;
-      font-weight: 100 !important;
+    .overlay-content{
+        display: none;
     }
   }
   @media screen and (max-width: 500px) {
-    grid-gap: 1rem;
+    grid-gap: 0rem;
+
     img,
     .overlay {
-      height: 200px;
-      width: 100%;
+      height: 150px;
+      width: 98%;
     }
+
   }
   @media screen and (max-width: 400px) {
+    grid-gap: 0rem;
+    row-gap: 5 !important;
     img,
     .overlay {
-      height: 170px;
-      width: 100%;
+      height: 120px;
+      width: 98%;
     }
   }
 `;
@@ -250,22 +265,13 @@ const Wrapper = styled.div`
   }
 `;
 
-const modalHeaderStyle = {
-  display: "flex",
-  alignItems: "center",
-  justifyContent: "space-between",
-  borderBottom: "1px solid #DBDBDB",
-  padding: "1rem",
-};
-
-
-
 
 const ProfileOthers = (props) => {
   const [userProfile, setProfile] = useState(null);
   const [showFollowersModal, setFollowersModal] = useState(false);
   const [showFollowingModal, setFollowingModal] = useState(false);
-  const [load, setLoad] = useState(true);
+  const [load, setLoad] = useState(false);
+  const history = useHistory();
   const closeModal = () => {
     setFollowersModal(false);
     setFollowingModal(false);
@@ -293,7 +299,7 @@ const ProfileOthers = (props) => {
       });
   }, []);
 
-  const followUser = () => {
+  const followUser = (id) => {
     fetch(`${process.env.REACT_APP_BACKEND_URL}/follow`, {
       method: "put",
       headers: {
@@ -301,7 +307,7 @@ const ProfileOthers = (props) => {
         Authorization: "Bearer " + localStorage.getItem("jwt"),
       },
       body: JSON.stringify({
-        followId: userId,
+        followId: id,
       }),
     })
       .then((res) => res.json())
@@ -311,7 +317,7 @@ const ProfileOthers = (props) => {
           payload: { following: data.following, followers: data.followers },
         });
         localStorage.setItem("user", JSON.stringify(data));
-        setLoad(false);
+        
         setProfile((prevState) => {
           return {
             ...prevState,
@@ -321,12 +327,12 @@ const ProfileOthers = (props) => {
             },
           };
         });
-        setLoad(true);
+        setLoad(false);
         setShowfollow(false);
       });
   };
 
-  const unfollowUser = () => {
+  const unfollowUser = (id) => {
     fetch(`${process.env.REACT_APP_BACKEND_URL}/unfollow`, {
       method: "put",
       headers: {
@@ -334,7 +340,7 @@ const ProfileOthers = (props) => {
         Authorization: "Bearer " + localStorage.getItem("jwt"),
       },
       body: JSON.stringify({
-        unfollowId: userId,
+        unfollowId: id,
       }),
     })
       .then((res) => res.json())
@@ -358,7 +364,7 @@ const ProfileOthers = (props) => {
             },
           };
         });
-        setLoad(true);
+        setLoad(false);
         setShowfollow(true);
       });
   };
@@ -379,11 +385,11 @@ const ProfileOthers = (props) => {
                 {/* <span>{userProfile.user.followers>=10 ? <img src={verified}/> : null }</span> */}
                 <div className="options">
                   {showFollow ? (
-                    load ? (
+                    !load ? (
                       <Button
                         onClick={() => {
-                          followUser();
-                          setLoad(false);
+                          followUser(userId);
+                          setLoad(true);
                         }}
                       >
                         Follow
@@ -393,12 +399,12 @@ const ProfileOthers = (props) => {
                         <i className="fa fa-spinner fa-spin"></i>
                       </Button>
                     )
-                  ) : load ? (
+                  ) : !load ? (
                     <Button
                     className="following"
                       onClick={() => {
-                        unfollowUser();
-                        setLoad(false);
+                        unfollowUser(userId);
+                        setLoad(true);
                       }}
                     >
                       Following
@@ -433,8 +439,10 @@ const ProfileOthers = (props) => {
                     <ModalFollowersFollowings
                       //  setShFollow={setShowfollow}
                       //   shFollow={showFollow}
-                      // follow={followUser}
-                      // unfollow={unfollowUser}
+                      followUser={followUser}
+                      unfollowUser={unfollowUser}
+                      load={load}
+                      setLoad={setLoad}
                       users={userProfile.user.followers}
                       title="Followers"
                       closeModal={closeModal}
@@ -447,8 +455,10 @@ const ProfileOthers = (props) => {
                     <ModalFollowersFollowings
                       //  setShFollow={setShowfollow}
                       //   shFollow={showFollow}
-                      // follow={followUser}
-                      // unfollow={unfollowUser}
+                      followUser={followUser}
+                      unfollowUser={unfollowUser}
+                      load={load}
+                      setLoad={setLoad}
                       users={userProfile.user.following}
                       title="Following"
                       closeModal={closeModal}
@@ -481,6 +491,10 @@ const ProfileOthers = (props) => {
                     //   shFollow={showFollow}
                     // follow={followUser}
                     // unfollow={unfollowUser}
+                    followUser={followUser}
+                    unfollowUser={unfollowUser}
+                    load={load}
+                    setLoad={setLoad}
                     users={userProfile.user.followers}
                     title="Followers"
                     closeModal={closeModal}
@@ -495,6 +509,10 @@ const ProfileOthers = (props) => {
                     //   shFollow={showFollow}
                     // follow={followUser}
                     // unfollow={unfollowUser}
+                    followUser={followUser}
+                    unfollowUser={unfollowUser}
+                    load={load}
+                    setLoad={setLoad}
                     users={userProfile.user.following}
                     title="Following"
                     closeModal={closeModal}
@@ -522,9 +540,20 @@ const ProfileOthers = (props) => {
 
           <WrapperPost>
             {userProfile.posts.map((item) => (
-              <div key={item._id} className="container-overlay">
+              <div key={item._id} className="grid-container" onClick={() => history.push(`/post/${item._id}`)}>
                 <img src={item.photo} alt="post" />
-              </div>
+                <div className="overlay">
+                <div className="overlay-content">
+                    <span>
+                      <HeartIcon /> {item.likes.length}
+                    </span>
+                    <span>
+                      <CommentIcon/>  {item.comments.length}
+                    </span>
+                    </div>
+                  </div>
+                </div>
+
             ))}
           </WrapperPost>
         </Wrappers>
