@@ -62,11 +62,17 @@ const Wrapper = styled.div`
     cursor: pointer;
   }
   .btns {
-    min-width: 80px; 
+    min-width: 90px; 
     margin: auto 0 auto auto;
     cursor: pointer;
     font-size: 12px;
+   
   }
+   .following{
+      border: 1px solid #dbdbdb !important;
+      background: transparent !important;
+      color: black;
+    }
   .name {
     font-size: 14px;
     font-weight: 800;

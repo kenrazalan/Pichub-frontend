@@ -57,6 +57,12 @@ const Wrapper = styled.div`
     position: relative;
     top: -5px;
   }
+  .following{
+      border: 1px solid #dbdbdb !important;
+      background: transparent !important;
+      color: black;
+      
+  }
 
   @media screen and (max-width: 660px) {
     width: 500px;

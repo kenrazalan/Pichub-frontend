@@ -119,7 +119,7 @@ function ExplorePostList({ posts }) {
   return (
     <Wrapper>
       {posts.map((post) => (
-        <div className="grid-container"  onClick={() => history.push(`/post/${post._id}`)}>
+        <div className="grid-container card-image"  onClick={() => history.push(`/post/${post._id}`)}>
           <img src={post.photo} alt={post._id} />
           <div className="overlay">
             <div className="overlay-content">

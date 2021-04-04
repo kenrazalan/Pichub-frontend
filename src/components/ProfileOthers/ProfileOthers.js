@@ -114,6 +114,11 @@ const Wrappers = styled.div`
   margin-left:-12px;
 
 }
+.following{
+      border: 1px solid #dbdbdb !important;
+      background: transparent !important;
+      color: black;
+}
 .numberOf{
   font-weight: 900;
   padding-right: 0.5rem !important;
@@ -390,12 +395,13 @@ const ProfileOthers = (props) => {
                     )
                   ) : load ? (
                     <Button
+                    className="following"
                       onClick={() => {
                         unfollowUser();
                         setLoad(false);
                       }}
                     >
-                      Unfollow
+                      Following
                     </Button>
                   ) : (
                     <Button>

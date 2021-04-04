@@ -73,7 +73,7 @@ function SideSuggestionsList({user}) {
         </Button>
       )
     ) : ( !load ? 
-      <Button className="btns" onClick={() => {unfollowUser(user._id); setLoad(true);}}>Unfollow</Button>
+      <Button className="btns following" onClick={() => {unfollowUser(user._id); setLoad(true);}}>Following</Button>
       :  (
         <Button className="btns">
           <i className="fa fa-spinner fa-spin"></i>

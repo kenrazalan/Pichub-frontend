@@ -94,7 +94,7 @@ function SuggestionList({user}) {
                 </Button>
               )
             ) : ( !load ? 
-              <Button onClick={() => {unfollowUser(user._id); setLoad(true);}}>Unfollow</Button>
+              <Button className="following" onClick={() => {unfollowUser(user._id); setLoad(true);}}>Following</Button>
               :  (
                 <Button>
                   <i className="fa fa-spinner fa-spin"></i>

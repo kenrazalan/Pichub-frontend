@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { useHistory, Link } from "react-router-dom";
 import Button from "../assets/Button";
 import Loader from "./../assets/Loader";
-import { OptionsIcon, PostIcon, SavedIcon, CloseIcon } from "../assets/Icons";
+import { OptionsIcon, PostIcon, SavedIcon, CloseIcon, CommentIcon, HeartIcon } from "../assets/Icons";
 import { UserContext } from "../../App";
 import Modal from "../Modal/Modal";
 import LogoutModal from './LogoutModal'
@@ -12,24 +12,26 @@ import ModalFollowersFollowings from '../ModalFollowersFollowings/ModalFollowers
 import { Skeleton } from "@material-ui/lab";
 
 const WrapperPost = styled.div`
-  margin-top: 1rem;
-  cursor: pointer;
-  display: grid;
+   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  grid-gap: 1.5rem;
+  grid-gap: 1rem;
+  //row-gap: 0;
+  margin-top: 5rem;
   img {
     border-radius: 4px;
     box-shadow: 0 1px 0 rgba(0, 0, 0, 0.2);
     width: 300px;
     height: 300px;
     object-fit: cover;
+    padding: 0;
   }
-  .container-overlay {
+  .grid-container {
     position: relative;
   }
-  .container-overlay:hover .overlay {
+  .grid-container:hover .overlay {
     display: block;
   }
+
   .overlay {
     border-radius: 4px;
     position: absolute;
@@ -43,6 +45,7 @@ const WrapperPost = styled.div`
     z-index: 4;
     display: none;
   }
+
   .overlay-content {
     display: flex;
     justify-content: center;
@@ -52,55 +55,69 @@ const WrapperPost = styled.div`
     font-weight: 500;
     font-size: 1.1rem;
   }
+
   svg {
     fill: #fff;
     position: relative;
     top: 4px;
   }
+
   span {
     display: flex;
     display: block;
     align-items: center;
     padding-right: 0.5rem;
   }
+
   span:first-child {
     margin-right: 1rem;
   }
+
   @media screen and (max-width: 1000px) {
     img,
     .overlay {
-      width: 233px;
+      width: 98%;
       height: 233px;
     }
   }
   @media screen and (max-width: 800px) {
+    grid-gap: 0rem;
     img,
     .overlay {
-      width: 200px;
+      width: 98%;
       height: 200px;
     }
   }
+
   @media screen and (max-width: 700px) {
-    grid-template-columns: 1fr 1fr;
+    grid-gap: 0rem;
+    font-size: 0.5rem;
     img,
     .overlay {
-      height: 240px;
-      width: 100%;
+      height: 180px;
+      width: 98%;
+    }
+    .overlay-content{
+        display: none;
     }
   }
   @media screen and (max-width: 500px) {
-    grid-gap: 1rem;
+    grid-gap: 0rem;
+
     img,
     .overlay {
-      height: 200px;
-      width: 100%;
+      height: 150px;
+      width: 98%;
     }
+
   }
   @media screen and (max-width: 400px) {
+    grid-gap: 0rem;
+    row-gap: 5 !important;
     img,
     .overlay {
-      height: 170px;
-      width: 100%;
+      height: 120px;
+      width: 98%;
     }
   }
 `;
@@ -323,22 +340,10 @@ const ProfileHeader = () => {
                   >
                     Edit Profile
                   </Button>
-                  {/* <i
-                    className="material-icons"
-                    onClick={() => {
-                      localStorage.clear();
-                      dispatch({ type: "CLEAR" });
-                      history.push("/signin");
-                    }}
-                  >
-                    power_settings_new
-                  </i> */}
+
                   <OptionsIcon 
                   className="material-icons"
                    onClick={()=>{
-                  //  localStorage.clear()
-                  //  dispatch({type:"CLEAR"})
-                  //  history.push('/signin')
                   setShowModal(true);
                 }}
                   
@@ -466,8 +471,18 @@ const ProfileHeader = () => {
           <WrapperPost>
             {!loading ?
             mypics?.map((item) => (
-              <div key={item._id} className="container-overlay">
+              <div key={item._id} className="grid-container" onClick={() => history.push(`/post/${item._id}`)}>
                 <img src={item.photo} alt="post" />
+                <div className="overlay">
+                <div className="overlay-content">
+                    <span>
+                      <HeartIcon /> {item.likes.length}
+                    </span>
+                    <span>
+                      <CommentIcon/>  {item.comments.length}
+                    </span>
+                  </div>
+                </div>
               </div>
             )) :
             <>
