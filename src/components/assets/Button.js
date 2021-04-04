@@ -3,7 +3,8 @@ import styled, { css } from "styled-components";
 const Button = styled.button`
   min-width: 100px; 
   background-color: #0095f6;
-  border: 1px solid #0095f6;
+  //background-color: transparent;
+  border: 1px solid #dbdbdb;
   padding: 0.4rem 1rem;
   color: #fff;
   border-radius: 4px;
@@ -11,6 +12,9 @@ const Button = styled.button`
   margin-left: 1rem;
   font-family: "Fira Sans", sans-serif;
   font-size: 1rem;
+  :focus{
+    background-color: #0095f6;
+  }
 
 `;
 

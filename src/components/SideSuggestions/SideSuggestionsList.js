@@ -64,6 +64,7 @@ function SideSuggestionsList({user}) {
           </div>
           <div className="username">{user.username}</div>
         </div>
+        
         {!state.following.some((i) => i._id === user._id) ? (
       !load ? 
       <Button className="btns" onClick={() => {followUser(user._id);setLoad(true);}}>Follow</Button>

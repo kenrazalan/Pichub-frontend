@@ -8,6 +8,7 @@ import Loader from '../assets/Loader';
 import {PostContext} from '../context/PostContext'
 import DeleteModal from '../DeleteModal/DeleteModal';
 import Modal from '../Modal/Modal';
+import Button from '../assets/Button';
 
 const Wrapper = styled.div`
   display: grid;
@@ -213,7 +214,7 @@ function GoToPost() {
     const [post,setPost] = useState([])
     const { state, dispatch } = useContext(UserContext);
     const [text,setText] = useState("")
-    const [load,setLoad] = useState(true)
+    const [loading,setLoading] = useState(true)
     const { feed, setFeed } = useContext(PostContext);
     const [isLike, setIsLike] = useState(true);
     const [likes,setLikes] = useState(null)
@@ -221,6 +222,13 @@ function GoToPost() {
     const [showModal, setShowModal] = useState(false);
     const [del, setDelete] = useState("");
     const closeModal = () => setShowModal(false);
+    const [load,setLoad] = useState(false)
+    const [showFollow,setShowfollow] = useState(true)
+
+    useEffect(() => {
+      setShowfollow(state && !state.following.some((i) => i._id === id));
+    }, [state,id]);
+    
     
     useEffect(() => {
         fetch(`${process.env.REACT_APP_BACKEND_URL}/post/${id}`, {
@@ -231,7 +239,7 @@ function GoToPost() {
           .then((res) => res.json())
           .then((result) => {
             setPost(result.post)
-            setLoad(false)
+            setLoading(false)
             console.log(result.post)
           });
       }, [id]);
@@ -271,7 +279,7 @@ function GoToPost() {
             return item;
           }
         });
-        console.log(newData)
+        console.log(newData) 
         setFeed(newData);
       })
       .catch((err) => {
@@ -348,8 +356,54 @@ function GoToPost() {
       }));
   };
 
+  const followUser = (userId) => {
+    fetch(`${process.env.REACT_APP_BACKEND_URL}/follow`, {
+      method: "put",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + localStorage.getItem("jwt"),
+      },
+      body: JSON.stringify({
+        followId: userId,
+      }),
+    }).then((res) => res.json())
+      .then((data) => {
+        console.log(data)
+        dispatch({
+          type: "UPDATE",
+          payload: { following: data.following, followers: data.followers },
+        });
+        localStorage.setItem("user", JSON.stringify(data));
+        setShowfollow(false);
+        setLoad(false);
+      }).catch(error=>console.log(error));
+  };
 
-    if(load){
+  const unfollowUser = (userId) => {
+    fetch(`${process.env.REACT_APP_BACKEND_URL}/unfollow`, {
+      method: "put",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + localStorage.getItem("jwt"),
+      },
+      body: JSON.stringify({
+        unfollowId: userId,
+      }),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+        dispatch({
+          type: "UPDATE",
+          payload: { following: data.following, followers: data.followers },
+        });
+        localStorage.setItem("user", JSON.stringify(data));
+        setLoad(false)
+        setShowfollow(false);
+      });
+  };
+
+    if(loading){
         return <Loader/>
     }
 
@@ -368,11 +422,13 @@ function GoToPost() {
           <Link to={post.postedBy?._id === state._id ? `/profileheader` : `/profile/${post.postedBy?._id}`}>
                 <img src={post.postedBy?.pic} className="postedby-img" alt={post.name} />{" "}
           </Link>
-          <Link to={post.postedBy?._id === state._id ? `/profileheader` : `/profile/${post.postedBy?._id}`}>
+         
                 <div className="postedby-name">
-                    {post.postedBy?.name}<span>  •</span>
+                <Link to={post.postedBy?._id === state._id ? `/profileheader` : `/profile/${post.postedBy?._id}`}>
+                    {post.postedBy?.name}<span>  •</span> 
+                  </Link> 
+                    
                 </div>
-          </Link> 
           </div>
             {post.postedBy?._id === state._id && (
                 <MoreIcon
