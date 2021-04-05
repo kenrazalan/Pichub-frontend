@@ -210,9 +210,10 @@ const MobileWrapper = styled.div`
 
   hr{
   margin-left: -24px;
-  padding-left: 300vw;
+  margin-right: -10px;
+  //padding-left: 300vw;
   //margin-right: -300vw;
-  padding-right: 300vw;
+  //adding-right: 300vw;
   //padding-top: 15px;
   //padding-bottom: 15px;
   }
