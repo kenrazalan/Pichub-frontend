@@ -19,7 +19,7 @@ const Wrapper = styled.div`
 
      margin-bottom: 150px;
     .post-details{
-       
+      margin-bottom: 230px !important;
     }
     .comment-section {
       height: auto !important;
@@ -32,13 +32,16 @@ const Wrapper = styled.div`
     }
 
     .imahe{
-        min-height: 350px;
-        max-height: 600px !important;
+      min-height: unset !important;
+      max-height: unset !important;
+        /* min-height: 350px;
+        max-height: 600px !important; */
+        object-fit: contain;
     }
-    .numLikes-container{
+    /* .numLikes-container{
         display: none !important;
-    }
-    .numLikes-container2{
+    } */
+    /* .numLikes-container2{
       display: flex !important;
       border-top: none !important;
       flex-direction: column;
@@ -56,7 +59,7 @@ const Wrapper = styled.div`
         color: #8e8e8e;
     }
 
-   }
+   } */
   }
 
   
@@ -147,6 +150,7 @@ svg{
 }
 .comment-footer{
     position: relative;
+   
 }
   .footer{
     width: 100%;
@@ -452,13 +456,13 @@ function GoToPost() {
           </Modal>
         )}
 
-        <hr/>
-            <div className="numLikes-container2">
+        {/* <hr/> */}
+            {/* <div className="numLikes-container2">
                 <div className="numLikes">   {likes} {likes > 1 ? "likes" : "like"} </div>
                 <div className="createdAt"> {moment(post?.createdAt).fromNow()} </div>
-            </div>
+            </div> */}
         <div className="comment-footer">
-            
+        
         <div className="footer">
         <div className="comment-section"> 
             <div className="comment-list">
@@ -531,14 +535,14 @@ function GoToPost() {
               />
              )}
             <CommentIcon/>
-            <div className="allowance" style={{height: "150px"}}>
+            {/* <div className="allowance" style={{height: "150px"}}>
                 <p>.</p>
-             </div>
+             </div> */}
             </div>
         </div>
         </div>
+        </div>
       
-        </div>  
 
       </Wrapper>
     )
