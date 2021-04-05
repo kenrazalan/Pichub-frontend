@@ -143,9 +143,9 @@ function SideSuggestions() {
     <Wrapper>
       <div className="containers">
         <div className="profile-container">
-          <img className="profile" src={state && state.pic} alt="profile" onClick={() => { history.push(`/profileheader`);}}/>
+          <img className="profile" src={state && state.pic} alt="profile" onClick={() => { history.push(`/profile`);}}/>
 
-          <div className="list" onClick={() => { history.push(`/profileheader`);}}>
+          <div className="list" onClick={() => { history.push(`/profile`);}}>
             <div className="name">
               <b>{state && state.name}</b>
             </div>

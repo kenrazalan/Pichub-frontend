@@ -145,7 +145,7 @@ function Post({ item }) {
     <div className="card home-card" key={item?._id}>
       <div style={{ padding: "10px", margin: "0" }}>
         <Link to={item.postedBy?._id === state._id
-              ? `/profileheader`
+              ? `/profile`
               : `/profile/${item.postedBy?._id}`}>
           <span>
             <span className="border">

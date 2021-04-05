@@ -45,7 +45,7 @@ const Routing = () => {
         <Route exact path="/">
           <HomeTwo />
         </Route>
-        <Route exact path="/profileheader">
+        <Route exact path="/profile">
           <ProfileHeader />
         </Route>
         <Route exact path="/signin"

@@ -419,12 +419,12 @@ function GoToPost() {
 
           <div className="header-info">
         <div className="header-info-link">
-          <Link to={post.postedBy?._id === state._id ? `/profileheader` : `/profile/${post.postedBy?._id}`}>
+          <Link to={post.postedBy?._id === state._id ? `/profile` : `/profile/${post.postedBy?._id}`}>
                 <img src={post.postedBy?.pic} className="postedby-img" alt={post.name} />{" "}
           </Link>
          
                 <div className="postedby-name">
-                <Link to={post.postedBy?._id === state._id ? `/profileheader` : `/profile/${post.postedBy?._id}`}>
+                <Link to={post.postedBy?._id === state._id ? `/profile` : `/profile/${post.postedBy?._id}`}>
                     {post.postedBy?.name}<span>  •</span> 
                   </Link> 
                     
@@ -465,11 +465,11 @@ function GoToPost() {
                 {comments.map((comment)=>{
                     return(
                     <div className="comment-info">
-                    <Link to={comment.postedBy?._id === state?._id ? `/profileheader` : `/profile/${comment.postedBy?._id}`}>   
+                    <Link to={comment.postedBy?._id === state?._id ? `/profile` : `/profile/${comment.postedBy?._id}`}>   
                          <img src={comment.postedBy?.pic} className="comment-img" alt={comment.name} />{" "}
                     </Link>
                     <p>  
-                        <Link to={comment.postedBy?._id === state?._id ? `/profileheader` : `/profile/${comment.postedBy?._id}`}>
+                        <Link to={comment.postedBy?._id === state?._id ? `/profile` : `/profile/${comment.postedBy?._id}`}>
                             <span className="comment-name">
                                 {comment.postedBy?.name}{" "}
                             </span>

@@ -144,12 +144,34 @@ const Wrappers = styled.div`
 }
 .numberOf{
   font-weight: 900;
-  padding-right: 0.5rem !important;
+  padding-right: 0 !important;
 }
 .texts{
   font-weight: 400;
   padding-left: 2px;
 }
+.profile-hr2{
+  display: none;
+}
+.mobile-bio{
+  margin-bottom: 8px;
+  padding-top:0
+}
+@media screen and (max-width: 645px) {
+    .texts {
+      padding-right: 0 !important;
+    }
+    .profile-hr{
+      display: none;
+  }
+  .profile-hr2{
+      display: block;
+  }
+    .profile-tab{
+      margin: -6px 0 12px 0 !important;
+      padding-bottom: 0;
+    }
+  }
   .profile-tab {
     display: flex;
     align-items: center;
@@ -168,8 +190,11 @@ const Wrappers = styled.div`
     height: 24px;
     width: 24px;
   }
+
   hr {
-    border: 0.5px solid #dbdbdb;
+
+    border: none; 
+    border-bottom: 1px solid #dbdbdb;
   }
   .pointers {
     font-size: 1.5rem;
@@ -180,6 +205,22 @@ const MobileWrapper = styled.div`
   margin: 1rem 0;
   font-size: 1rem;
   padding-left: 1rem;
+  display: flex;
+  flex-direction: column-reverse;
+
+  hr{
+  margin-left: -300vw;
+  padding-left: 300vw;
+  margin-right: -300vw;
+  padding-right: 300vw;
+  //padding-top: 15px;
+  //padding-bottom: 15px;
+  }
+  .mobile-info-container{
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+  }
   .mobile-profile-stats span {
     padding-right: 1rem;
   }
@@ -188,6 +229,7 @@ const MobileWrapper = styled.div`
     display: none;
   }
   @media screen and (max-width: 645px) {
+  
     .mobile-bio {
       display: block;
     }
@@ -420,9 +462,7 @@ const ProfileHeader = () => {
                   className="material-icons"
                    onClick={()=>{
                   setShowModal(true);
-                }}
-                  
-                  />
+                }}/>
                     
                 </div>
               </div>
@@ -496,6 +536,8 @@ const ProfileHeader = () => {
           </Wrapper>
           <MobileWrapper>
             <div className="mobile-profile-stats">
+              <hr/>
+              <div className="mobile-info-container">
               <span><span className="numberOf">{state ? mypics.length : "0"}<span className="texts"> posts</span> </span></span>
 
               <span className="pointer" onClick={() => setFollowersModal(true)}>
@@ -505,6 +547,8 @@ const ProfileHeader = () => {
               <span className="pointer" onClick={() => setFollowingModal(true)}>
               <span className="numberOf">{state ? state.following.length : "0"} <span className="texts"> following</span></span>
               </span>
+              </div>
+              <hr/>
             </div>
             {showFollowersModal && state.followers.length > 0 && (
               <Modal>
@@ -546,7 +590,7 @@ const ProfileHeader = () => {
               <span className="bold">{state ? state.name : "loading"}</span>
             </div>
           </MobileWrapper>
-          <hr />
+          <hr className="profile-hr"/>
 
           <div className="profile-tab">
             <div>
@@ -558,6 +602,7 @@ const ProfileHeader = () => {
               <span>Saved</span>
             </div>
           </div>
+          <hr className="profile-hr2"/>
 
           <WrapperPost>
             {!loading ?

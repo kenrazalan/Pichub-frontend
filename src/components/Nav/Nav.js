@@ -125,7 +125,7 @@ const Nav = () => {
           </Link>
         </li>,
         <li key="2">
-          <Link to="/profileheader">
+          <Link to="/profile">
             <img
               style={{
                 marginBottom: "-15px",
@@ -221,7 +221,7 @@ const Nav = () => {
                     to={
                       item._id !== state._id
                         ? `/profile/${item._id}`
-                        : "/profileheader"
+                        : "/profile"
                     }
                     onClick={() => {
                       M.Modal.getInstance(searchModal.current).close();

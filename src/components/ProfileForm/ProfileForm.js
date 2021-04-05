@@ -153,7 +153,7 @@ const ProfileForm = () => {
           type: "UPDATEPROFILE",
           payload: { name: data.name, username: data.username, pic: data.pic },
         });
-        history.push(`/profileheader`);
+        history.push(`/profile`);
       });
   };
 

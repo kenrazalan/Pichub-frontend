@@ -9,7 +9,7 @@ const Navbar = () => {
     if (state) {
       return [
         <li key="8">
-          <Link to="/profileheader">Profile</Link>
+          <Link to="/profile">Profile</Link>
         </li>,
         <li key="9">
           <NewPost />

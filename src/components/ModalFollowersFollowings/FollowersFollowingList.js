@@ -83,13 +83,13 @@ function FollowersFollowingList({user,loggedInUser,closeModal}) {
                       className="pointer"
                       onClick={() => {
                         closeModal();
-                        history.push(loggedInUser._id === user._id ? `/profileheader` : `/profile/${user._id}`);
+                        history.push(loggedInUser._id === user._id ? `/profile` : `/profile/${user._id}`);
                       }}
                       src={user.pic}
                       alt="avatar"
                     />
                     <div className="user-info">
-                      <Link to={loggedInUser._id === user._id ? `/profileheader` : `/profile/${user._id}`}>
+                      <Link to={loggedInUser._id === user._id ? `/profile` : `/profile/${user._id}`}>
                       <div className="pointer" onClick={() => { closeModal(); }} >
                           {user.username}
                       </div>
@@ -97,7 +97,10 @@ function FollowersFollowingList({user,loggedInUser,closeModal}) {
                         </Link>
                     </div>
                   </div>
-                  {!loggedInUser.following.some((i) => i._id === user._id) ? (
+                  { 
+                  loggedInUser._id === user._id ? 
+                  <Button style={{background: "none",color:"#000",border:"none"}}>You</Button> :
+                  !loggedInUser.following.some((i) => i._id === user._id) ? (
                   !load ? 
                   <Button onClick={() => {followUser(user._id);setLoad(true);}}>Follow</Button>
                   : (

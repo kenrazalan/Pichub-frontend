@@ -136,12 +136,17 @@ const Wrappers = styled.div`
 }
 .numberOf{
   font-weight: 900;
-  padding-right: 0.5rem !important;
+  padding-right: 0rem !important;
 }
 .texts{
   font-weight: 400;
   padding-left: 2px;
 }
+@media screen and (max-width: 500px) {
+    .texts {
+      padding-right: 0 !important;
+    }
+  }
 
 .pointers{
   font-size: 1.5rem;
