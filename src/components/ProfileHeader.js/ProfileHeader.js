@@ -204,13 +204,13 @@ const Wrappers = styled.div`
 const MobileWrapper = styled.div`
   margin: 1rem 0;
   font-size: 1rem;
-  padding-left: 1rem;
+  padding-left: 0rem;
   display: flex;
   flex-direction: column-reverse;
 
   hr{
-  margin-left: -24px;
-  margin-right: -10px;
+  //margin-left: -24px;
+  //margin-right: -10px;
   //padding-left: 300vw;
   //margin-right: -300vw;
   //adding-right: 300vw;
