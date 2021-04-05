@@ -209,7 +209,7 @@ const MobileWrapper = styled.div`
   flex-direction: column-reverse;
 
   hr{
-  margin-left: -300vw;
+  margin-left: -24px;
   padding-left: 300vw;
   //margin-right: -300vw;
   padding-right: 300vw;
