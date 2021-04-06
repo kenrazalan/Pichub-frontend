@@ -142,9 +142,26 @@ const Wrappers = styled.div`
   font-weight: 400;
   padding-left: 2px;
 }
-@media screen and (max-width: 500px) {
+.profile-hr2{
+  display: none;
+}
+.mobile-bio{
+  margin-bottom: 8px;
+  padding-top:0
+}
+@media screen and (max-width: 645px) {
     .texts {
       padding-right: 0 !important;
+    }
+    .profile-hr{
+      display: none;
+  }
+  .profile-hr2{
+      display: block;
+  }
+    .profile-tab{
+      margin: -6px 0 12px 0 !important;
+      padding-bottom: 0;
     }
   }
 
@@ -170,20 +187,29 @@ const Wrappers = styled.div`
     width: 24px;
   }
   hr {
-    border: 0.5px solid #dbdbdb;
+    border: none; 
+    border-bottom: 1px solid #dbdbdb;
   }
 `;
 
 const MobileWrapper = styled.div`
   margin: 1rem 0;
   font-size: 1rem;
-  padding-left: 1rem;
+  padding-left: 0rem;
+  display: flex;
+  flex-direction: column-reverse;
+
   .mobile-profile-stats span {
     padding-right: 1rem;
   }
   .mobile-bio,
   .mobile-profile-stats {
     display: none;
+  }
+  .mobile-info-container{
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
   }
   @media screen and (max-width: 645px) {
 
@@ -481,6 +507,8 @@ const ProfileOthers = (props) => {
           </Wrapper>
           <MobileWrapper>
             <div className="mobile-profile-stats">
+            <hr/>
+            <div className="mobile-info-container">
               <span><span className="numberOf">{userProfile.posts.length}<span className="texts"> posts</span> </span></span>
 
               <span className="pointer" onClick={() => setFollowersModal(true)}>
@@ -490,7 +518,7 @@ const ProfileOthers = (props) => {
               <span className="pointer" onClick={() => setFollowingModal(true)}>
               <span className="numberOf">{userProfile.user.following.length}<span className="texts"> following</span> </span>
               </span>
-
+              </div>
               {showFollowersModal && userProfile.user.followers.length > 0 && (
                 <Modal>
                   <ModalFollowersFollowings
@@ -527,12 +555,13 @@ const ProfileOthers = (props) => {
                   />
                 </Modal>
               )}
+                  <hr/>
             </div>
             <div className="mobile-bio">
               <span className="bold">{userProfile.user.name}</span>
             </div>
           </MobileWrapper>
-          <hr />
+          <hr className="profile-hr"/>
 
           <div className="profile-tab">
             <div>
@@ -544,6 +573,7 @@ const ProfileOthers = (props) => {
               <span>Saved</span>
             </div>
           </div>
+          <hr className="profile-hr2"/>
 
           <WrapperPost>
             {userProfile.posts.map((item) => (

@@ -456,7 +456,7 @@ function GoToPost() {
           </Modal>
         )}
 
-        {/* <hr/> */}
+        <hr/>
             {/* <div className="numLikes-container2">
                 <div className="numLikes">   {likes} {likes > 1 ? "likes" : "like"} </div>
                 <div className="createdAt"> {moment(post?.createdAt).fromNow()} </div>
