@@ -153,15 +153,15 @@ svg{
     object-fit: cover;
 }
 .comment-name{
-    font-family: 'Roboto', sans-serif;
+    //font-family: 'Roboto', sans-serif;
     font-size: 14px;
-    font-weight: bolder;
+    font-weight: 700;
     padding:0 5px 0 5px;
 }
 .comment-text{
     font-size: 14px;
     font-weight: 100;
-    font-family: 'Roboto', sans-serif;
+    //font-family: 'Roboto', sans-serif;
 }
 .comment-footer{
     position: relative;
@@ -444,7 +444,8 @@ function GoToPost() {
          
                 <div className="postedby-name">
                 <Link to={post.postedBy?._id === state._id ? `/profile` : `/profile/${post.postedBy?._id}`}>
-                    {post.postedBy?.name}<span>  •</span> 
+                    {post.postedBy?.username}<span>  •</span>
+                    <span></span> 
                   </Link> 
                     
                 </div>
@@ -490,7 +491,7 @@ function GoToPost() {
                     <p>  
                         <Link to={comment.postedBy?._id === state?._id ? `/profile` : `/profile/${comment.postedBy?._id}`}>
                             <span className="comment-name">
-                                {comment.postedBy?.name}{" "}
+                                {comment.postedBy?.username}{" "}
                             </span>
                         </Link>
                         

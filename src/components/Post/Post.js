@@ -178,7 +178,7 @@ function Post({ item }) {
           </span>
           </span>
           <span style={{fontWeight: "600",verticalAlign: "super",paddingLeft: "10px",}}>
-            {item.postedBy?.name}
+            {item.postedBy?.username}
           </span>
         </Link>
         {item.postedBy?.followers.length >= 10 ? (
