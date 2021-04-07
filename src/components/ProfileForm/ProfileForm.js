@@ -3,6 +3,7 @@ import { useHistory } from "react-router-dom";
 import useInput from "../hooks/useInput";
 import styled from "styled-components";
 import Button from "../assets/Button";
+import gif from '../assets/771.gif'
 
 import { UserContext } from "../../App";
 import M from "materialize-css";
@@ -84,6 +85,7 @@ const ProfileForm = () => {
   const history = useHistory();
   const { state, dispatch } = useContext(UserContext);
   const [newProfile, setNewProfile] = useState("");
+  const [loader,setLoader] = useState(false)
 
   const name = useInput(state && state.name);
   const username = useInput(state && state.username);
@@ -91,6 +93,7 @@ const ProfileForm = () => {
 
   const handleImageUpload = (e) => {
     if (e.target.files[0]) {
+      setLoader(true)
       const data = new FormData();
       data.append("file", e.target.files[0]);
       data.append("upload_preset", "instagram-clone");
@@ -101,12 +104,15 @@ const ProfileForm = () => {
       })
         .then((res) => res.json())
         .then((data) => {
+          
           setNewProfile(data.url);
+          setLoader(false)
         })
         .catch((error) => {
           console.log(error);
         });
-    }
+    };
+
   };
 
   const handleEditProfile = (e) => {
@@ -164,7 +170,7 @@ const ProfileForm = () => {
           <div>
             <label htmlFor="change-avatar">
               <img
-                src={newProfile ? newProfile : state && state.pic}
+                src={loader ? gif : newProfile ? newProfile : state && state.pic}
                 style={{ width: "42px", height: "42px", borderRadius: "80px" }}
                 alt="profile"
               />
