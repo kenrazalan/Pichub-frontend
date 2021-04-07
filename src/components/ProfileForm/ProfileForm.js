@@ -14,6 +14,7 @@ export const Wrapper = styled.div`
     cursor: pointer !important;
     margin-right: 40px !important;
   }
+
   h2 {
     display: block !important;
     font-size: 1.5em !important;
@@ -58,6 +59,9 @@ export const Wrapper = styled.div`
     margin-top: 1.5rem !important;
     margin-left: 6.25rem !important;
     margin-bottom: 1rem !important;
+  }
+  .btn-submit :focus{
+    background-color: unset;
   }
   @media screen and (max-width: 550px) {
     width: 98% !important;
@@ -205,12 +209,14 @@ const ProfileForm = () => {
           <label className="bold">Username</label>
           <input
             type="text"
-            value={username.value.toLowerCase()}
+            value={username.value?.toLowerCase()}
             onChange={username.onChange}
           />
         </div>
 
-        <Button>Submit</Button>
+        <Button disabled={loader? true: false} 
+                style={{opacity: loader? "0.3": "1" ,}}
+                className="btn-submit">Submit</Button>
       </form>
     </Wrapper>
   );
