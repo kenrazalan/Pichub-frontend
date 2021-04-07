@@ -98,6 +98,7 @@ const Wrapper = styled.div`
       width: 100vw;
       margin-left: calc(-53vw + 50%);
       max-width: unset;
+     
     }
   }
   
