@@ -35,6 +35,8 @@ const Wrapper = styled.div`
     border-radius: 50%;
     margin-right: 12px;
     cursor: pointer;
+    object-fit: cover;
+    
   }
   .profile2 {
     width: 35px;
@@ -42,6 +44,7 @@ const Wrapper = styled.div`
     border-radius: 50%;
     margin-right: 19px;
     cursor: pointer;
+    object-fit: cover;
   }
   h6 {
     font-size: 14px;

@@ -1,5 +1,5 @@
 import React, { useState, useContext, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import Modal from "../Modal/Modal";
 import verified from "../assets/correct.svg";
 import { MoreIcon } from "../assets/Icons";
@@ -9,6 +9,25 @@ import { Skeleton } from "@material-ui/lab";
 import { HeartIcon, FilledHeartIcon } from "../assets/Icons";
 import moment from "moment";
 import {PostContext} from '../context/PostContext'
+import styled from 'styled-components'
+
+const Wrapper = styled.div`
+.postedby-img{
+  object-fit: cover;
+}
+  .card-content{
+    padding-top: 15px !important;
+    padding-left: 15px !important;
+  }
+  .view-comments{
+    color: #8e8e8e;
+    cursor: pointer;
+  }
+  .comment-postedby{
+
+  }
+
+`
 
 function Post({ item }) {
   const { state, dispatch } = useContext(UserContext);
@@ -31,7 +50,7 @@ function Post({ item }) {
   const handleText=(e)=>{
         setText(e.target.value)
   }
-
+  const history = useHistory()
   const incLikes = () => setLikes(likes + 1);
   const decLikes = () => setLikes(likes - 1);
 
@@ -142,6 +161,7 @@ function Post({ item }) {
       }));
   };
   return (
+    <Wrapper>
     <div className="card home-card" key={item?._id}>
       <div style={{ padding: "10px", margin: "0" }}>
         <Link to={item.postedBy?._id === state._id
@@ -212,11 +232,24 @@ function Post({ item }) {
           {moment(item.createdAt).fromNow()}
         </span>
         <p style={{ fontSize: "13px" }}>{item.body}</p>
-        {comments?.map((record) => {
+        
+        {comments.length > 2 && (
+          <span
+            onClick={() => history.push(`/post/${item._id}`)}
+            style={{
+                color:"#8e8e8e",
+                cursor: "pointer"
+              }}
+            className="view-comments"
+          >
+            View all {comments.length} comments
+          </span>
+        )}
+        {comments?.slice(-2).map((record) => {
           //console.log(record)
           return (
             <div key={record._id}>
-              <span style={{ fontWeight: "600" }}>{record.postedBy.name}</span>{" "}
+              <span className="bold">{record.postedBy.name}</span>{" "}
               {record.text}
             </div>
           );
@@ -240,6 +273,7 @@ function Post({ item }) {
         <button disabled={!text} className="post-btn">Post</button>
       </form>
     </div>
+    </Wrapper>
   );
 }
 

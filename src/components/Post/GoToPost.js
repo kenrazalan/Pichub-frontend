@@ -85,6 +85,7 @@ const Wrapper = styled.div`
     border-radius: 50%;
     margin-bottom: -10px;
     border: 2px solid #DBDBDB;
+    object-fit: cover;
 
   }
   .postedby-name{
@@ -136,6 +137,7 @@ svg{
     margin-bottom: -10px;
     margin-right: 3px;
     border: 2px solid #DBDBDB;
+    object-fit: cover;
 }
 .comment-name{
     font-family: 'Roboto', sans-serif;

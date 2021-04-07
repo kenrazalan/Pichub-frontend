@@ -170,6 +170,7 @@ const Signup = () => {
             className="signup-input"
             type="text"
             placeholder="username"
+            value={username.toLowerCase()}
             onChange={(e) => {
               setUsername(e.target.value);
             }}
