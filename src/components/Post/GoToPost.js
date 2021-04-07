@@ -1,5 +1,5 @@
 import React,{useEffect,useState,useContext} from 'react'
-import { CommentIcon, FilledHeartIcon, HeartIcon, MoreIcon, SavedIcon } from '../assets/Icons';
+import { CommentIcon, FilledHeartIcon, HeartIcon, InboxIcon, MoreIcon, SavedIcon } from '../assets/Icons';
 import { useParams, useHistory, Link } from "react-router-dom";
 import styled from 'styled-components'
 import { UserContext } from "../../App";
@@ -23,6 +23,9 @@ const Wrapper = styled.div`
     }
     .comment-section {
       height: auto !important;
+    }
+    .comment-list{
+      max-height: 150px;
     }
     .footer{
         border: 1px solid #dbdbdb
@@ -62,7 +65,17 @@ const Wrapper = styled.div`
    } */
   }
 
-  
+  .post-btn{
+    border:none;
+    color:#0095f6;
+    font-weight: 500;
+    font-size: 14px;
+    background: none;
+    margin-right: 20px;
+  }
+  .post-btn:disabled{
+    opacity: 0.3;
+  }
   hr{
     border: none;
     border-bottom:1px solid #DBDBDB;
@@ -362,52 +375,52 @@ function GoToPost() {
       }));
   };
 
-  const followUser = (userId) => {
-    fetch(`${process.env.REACT_APP_BACKEND_URL}/follow`, {
-      method: "put",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: "Bearer " + localStorage.getItem("jwt"),
-      },
-      body: JSON.stringify({
-        followId: userId,
-      }),
-    }).then((res) => res.json())
-      .then((data) => {
-        console.log(data)
-        dispatch({
-          type: "UPDATE",
-          payload: { following: data.following, followers: data.followers },
-        });
-        localStorage.setItem("user", JSON.stringify(data));
-        setShowfollow(false);
-        setLoad(false);
-      }).catch(error=>console.log(error));
-  };
+  // const followUser = (userId) => {
+  //   fetch(`${process.env.REACT_APP_BACKEND_URL}/follow`, {
+  //     method: "put",
+  //     headers: {
+  //       "Content-Type": "application/json",
+  //       Authorization: "Bearer " + localStorage.getItem("jwt"),
+  //     },
+  //     body: JSON.stringify({
+  //       followId: userId,
+  //     }),
+  //   }).then((res) => res.json())
+  //     .then((data) => {
+  //       console.log(data)
+  //       dispatch({
+  //         type: "UPDATE",
+  //         payload: { following: data.following, followers: data.followers },
+  //       });
+  //       localStorage.setItem("user", JSON.stringify(data));
+  //       setShowfollow(false);
+  //       setLoad(false);
+  //     }).catch(error=>console.log(error));
+  // };
 
-  const unfollowUser = (userId) => {
-    fetch(`${process.env.REACT_APP_BACKEND_URL}/unfollow`, {
-      method: "put",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: "Bearer " + localStorage.getItem("jwt"),
-      },
-      body: JSON.stringify({
-        unfollowId: userId,
-      }),
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        console.log(data);
-        dispatch({
-          type: "UPDATE",
-          payload: { following: data.following, followers: data.followers },
-        });
-        localStorage.setItem("user", JSON.stringify(data));
-        setLoad(false)
-        setShowfollow(false);
-      });
-  };
+  // const unfollowUser = (userId) => {
+  //   fetch(`${process.env.REACT_APP_BACKEND_URL}/unfollow`, {
+  //     method: "put",
+  //     headers: {
+  //       "Content-Type": "application/json",
+  //       Authorization: "Bearer " + localStorage.getItem("jwt"),
+  //     },
+  //     body: JSON.stringify({
+  //       unfollowId: userId,
+  //     }),
+  //   })
+  //     .then((res) => res.json())
+  //     .then((data) => {
+  //       console.log(data);
+  //       dispatch({
+  //         type: "UPDATE",
+  //         payload: { following: data.following, followers: data.followers },
+  //       });
+  //       localStorage.setItem("user", JSON.stringify(data));
+  //       setLoad(false)
+  //       setShowfollow(false);
+  //     });
+  // };
 
     if(loading){
         return <Loader/>
@@ -480,7 +493,7 @@ function GoToPost() {
                                 {comment.postedBy?.name}{" "}
                             </span>
                         </Link>
-            
+                        
                         <span className="comment-text">
                           {comment.text}
                         </span>
@@ -537,6 +550,7 @@ function GoToPost() {
               />
              )}
             <CommentIcon/>
+            <InboxIcon/>
             {/* <div className="allowance" style={{height: "150px"}}>
                 <p>.</p>
              </div> */}

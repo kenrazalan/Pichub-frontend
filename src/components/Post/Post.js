@@ -2,7 +2,7 @@ import React, { useState, useContext, useEffect } from "react";
 import { Link, useHistory } from "react-router-dom";
 import Modal from "../Modal/Modal";
 import verified from "../assets/correct.svg";
-import { MoreIcon } from "../assets/Icons";
+import { CommentIcon, InboxIcon, MoreIcon } from "../assets/Icons";
 import DeleteModal from "../DeleteModal/DeleteModal";
 import { UserContext } from "./../../App";
 import { Skeleton } from "@material-ui/lab";
@@ -23,9 +23,14 @@ const Wrapper = styled.div`
     color: #8e8e8e;
     cursor: pointer;
   }
-  .comment-postedby{
+  .comment-icon{  
+    margin-left: 13px;
 
   }
+  .inbox-icon{
+    margin-left: 13px;
+  }
+  
 
 `
 
@@ -206,6 +211,7 @@ function Post({ item }) {
         <img src={item.photo} alt={item.name} />
       </div>
       <div className="card-content">
+        <span>
         {isLike ? (
           <FilledHeartIcon
             onClick={() => {
@@ -223,6 +229,9 @@ function Post({ item }) {
             }}
           />
         )}
+        <CommentIcon onClick={() => history.push(`/post/${item._id}`)} className="comment-icon" />
+        <InboxIcon className="inbox-icon"/>
+        </span>
 
         <div className="bold">
           {likes} {likes > 1 ? "likes" : "like"}
