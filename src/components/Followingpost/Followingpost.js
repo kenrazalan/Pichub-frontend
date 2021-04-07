@@ -24,13 +24,8 @@ const Wrapper = styled.div`
 .rect{
   width: 600px
 }
-.home{
-  
-
- // margin: 26px auto;
-}
   .home-card {
-    margin-right: 10px;
+    //margin-right: 10px;
     border: 1px solid #dbdbdb !important;
     box-shadow: none !important;
     min-width: 300px;
@@ -98,6 +93,11 @@ const Wrapper = styled.div`
   @media (max-width: 646px){
     .rect{
       width: 330px ;
+    }
+    .home-card{
+      width: 100vw;
+      margin-left: calc(-53vw + 50%);
+      max-width: unset;
     }
   }
   
