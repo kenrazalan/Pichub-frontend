@@ -199,7 +199,7 @@ const ProfileForm = () => {
           <label className="bold">Username</label>
           <input
             type="text"
-            value={username.value}
+            value={username.value.toLowerCase()}
             onChange={username.onChange}
           />
         </div>

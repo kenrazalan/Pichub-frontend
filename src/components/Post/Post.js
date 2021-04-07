@@ -177,7 +177,7 @@ function Post({ item }) {
               <img src={item.postedBy?.pic} className="postedby-img" alt={item.name} />{" "}
           </span>
           </span>
-          <span style={{fontSize: "17px",fontWeight: "600",verticalAlign: "super",paddingLeft: "10px",}}>
+          <span style={{fontWeight: "600",verticalAlign: "super",paddingLeft: "10px",}}>
             {item.postedBy?.name}
           </span>
         </Link>
