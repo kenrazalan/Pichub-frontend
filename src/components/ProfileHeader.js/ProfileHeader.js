@@ -428,9 +428,9 @@ const ProfileHeader = () => {
   };
   
 
-  // if (loading) {
-  //   return <Loader />;
-  // }
+  if (loading) {
+    return <Loader />;
+  }
 
   return (
     <>
@@ -606,7 +606,8 @@ const ProfileHeader = () => {
           <hr className="profile-hr2"/>
 
           <WrapperPost>
-            {!loading ?
+            {/* {!loading ? */}
+            {
             mypics?.map((item) => (
               <div key={item._id} className="grid-container" onClick={() => history.push(`/post/${item._id}`)}>
                 <img src={item.photo} alt="post" />
@@ -621,12 +622,14 @@ const ProfileHeader = () => {
                   </div>
                 </div>
               </div>
-            )) :
+            )) 
+            }
+            {/* :
             <>
             <Skeleton className="rect" animation="wave" variant="rect"  height={200} />
             <Skeleton className="rect" animation="wave" variant="rect"  height={200} />
             </>
-            }
+            } */}
           </WrapperPost>
         </Wrappers>
       ) : (
