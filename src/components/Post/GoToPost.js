@@ -102,7 +102,7 @@ const Wrapper = styled.div`
 
   }
   .postedby-name{
-   font-size: 15px;
+   font-size: 14px;
    font-weight: 600;
    vertical-align: super;
    padding-left: 10px;
@@ -119,7 +119,7 @@ const Wrapper = styled.div`
     display: flex;
       align-items: center;
       padding: 10px;
-      margin-bottom: 10px;
+     
   }
   .comment-section{
 
@@ -226,6 +226,26 @@ svg{
           margin-left: 15px;
       }
   }
+  .btns{
+    background: transparent;
+    padding : 0;
+    min-width: unset;
+    width: fit-content ;
+    color: black;
+    border: none;
+    margin-left: 3px;
+    :focus{
+      background-color: unset;
+    }
+
+  }
+  .follow{
+    color: #0095f6;
+    //font-weight: bold;
+}
+.following{
+  color: #262626;
+}
 `;
 
 function GoToPost() {
@@ -375,52 +395,52 @@ function GoToPost() {
       }));
   };
 
-  // const followUser = (userId) => {
-  //   fetch(`${process.env.REACT_APP_BACKEND_URL}/follow`, {
-  //     method: "put",
-  //     headers: {
-  //       "Content-Type": "application/json",
-  //       Authorization: "Bearer " + localStorage.getItem("jwt"),
-  //     },
-  //     body: JSON.stringify({
-  //       followId: userId,
-  //     }),
-  //   }).then((res) => res.json())
-  //     .then((data) => {
-  //       console.log(data)
-  //       dispatch({
-  //         type: "UPDATE",
-  //         payload: { following: data.following, followers: data.followers },
-  //       });
-  //       localStorage.setItem("user", JSON.stringify(data));
-  //       setShowfollow(false);
-  //       setLoad(false);
-  //     }).catch(error=>console.log(error));
-  // };
+   const followUser = (userId) => {
+    fetch(`${process.env.REACT_APP_BACKEND_URL}/follow`, {
+      method: "put",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + localStorage.getItem("jwt"),
+      },
+      body: JSON.stringify({
+        followId: userId,
+      }),
+    }).then((res) => res.json())
+      .then((data) => {
+        console.log(data)
+        dispatch({
+          type: "UPDATE",
+          payload: { following: data.following, followers: data.followers },
+        });
+        localStorage.setItem("user", JSON.stringify(data));
+        setShowfollow(false);
+        setLoad(false);
+      }).catch(error=>console.log(error));
+  };
 
-  // const unfollowUser = (userId) => {
-  //   fetch(`${process.env.REACT_APP_BACKEND_URL}/unfollow`, {
-  //     method: "put",
-  //     headers: {
-  //       "Content-Type": "application/json",
-  //       Authorization: "Bearer " + localStorage.getItem("jwt"),
-  //     },
-  //     body: JSON.stringify({
-  //       unfollowId: userId,
-  //     }),
-  //   })
-  //     .then((res) => res.json())
-  //     .then((data) => {
-  //       console.log(data);
-  //       dispatch({
-  //         type: "UPDATE",
-  //         payload: { following: data.following, followers: data.followers },
-  //       });
-  //       localStorage.setItem("user", JSON.stringify(data));
-  //       setLoad(false)
-  //       setShowfollow(false);
-  //     });
-  // };
+  const unfollowUser = (userId) => {
+    fetch(`${process.env.REACT_APP_BACKEND_URL}/unfollow`, {
+      method: "put",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + localStorage.getItem("jwt"),
+      },
+      body: JSON.stringify({
+        unfollowId: userId,
+      }),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+        dispatch({
+          type: "UPDATE",
+          payload: { following: data.following, followers: data.followers },
+        });
+        localStorage.setItem("user", JSON.stringify(data));
+        setLoad(false)
+        setShowfollow(false);
+      });
+  };
 
     if(loading){
         return <Loader/>
@@ -444,11 +464,29 @@ function GoToPost() {
          
                 <div className="postedby-name">
                 <Link to={post.postedBy?._id === state._id ? `/profile` : `/profile/${post.postedBy?._id}`}>
-                    {post.postedBy?.username}<span>  •</span>
-                    <span></span> 
-                  </Link> 
-                    
-                </div>
+                    {post.postedBy?.username}
+                </Link> 
+             
+                    <span>  •</span>
+                </div>    
+                    <span>
+                     {!state.following.some((i) => i._id === post.postedBy?._id) ? (
+                      !load ? 
+                      <Button className="btns follow" onClick={() => {followUser(post.postedBy?._id);setLoad(true);}}>Follow</Button>
+                      : (
+                        <Button className="btns">
+                          <i className="fa fa-spinner fa-spin"></i>
+                        </Button>
+                      )
+                    ) : ( !load ? 
+                      <Button className="btns following bold" onClick={() => {unfollowUser(post.postedBy?._id); setLoad(true);}}>Following</Button>
+                      :  (
+                        <Button className="btns">
+                          <i className="fa fa-spinner fa-spin"></i>
+                        </Button>
+                      )
+                    )}
+                      </span>    
           </div>
             {post.postedBy?._id === state._id && (
                 <MoreIcon
