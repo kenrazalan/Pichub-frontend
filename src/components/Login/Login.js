@@ -4,9 +4,41 @@ import styled from "styled-components";
 import { UserContext } from "../../App";
 import navlogo from "../../components/assets/logo.png";
 import LoginGoogle from "./GoogleLogin";
-
+import side from '../assets/side.png'
+import pic1 from '../assets/insta1.jpg'
 
 const Wrapper = styled.div`
+.main{
+  display: flex;
+}
+
+.imahe{
+  width: 454px;
+  height: 618px;
+}
+.imahe-container{
+  position: relative;
+  width: 454px;
+  height: 618px;
+  
+  
+}
+.imahe2{
+  position: absolute;
+  bottom: 90px;
+  left: 152px;
+  width: 240px;
+  height: 429px;
+
+}
+@media screen and (max-width: 900px) {
+    .imahe-container {
+      display: none;
+    }
+    .main{
+      display: unset;
+    }
+  }
   .mycard{
   display: flex;
   flex-direction: column;
@@ -22,13 +54,11 @@ const Wrapper = styled.div`
     align-items: center;
     background: rgba(var(--d87,255,255,255),1);
     max-width: 350px;
-    //min-height: 379px;
     border: 1px solid #dbdbdb !important;
     box-shadow: none !important;
   }
 
   .login-input {
-    //border-radius: 999px !important;
     border: 1px solid #dbdbdb !important;
     padding: 0.1rem 0.5rem !important;
     background: #fafafa;
@@ -36,6 +66,7 @@ const Wrapper = styled.div`
     width: 258px !important;
     height: 36px;
     margin-bottom: 4px;
+    border-radius: 3px;
   }
   .no-account {
     color: #0095f6 !important;
@@ -59,7 +90,7 @@ const Wrapper = styled.div`
     margin-bottom: 1em;
     background: #0095f6 !important;
     box-shadow: none;
-    //border-radius: 999px !important;
+    border-radius: 3px;
   }
   .btn:disabled{
     color: white !important;
@@ -87,7 +118,6 @@ const Wrapper = styled.div`
     box-shadow: none !important;
     text-align: center;
     color: #262626;
-    font-weight: bold;
   }
   .hr-text {
     width: 258px;
@@ -171,6 +201,12 @@ const Login = () => {
   return (
     <Wrapper>
       <div className="main">
+            <div className="imahe-container">
+            <img className="imahe" src={side} alt="side"/>
+            <img className="imahe2" src={pic1} alt="pic1"/>
+            </div>
+         
+        
         <div className="mycard">
         <div className="auth-card">
             <img className="nav-logo" src={navlogo} alt="logo" /> 

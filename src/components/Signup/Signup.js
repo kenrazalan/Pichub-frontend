@@ -6,37 +6,76 @@ import navlogo from "../../components/assets/logo.png";
 import LoginGoogle from "../Login/GoogleLogin";
 
 const Wrapper = styled.div`
+  .mycard{
+    display: flex;
+    flex-direction: column;
+    margin-top: 30px;
+   justify-content: center;
+    align-items: center;
+  }
   .auth-card {
+    padding:0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center !important;
+    align-items: center;
+    background: rgba(var(--d87,255,255,255),1);
+    max-width: 350px;
+    //min-height: 379px;
     border: 1px solid #dbdbdb !important;
     box-shadow: none !important;
   }
   .signup-input {
-    border-radius: 999px !important;
     border: 1px solid #dbdbdb !important;
     padding: 0.1rem 0.5rem !important;
-    width: 95% !important;
-    height: 2rem !important;
+    background: #fafafa;
+    max-width: 258px !important;
+    width: 258px !important;
+    height: 36px;
+    margin-bottom: 4px;
+    border-radius: 3px;
   }
   .acc-already {
     color: #0095f6 !important;
     font-weight: 600;
   }
   .nav-logo {
-    margin-bottom: 30px;
-    margin-top: 30px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    width: 175px;
+    height: 70px;
   }
   .btn {
-    margin-top:10px;
+    margin-top: 10px;
     font-weight: 600 !important;
-    width: 100% !important;
-    margin-bottom: 2em;
+    width: 258px !important;
+    margin-bottom: 1em;
+    background: #0095f6 !important;
+    box-shadow: none;
+    border-radius: 3px;
+  }
+  .btn:disabled{
+    color: white !important;
+    opacity: 0.3;
+  }
+  .google-btn{
     border-radius: 999px !important;
+    overflow: hidden;
+    box-shadow: rgb(0 0 0 / 24%) 0px 0px 0px 0px, rgb(0 0 0 / 24%) 0px 0px 1px 0px !important;
+    border: 1px solid red;
+    margin-top: 10px;
+    height: 35px;
+    margin-bottom: 1em;
   }
   .error{
     margin-top: 10px;
     color:#ed4956;
   }
+  .signin{
+    margin-bottom: 20px;
+  }
   .hr-text {
+    width: 258px;
   line-height: 1em;
   position: relative;
   outline: 0;
@@ -144,61 +183,38 @@ const Signup = () => {
 
   return (
     <Wrapper>
+      <div className="main">
       <div className="mycard">
         <div className="card auth-card">
         <img className="nav-logo" src={navlogo} alt="logo" /> 
-          {/* <h2 className="brand-logo">Instagram</h2> */}
-          <input
-            className="signup-input"
+        <div>
+          <input className="signup-input browser-default"
             type="text"
-            placeholder="name"
+            placeholder="Name"
             value={name}
-            onChange={(e) => {
-              setName(e.target.value);
-            }}
-          />
-          <input
-            className="signup-input"
+            onChange={(e) => { setName(e.target.value); }} />
+          <input className="signup-input browser-default"
             type="text"
-            placeholder="email"
+            placeholder="Email"
             value={email.toLowerCase()}
-            onChange={(e) => {
-              setEmail(e.target.value);
-            }}
-          />
+            onChange={(e) => { setEmail(e.target.value); }} />
           <input
-            className="signup-input"
+            className="signup-input browser-default"
             type="text"
-            placeholder="username"
+            placeholder="Username"
             value={username.toLowerCase()}
-            onChange={(e) => {
-              setUsername(e.target.value);
-            }}
-          />
+            onChange={(e) => { setUsername(e.target.value); }} />
           <input
-            className="signup-input"
+            className="signup-input browser-default"
             type="password"
-            placeholder="password"
-            onChange={(e) => {
-              setPassword(e.target.value);
-            }}
-          />
-          {/* <div className="file-field input-field">
-                    <div className="btn #64b5f6 blue darken-2">
-                    <span>Upload Picture</span>
-                    <input type="file" onChange={(e)=>{setImage(e.target.files[0])}}/>
-                        </div>
-                <div className="file-path-wrapper">
-                    <input className="file-path validate" type="text"/>
-                </div>
-                </div> */}
+            placeholder="Password"
+            value={password}
+            onChange={(e) => { setPassword(e.target.value); }} />
+            </div>
           <button
-              className="btn waves-effect waves-light #64b5f6 blue darken-2"
-              onClick={() => {
-                PostData();
-                setLoad(false);
-              }}
-            >
+               disabled={!email || !password || !name || !username  ? true : false}
+              className="btn"
+              onClick={() => { PostData(); setLoad(false); }}  >
               {load? "Signup" : "loading..."}
             </button>
             <hr class="hr-text" data-content="OR"></hr>
@@ -207,13 +223,14 @@ const Signup = () => {
             <p className="error">{data}</p>
 
 
-          <div style={{ marginTop: "1em" }}>
+          <div className="signin">
             Already have an account?{" "}
             <Link className="acc-already" to="/signin">
               Sign in
             </Link>
           </div>
         </div>
+      </div>
       </div>
     </Wrapper>
   );
