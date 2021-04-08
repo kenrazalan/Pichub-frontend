@@ -7,36 +7,63 @@ import LoginGoogle from "./GoogleLogin";
 
 
 const Wrapper = styled.div`
+  .mycard{
+  display: flex;
+  flex-direction: column;
+  margin-top: 30px;
+  justify-content: center;
+  align-items: center;
+}
   .auth-card {
+    padding:0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center !important;
+    align-items: center;
+    background: rgba(var(--d87,255,255,255),1);
+    max-width: 350px;
+    //min-height: 379px;
     border: 1px solid #dbdbdb !important;
     box-shadow: none !important;
   }
+
   .login-input {
-    border-radius: 999px !important;
+    //border-radius: 999px !important;
     border: 1px solid #dbdbdb !important;
     padding: 0.1rem 0.5rem !important;
-    width: 95% !important;
-    height: 2rem !important;
+    background: #fafafa;
+    max-width: 258px !important;
+    width: 258px !important;
+    height: 36px;
+    margin-bottom: 4px;
   }
   .no-account {
     color: #0095f6 !important;
     font-weight: 600;
   }
   .reset {
-    font-size: 0.8em;
-
-    font-weight: 100 !important;
+    margin-bottom: 15px;
+    font-size: 12px;
+    color: #00376b !important;
   }
   .nav-logo {
-    margin-bottom: 30px;
-    margin-top: 30px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    width: 175px;
+    height: 70px;
   }
   .btn {
     margin-top: 10px;
     font-weight: 600 !important;
-    width: 100% !important;
-    margin-bottom: 2em;
-    border-radius: 999px !important;
+    width: 258px !important;
+    margin-bottom: 1em;
+    background: #0095f6 !important;
+    box-shadow: none;
+    //border-radius: 999px !important;
+  }
+  .btn:disabled{
+    color: white !important;
+    opacity: 0.3;
   }
  
   .google-btn{
@@ -45,11 +72,25 @@ const Wrapper = styled.div`
     box-shadow: rgb(0 0 0 / 24%) 0px 0px 0px 0px, rgb(0 0 0 / 24%) 0px 0px 1px 0px !important;
     border: 1px solid red;
     margin-top: 10px;
+    height: 35px;
+    margin-bottom: 1em;
   }
   .error{
     color:#ed4956;
   }
+  .footer-noacct{
+    background: rgba(var(--d87,255,255,255),1);
+    max-width: 350px;
+    padding: 15px;
+    width: 100%;
+    border: 1px solid #dbdbdb !important;
+    box-shadow: none !important;
+    text-align: center;
+    color: #262626;
+    font-weight: bold;
+  }
   .hr-text {
+    width: 258px;
   line-height: 1em;
   position: relative;
   outline: 0;
@@ -129,55 +170,43 @@ const Login = () => {
 
   return (
     <Wrapper>
-      <div className="mycard">
-        <div className="card auth-card">
-         <img className="nav-logo" src={navlogo} alt="logo" /> 
-      
-          <input
-            className="login-input"
-            type="text"
-            placeholder="email"
-            value={email.toLowerCase()}
-            onKeyPress={handleKeyPress}
-            onChange={(e) => {
-              setEmail(e.target.value);
-            }}
-          />
-          <input
-            className="login-input"
-            type="password"
-            placeholder="password"
-            onKeyPress={handleKeyPress}
-            onChange={(e) => {
-              setPassword(e.target.value);
-            }}
-          />
+      <div className="main">
+        <div className="mycard">
+        <div className="auth-card">
+            <img className="nav-logo" src={navlogo} alt="logo" /> 
+            <div >
+            <input className="login-input browser-default" type="text"
+              placeholder="Email"
+              value={email.toLowerCase()}
+              onKeyPress={handleKeyPress}
+              onChange={(e) => { setEmail(e.target.value); }} />
+
+              <input className="login-input browser-default"
+              type="password"
+              placeholder="Password"
+              value={password}
+              onKeyPress={handleKeyPress}
+              onChange={(e) => { setPassword(e.target.value); }} />
+              </div>
        
-            <button
-              className="btn waves-effect waves-light #64b5f6 blue darken-2"
-              onClick={() => {
-                PostData();
-                setLoad(false);
-              }}
-            >{load? "Login" : "loading..."}
-              
-            </button>
-            <hr class="hr-text" data-content="OR"></hr>
-            <LoginGoogle/>
+              <button className="browser-default btn" disabled={!email || !password ? true : false}
+               onClick={() => {PostData(); setLoad(false);}}>{load? "Login" : "loading..."}</button>
+              <hr class="hr-text" data-content="OR"></hr>
+
+              <LoginGoogle/>
           
-          <p className="error">{data.error}</p>
-          <div style={{ marginTop: "1em" }}>
-            Dont have an account?{" "}
-            <Link className="no-account" to="/signup">
-              Sign up
-            </Link>
+              <p className="error">{data.error}</p>
+              
+                <Link className="reset" to="/reset"> Forgot password? </Link>
+              
           </div>
-          <div>
-            <Link className="reset" to="/reset">
-              Forgot password?
-            </Link>
-          </div>
-        </div>
+              <div className="footer-noacct"> 
+               <span className="footer-span">Dont have an account?{" "} 
+               <Link  className="no-account" to="/signup"> Sign up </Link></span>
+              </div>
+
+
+              </div>
       </div>
     </Wrapper>
   );
