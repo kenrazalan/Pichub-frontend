@@ -64,6 +64,19 @@ const Wrapper = styled.div`
     margin: auto 0 auto auto;
     cursor: pointer;
   }
+  .btn-follow{
+    background: transparent;
+    padding : 0;
+    min-width: unset;
+    width: fit-content ;
+    color: black;
+    border: none;
+    //margin-left: 6px;
+    color: #0095f6;
+    :focus{
+      background-color: unset;
+    }
+  }
   .btns {
     min-width: 90px; 
     margin: auto 0 auto auto;
@@ -75,6 +88,9 @@ const Wrapper = styled.div`
       border: 1px solid #dbdbdb !important;
       background: transparent !important;
       color: black;
+      :focus{
+      background-color: transparent !important;
+    }
     }
   .name {
     font-size: 14px;

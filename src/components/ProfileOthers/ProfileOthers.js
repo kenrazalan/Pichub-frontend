@@ -267,6 +267,22 @@ const Wrapper = styled.div`
   a {
     color: #0095f6;
   }
+  .btns{
+    background: transparent;
+    padding : 0;
+    min-width: unset;
+    width: fit-content ;
+    color: black;
+    border: none;
+    margin-left: 12px;
+    :focus{
+      background-color: unset;
+    }
+  }
+  .follow{
+    color: #0095f6;
+    //font-weight: bold;
+}
   @media screen and (max-width: 645px) {
     font-size: 1rem;
     .bio,
@@ -420,6 +436,7 @@ const ProfileOthers = (props) => {
                   {showFollow ? (
                     !load ? (
                       <Button
+                      className="btns follow"
                         onClick={() => {
                           followUser(userId);
                           setLoad(true);
@@ -428,7 +445,7 @@ const ProfileOthers = (props) => {
                         Follow
                       </Button>
                     ) : (
-                      <Button>
+                      <Button className="btns follow">
                         <i className="fa fa-spinner fa-spin"></i>
                       </Button>
                     )
@@ -443,7 +460,7 @@ const ProfileOthers = (props) => {
                       Following
                     </Button>
                   ) : (
-                    <Button>
+                    <Button className="following">
                       <i className="fa fa-spinner fa-spin"></i>
                     </Button>
                   )}

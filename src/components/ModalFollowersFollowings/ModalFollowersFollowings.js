@@ -23,6 +23,9 @@ const ModalContentWrapper = styled.div`
      border: 1px solid #dbdbdb !important;
       background: transparent !important;
       color: black;
+      :focus{
+      background-color: unset;
+    }
   }
   .profile-info {
     display: flex !important;
@@ -34,6 +37,20 @@ const ModalContentWrapper = styled.div`
     font-size: 0.9rem !important;
     position: relative !important;
     top: -10px !important;
+  }
+  .btns{
+    margin-right: 42px;
+    background: transparent;
+    padding : 0;
+    min-width: unset;
+    width: fit-content ;
+    color: black;
+    border: none;
+    //margin-left: 6px;
+    color: #0095f6;
+    :focus{
+      background-color: unset !important;
+    }
   }
   @media screen and (max-width: 480px) {
     width: 340px !important;

@@ -67,16 +67,16 @@ function SideSuggestionsList({user}) {
         
         {!state.following.some((i) => i._id === user._id) ? (
       !load ? 
-      <Button className="btns" onClick={() => {followUser(user._id);setLoad(true);}}>Follow</Button>
+      <Button className="btns btn-follow" onClick={() => {followUser(user._id);setLoad(true);}}>Follow</Button>
       : (
-        <Button className="btns">
+        <Button className="btns btn-follow">
           <i className="fa fa-spinner fa-spin"></i>
         </Button>
       )
     ) : ( !load ? 
       <Button className="btns following" onClick={() => {unfollowUser(user._id); setLoad(true);}}>Following</Button>
       :  (
-        <Button className="btns">
+        <Button className="btns following">
           <i className="fa fa-spinner fa-spin"></i>
         </Button>
       )

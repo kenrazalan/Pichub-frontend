@@ -479,7 +479,7 @@ function GoToPost() {
                         </Button>
                       )
                     ) : ( !load ? 
-                      <Button className="btns following bold" onClick={() => {unfollowUser(post.postedBy?._id); setLoad(true);}}>Following</Button>
+                      <Button className="btns following" onClick={() => {unfollowUser(post.postedBy?._id); setLoad(true);}}>Following</Button>
                       :  (
                         <Button className="btns">
                           <i className="fa fa-spinner fa-spin"></i>

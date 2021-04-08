@@ -87,7 +87,7 @@ function SuggestionList({user}) {
             </div>
             {!state.following.some((i) => i._id === user._id) ? (
               !load ? 
-              <Button onClick={() => {followUser(user._id);setLoad(true);}}>Follow</Button>
+              <Button className="btns" onClick={() => {followUser(user._id);setLoad(true);}}>Follow</Button>
               : (
                 <Button>
                   <i className="fa fa-spinner fa-spin"></i>

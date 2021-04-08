@@ -10,6 +10,10 @@ import M from "materialize-css";
 
 export const Wrapper = styled.div`
   padding: 1rem !important;
+  .name,.username{
+    font-size: 14px;
+    color: #262626;
+  }
   img {
     cursor: pointer !important;
     margin-right: 40px !important;
@@ -47,6 +51,9 @@ export const Wrapper = styled.div`
   .change-avatar {
     display: flex !important;
   }
+  .change-profile{
+    font-size: 14px;
+  }
   input[id="change-avatar"],
   input[id="change-avatar-link"] {
     display: none !important;
@@ -64,14 +71,17 @@ export const Wrapper = styled.div`
     background-color: unset;
   }
   @media screen and (max-width: 550px) {
-    width: 98% !important;
-    .input-group {
+    /* width: 98% !important; */
+    /* .input-group {
       display: flex !important;
       flex-direction: column !important;
-    }
-    label {
+    } */
+    /* label {
       padding-bottom: 0.5rem !important;
       font-size: 1rem !important;
+    } */
+    img{
+      margin-right: 20px !important;
     }
     button {
       margin-left: 0 !important;
@@ -175,7 +185,7 @@ const ProfileForm = () => {
             <label htmlFor="change-avatar">
               <img
                 src={loader ? gif : newProfile ? newProfile : state && state.pic}
-                style={{ width: "42px", height: "42px", borderRadius: "80px" }}
+                style={{ width: "42px", height: "42px", borderRadius: "80px",objectFit: "cover" }}
                 alt="profile"
               />
             </label>
@@ -186,7 +196,7 @@ const ProfileForm = () => {
               onChange={handleImageUpload}
             />
           </div>
-          <div className="change-avatar-meta">
+          <div className="change-profile bold">
             <h2 className="bold">{ state && state.username}</h2>
             <label htmlFor="change-avatar-link">
               <span>Change Profile Photo</span>
@@ -201,12 +211,12 @@ const ProfileForm = () => {
         </div>
 
         <div className="input-group">
-          <label className="bold">Name</label>
+          <label className="name bold">Name</label>
           <input type="text" value={name.value} onChange={name.onChange} />
         </div>
 
         <div className="input-group">
-          <label className="bold">Username</label>
+          <label className="username bold">Username</label>
           <input
             type="text"
             value={username.value?.toLowerCase()}

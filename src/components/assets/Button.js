@@ -12,7 +12,7 @@ const Button = styled.button`
   margin-left: 1rem;
   font-family: "Fira Sans", sans-serif;
   font-size: 1rem;
-  font-weight: bold;
+  //font-weight: bold;
   :focus{
     background-color: #0095f6;
   }
