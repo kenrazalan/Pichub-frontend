@@ -103,6 +103,12 @@ const Wrapper = styled.div`
     font-size: 14px;
     margin-top: 0;
   }
+  .verified{
+  height: 14px;
+  width: 20px;
+  padding-top: 2px;
+
+}
 `;
 let list = [];
 for (var i = 0; i < 5; i++) {

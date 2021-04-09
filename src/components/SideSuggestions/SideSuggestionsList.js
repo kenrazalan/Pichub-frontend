@@ -60,7 +60,7 @@ function SideSuggestionsList({user}) {
         <img className="profile2" src={user.pic} alt="profile" onClick={() => { history.push(`/profile/${user._id}`);}} />
         <div className="list" onClick={() => { history.push(`/profile/${user._id}`);}}>
           <div className="name">
-            <b>{user.name}</b>
+            <b>{user.name}</b><span>{user.followers.length>=10 ? <img className="verified" src={verified} alt="verified"/> : null }</span>
           </div>
           <div className="username">{user.username}</div>
         </div>

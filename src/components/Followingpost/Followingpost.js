@@ -16,8 +16,8 @@ import {PostContext} from '../context/PostContext'
 
 const Wrapper = styled.div`
 .verified{
-  height: 17px;
-  width: 30px;
+  height: 14px;
+  width: 27px;
   margin-bottom: 3px;
 
 }
