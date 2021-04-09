@@ -1,5 +1,5 @@
 import React,{useEffect,useState,useContext} from 'react'
-import { CommentIcon, FilledHeartIcon, HeartIcon, InboxIcon, MoreIcon, SavedIcon } from '../assets/Icons';
+import { BookmarkIcon, CommentIcon, FilledBookmarkIcon, FilledHeartIcon, HeartIcon, InboxIcon, MoreIcon, SavedIcon } from '../assets/Icons';
 import { useParams, useHistory, Link } from "react-router-dom";
 import styled from 'styled-components'
 import { UserContext } from "../../App";
@@ -266,10 +266,12 @@ function GoToPost() {
     const [showFollow,setShowfollow] = useState(true)
     const [showMessageModal, setShowMessageModal] = useState(false);
     const closeMessageModal = () => setShowMessageModal(false);
+    const [isSave, setIsSave] = useState(false);
 
     useEffect(() => {
       setShowfollow(state && !state.following.some((i) => i._id === id));
-    }, [state,id]);
+      setIsSave(state?.savedPosts.includes(post._id))
+    }, [state,id,post._id]);
     
     
     useEffect(() => {
@@ -444,6 +446,53 @@ function GoToPost() {
         setShowfollow(false);
       });
   };
+  const savePost = (id) => {
+    fetch(`${process.env.REACT_APP_BACKEND_URL}/save`, {
+      method: "put",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + localStorage.getItem("jwt"),
+      },
+      body: JSON.stringify({
+        saveId: id,
+      }),
+    }).then((res) => res.json())
+      .then((result) => {
+        dispatch({
+          type: "UPDATESAVE",
+          payload: { savedPosts: result.savedPosts },
+        });
+        localStorage.setItem("user", JSON.stringify(result));
+        console.log(result)
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+    const UnsavePost = (id) => {
+    fetch(`${process.env.REACT_APP_BACKEND_URL}/unsave`, {
+      method: "put",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + localStorage.getItem("jwt"),
+      },
+      body: JSON.stringify({
+        unSaveId: id,
+      }),
+    }).then((res) => res.json())
+      .then((result) => {
+        dispatch({
+          type: "UPDATESAVE",
+          payload: { savedPosts: result.savedPosts },
+        });
+        localStorage.setItem("user", JSON.stringify(result));
+        console.log(result)
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
 
     if(loading){
         return <Loader/>
@@ -516,10 +565,6 @@ function GoToPost() {
         )}
 
         <hr/>
-            {/* <div className="numLikes-container2">
-                <div className="numLikes">   {likes} {likes > 1 ? "likes" : "like"} </div>
-                <div className="createdAt"> {moment(post?.createdAt).fromNow()} </div>
-            </div> */}
         <div className="comment-footer">
         
         <div className="footer">
@@ -595,6 +640,12 @@ function GoToPost() {
              )}
             <CommentIcon/>
             <InboxIcon onClick={() => {setShowMessageModal(true);}}/>
+            {
+              isSave ?
+              <FilledBookmarkIcon style={{float: "right"}} onClick={()=>{UnsavePost(post?._id);setIsSave(false)}}/>
+              : <BookmarkIcon style={{float: "right"}} onClick={()=>{savePost(post?._id);setIsSave(true)}}/>
+            }
+        
             {
                showMessageModal && 
         

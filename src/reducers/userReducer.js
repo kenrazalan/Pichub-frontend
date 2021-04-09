@@ -28,5 +28,11 @@ export const reducer = (state,action)=>{
             pic: action.payload.pic,
         }
     }
+    if(action.type==="UPDATESAVE"){
+        return {
+            ...state,
+            savedPosts: action.payload.savedPosts
+        }
+    }
     return state
 }

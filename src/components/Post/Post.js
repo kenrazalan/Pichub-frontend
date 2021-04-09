@@ -2,7 +2,7 @@ import React, { useState, useContext, useEffect } from "react";
 import { Link, useHistory } from "react-router-dom";
 import Modal from "../Modal/Modal";
 import verified from "../assets/correct.svg";
-import { CommentIcon, InboxIcon, MoreIcon } from "../assets/Icons";
+import { BookmarkIcon, CommentIcon, FilledBookmarkIcon, InboxIcon, MoreIcon, SavedIcon } from "../assets/Icons";
 import DeleteModal from "../DeleteModal/DeleteModal";
 import { UserContext } from "./../../App";
 import { Skeleton } from "@material-ui/lab";
@@ -47,12 +47,14 @@ function Post({ item }) {
   const [comments,setComments] = useState([])
   const [text,setText] = useState("")
   const { feed, setFeed } = useContext(PostContext);
+  const [isSave, setIsSave] = useState(false);
 
   useEffect(() => {
     setIsLike(item.likes?.includes(state._id));
     setLikes(item.likes?.length)
     setComments(item.comments)
-  }, [item,state]);
+    setIsSave(state?.savedPosts.includes(item._id))
+  }, [item.likes,item._id,item.comments,state]);
 
   const handleText=(e)=>{
         setText(e.target.value)
@@ -82,13 +84,64 @@ function Post({ item }) {
             return item;
           }
         });
-        console.log(newData)
+        console.log(result)
         setFeed(newData);
       })
       .catch((err) => {
         console.log(err);
       });
   };
+
+  const savePost = (id) => {
+    fetch(`${process.env.REACT_APP_BACKEND_URL}/save`, {
+      method: "put",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + localStorage.getItem("jwt"),
+      },
+      body: JSON.stringify({
+        saveId: id,
+      }),
+    }).then((res) => res.json())
+      .then((result) => {
+        dispatch({
+          type: "UPDATESAVE",
+          payload: { savedPosts: result.savedPosts },
+        });
+        localStorage.setItem("user", JSON.stringify(result));
+        console.log(result)
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+    const UnsavePost = (id) => {
+    fetch(`${process.env.REACT_APP_BACKEND_URL}/unsave`, {
+      method: "put",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + localStorage.getItem("jwt"),
+      },
+      body: JSON.stringify({
+        unSaveId: id,
+      }),
+    }).then((res) => res.json())
+      .then((result) => {
+        dispatch({
+          type: "UPDATESAVE",
+          payload: { savedPosts: result.savedPosts },
+        });
+        localStorage.setItem("user", JSON.stringify(result));
+        console.log(result)
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+
+
 
   const unlikePost = (id) => {
     fetch(`${process.env.REACT_APP_BACKEND_URL}/unlike`, {
@@ -234,6 +287,12 @@ function Post({ item }) {
         )}
         <CommentIcon onClick={() => history.push(`/post/${item._id}`)} className="comment-icon" />
         <InboxIcon onClick={() => {setShowMessageModal(true);}} className="inbox-icon"/>
+        {
+          isSave ?
+          <FilledBookmarkIcon style={{float: "right"}} onClick={()=>{UnsavePost(item?._id);setIsSave(false)}}/>
+          : <BookmarkIcon style={{float: "right"}} onClick={()=>{savePost(item?._id);setIsSave(true)}}/>
+        }
+        
         {
           showMessageModal && 
         
