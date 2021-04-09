@@ -27,6 +27,7 @@ function ExplorePost() {
 
     return (
         <div>
+            <h5 className="browser-default bold" style={{marginBottom: "0",textAlign:"center"}}>Explore</h5>
             <ExplorePostList posts={post}/>
         </div>
     )

@@ -3,13 +3,14 @@ import styled from "styled-components";
 import { useHistory, Link } from "react-router-dom";
 import Button from "../assets/Button";
 import Loader from "./../assets/Loader";
-import { OptionsIcon, PostIcon, SavedIcon, CloseIcon, CommentIcon, HeartIcon } from "../assets/Icons";
+import { OptionsIcon, PostIcon, SavedIcon, CloseIcon, CommentIcon, HeartIcon, NewPostIcon } from "../assets/Icons";
 import { UserContext } from "../../App";
 import Modal from "../Modal/Modal";
 import LogoutModal from './LogoutModal'
 import verified from '../assets/correct.svg'
 import ModalFollowersFollowings from '../ModalFollowersFollowings/ModalFollowersFollowings'
 import { Skeleton } from "@material-ui/lab";
+import NewPost from "../Newpost/Newpost";
 
 const WrapperPost = styled.div`
    display: grid;
@@ -73,6 +74,7 @@ const WrapperPost = styled.div`
   span:first-child {
     margin-right: 1rem;
   }
+
 
   @media screen and (max-width: 1000px) {
     img,
@@ -596,17 +598,30 @@ const ProfileHeader = () => {
           <div className="profile-tab">
             <div>
               <PostIcon />
-              <span>Posts</span>
+              <span className="bold">POSTS</span>
             </div>
             <div>
               <SavedIcon />
-              <span>Saved</span>
+              <span className="bold">SAVED</span>
             </div>
           </div>
           <hr className="profile-hr2"/>
 
           <WrapperPost>
             {/* {!loading ? */}
+            {mypics?.length === 0 && 
+            <>
+            <p></p>
+            <label htmlFor="upload-post">
+            <p className="pointer bold"
+            style={{fontSize:"15px",textAlign:"center",color: "#0095f6"}}>
+              Share your first photo.  
+              </p> 
+             </label> 
+            
+             <NewPost/>
+              </>
+            }
             {
             mypics?.map((item) => (
               <div key={item._id} className="grid-container" onClick={() => history.push(`/post/${item._id}`)}>
@@ -623,6 +638,7 @@ const ProfileHeader = () => {
                 </div>
               </div>
             )) 
+            
             }
             {/* :
             <>
@@ -630,6 +646,7 @@ const ProfileHeader = () => {
             <Skeleton className="rect" animation="wave" variant="rect"  height={200} />
             </>
             } */}
+           
           </WrapperPost>
         </Wrappers>
       ) : (

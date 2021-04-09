@@ -8,7 +8,7 @@ const Wrapper = styled.div`
   grid-template-columns: repeat(3, 1fr);
   grid-gap: 1rem;
   //row-gap: 0;
-  margin-top: 5rem;
+  margin-top: 1rem;
   img {
     border-radius: 4px;
     box-shadow: 0 1px 0 rgba(0, 0, 0, 0.2);
@@ -119,6 +119,7 @@ function ExplorePostList({ posts }) {
   const history = useHistory()
   return (
     <Wrapper>
+
       {posts.map((post) => (
         <div className="grid-container card-image"  onClick={() => history.push(`/post/${post._id}`)}>
           <img src={post.photo} alt={post._id} />
