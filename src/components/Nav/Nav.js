@@ -8,6 +8,7 @@ import navlogo from "../../components/assets/logo1.png";
 import NewPost from "../../components/Newpost/Newpost";
 import M from "materialize-css";
 import Search from "../Search/Search";
+import Message from "../Message/Message";
 
 const NavWrapper = styled.div`
   position: fixed;
@@ -90,8 +91,8 @@ const NavWrapper = styled.div`
     bottom: 0;
   }
   .collection{
-    max-height: 50vh;
-    min-height: 50vh;
+    max-height: 30vh;
+    min-height: 30vh;
     overflow: scroll;
   }
   @media screen and (max-width: 970px) {
@@ -128,7 +129,8 @@ const Nav = () => {
   const [search, setSearch] = useState("");
   const [userDetails, setUserDetails] = useState([]);
   const { state, dispatch } = useContext(UserContext);
-  const history = useHistory();
+  const [showMessageModal, setShowMessageModal] = useState(false);
+  const closeMessageModal = () => setShowMessageModal(false);
 
   useEffect(() => {
     M.Modal.init(searchModal.current);
@@ -144,7 +146,7 @@ const Nav = () => {
           </div>
         </Link>
       </li>,
-        <li key="1">
+        <li key="45">
           <Link to="/">
             <HomeIcon />
           </Link>
@@ -159,7 +161,7 @@ const Nav = () => {
         <li className="heart-icon"  style={{marginBottom:"10px",marginTop: "10px"}} key="12">
         <HeartIcon />
          </li>,
-        <li key="12">
+        <li key="16">
           <NewPost/>
         </li>,
         <li key="4">
@@ -228,9 +230,16 @@ const Nav = () => {
       <div className="nav2">
         <Link to={state ? "/" : "/signin"} className="brand-logo2">
           <img className="nav-logo2" src={navlogo} alt="logo" />
-          <InboxIcon style={{float: "right" ,marginTop: "14px",marginRight: "15px"}}/>
         </Link>
+        <InboxIcon onClick={() => {setShowMessageModal(true);}}  style={{float: "right" ,marginTop: "14px",marginRight: "15px"}}/>
+
       </div>
+         {
+          showMessageModal && 
+        
+              <Message closeMessageModal={closeMessageModal}/>
+          
+        }
 
         <Link to={state ? "/" : "/signin"} className="brand-logo left">
           <img className="nav-logo" src={navlogo} alt="logo" />

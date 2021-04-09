@@ -10,6 +10,7 @@ import { HeartIcon, FilledHeartIcon } from "../assets/Icons";
 import moment from "moment";
 import {PostContext} from '../context/PostContext'
 import styled from 'styled-components'
+import Message from "../Message/Message";
 
 const Wrapper = styled.div`
 .postedby-img{
@@ -37,10 +38,11 @@ const Wrapper = styled.div`
 function Post({ item }) {
   const { state, dispatch } = useContext(UserContext);
   const [showModal, setShowModal] = useState(false);
+  const [showMessageModal, setShowMessageModal] = useState(false);
   const [del, setDelete] = useState("");
   const closeModal = () => setShowModal(false);
+  const closeMessageModal = () => setShowMessageModal(false);
   const [isLike, setIsLike] = useState(true);
-  const [loading, setLoading] = useState(true);
   const [likes,setLikes] = useState(null)
   const [comments,setComments] = useState([])
   const [text,setText] = useState("")
@@ -231,7 +233,13 @@ function Post({ item }) {
           />
         )}
         <CommentIcon onClick={() => history.push(`/post/${item._id}`)} className="comment-icon" />
-        <InboxIcon className="inbox-icon"/>
+        <InboxIcon onClick={() => {setShowMessageModal(true);}} className="inbox-icon"/>
+        {
+          showMessageModal && 
+        
+              <Message closeMessageModal={closeMessageModal}/>
+          
+        }
         </span>
 
         <div className="bold">

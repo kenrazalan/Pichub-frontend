@@ -23,6 +23,7 @@ import SideSuggestions from "./components/SideSuggestions/SideSuggestions";
 import PostProvider from "./components/context/PostContext";
 import ExplorePost from "./components/Post/ExplorePost";
 import GoToPost from "./components/Post/GoToPost";
+import Message from "./components/Message/Message";
 
 export const UserContext = createContext();
 
@@ -81,6 +82,9 @@ const Routing = () => {
         </Route>
         <Route exact path="/post/:id">
           <GoToPost/>
+        </Route>
+        <Route exact path="/message">
+          <Message/>
         </Route>
         
         

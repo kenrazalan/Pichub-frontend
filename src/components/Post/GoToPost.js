@@ -9,6 +9,7 @@ import {PostContext} from '../context/PostContext'
 import DeleteModal from '../DeleteModal/DeleteModal';
 import Modal from '../Modal/Modal';
 import Button from '../assets/Button';
+import Message from '../Message/Message';
 
 const Wrapper = styled.div`
   display: grid;
@@ -263,6 +264,8 @@ function GoToPost() {
     const closeModal = () => setShowModal(false);
     const [load,setLoad] = useState(false)
     const [showFollow,setShowfollow] = useState(true)
+    const [showMessageModal, setShowMessageModal] = useState(false);
+    const closeMessageModal = () => setShowMessageModal(false);
 
     useEffect(() => {
       setShowfollow(state && !state.following.some((i) => i._id === id));
@@ -591,7 +594,13 @@ function GoToPost() {
               />
              )}
             <CommentIcon/>
-            <InboxIcon/>
+            <InboxIcon onClick={() => {setShowMessageModal(true);}}/>
+            {
+               showMessageModal && 
+        
+              <Message closeMessageModal={closeMessageModal}/>
+          
+            }
             {/* <div className="allowance" style={{height: "150px"}}>
                 <p>.</p>
              </div> */}
