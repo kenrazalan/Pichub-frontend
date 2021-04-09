@@ -270,7 +270,8 @@ function GoToPost() {
 
     useEffect(() => {
       setShowfollow(state && !state.following.some((i) => i._id === id));
-      setIsSave(state?.savedPosts.includes(post._id))
+      const saveposts = state.savedPosts.map(save=> save._id)
+      setIsSave(saveposts?.includes(post._id))
     }, [state,id,post._id]);
     
     

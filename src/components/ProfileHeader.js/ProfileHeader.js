@@ -332,6 +332,7 @@ const ProfileHeader = () => {
   const [loading, setLoading] = useState(true);
   const [load,setLoad] = useState(false)
   const [showModal, setShowModal] = useState(false);
+  const [onpost, setSaved] = useState("POSTS");
 
 
   const closeModal = () => {
@@ -349,7 +350,7 @@ const ProfileHeader = () => {
     })
       .then((res) => res.json())
       .then((result) => {
-        console.log(result);
+        console.log(state);
         setLoading(false)
         setMypic(result.myposts);
       });
@@ -598,11 +599,11 @@ const ProfileHeader = () => {
           <div className="profile-tab">
             <div>
               <PostIcon />
-              <span className="bold">POSTS</span>
+              <span onClick={()=>{setSaved("POSTS")}} className="bold">POSTS</span>
             </div>
             <div>
               <SavedIcon />
-              <span className="bold">SAVED</span>
+              <span onClick={()=>{setSaved("SAVED")}} className="bold">SAVED</span>
             </div>
           </div>
           <hr className="profile-hr2"/>
@@ -623,6 +624,8 @@ const ProfileHeader = () => {
               </>
             }
             {
+              onpost ==="POSTS" &&
+
             mypics?.map((item) => (
               <div key={item._id} className="grid-container" onClick={() => history.push(`/post/${item._id}`)}>
                 <img src={item.photo} alt="post" />
@@ -638,8 +641,28 @@ const ProfileHeader = () => {
                 </div>
               </div>
             )) 
-            
             }
+                        {
+              onpost ==="SAVED" &&
+
+            state.savedPosts?.map((item) => (
+              <div key={item._id} className="grid-container" onClick={() => history.push(`/post/${item._id}`)}>
+                <img src={item.photo} alt="post" />
+                <div className="overlay">
+                <div className="overlay-content">
+                    <span>
+                      <HeartIcon /> {item.likes?.length}
+                    </span>
+                    <span>
+                      <CommentIcon/>  {item.comments?.length}
+                    </span>
+                  </div>
+                </div>
+              </div>
+            )) 
+            }
+
+
             {/* :
             <>
             <Skeleton className="rect" animation="wave" variant="rect"  height={200} />

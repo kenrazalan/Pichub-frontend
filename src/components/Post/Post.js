@@ -53,7 +53,8 @@ function Post({ item }) {
     setIsLike(item.likes?.includes(state._id));
     setLikes(item.likes?.length)
     setComments(item.comments)
-    setIsSave(state?.savedPosts.includes(item._id))
+    const saveposts = state.savedPosts.map(save=> save._id)
+    setIsSave(saveposts.includes(item._id))
   }, [item.likes,item._id,item.comments,state]);
 
   const handleText=(e)=>{
@@ -84,7 +85,7 @@ function Post({ item }) {
             return item;
           }
         });
-        console.log(result)
+        console.log(state)
         setFeed(newData);
       })
       .catch((err) => {
