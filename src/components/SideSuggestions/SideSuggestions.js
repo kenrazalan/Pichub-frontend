@@ -11,7 +11,7 @@ import SideSuggestionsList from "./SideSuggestionsList";
 const Wrapper = styled.div`
   .containers {
     display: flex;
-    max-width: 320px;
+    width: 300px;
 
     flex-direction: column;
     height: 100vh;
@@ -49,6 +49,9 @@ const Wrapper = styled.div`
   h6 {
     font-size: 14px;
     text-align: left;
+  }
+  p{
+    margin-top: 12px;
   }
   .list {
     margin-right: 19px;
@@ -145,8 +148,16 @@ function SideSuggestions() {
     })
       .then((user) => user.json())
       .then((result) => {
+        result.forEach(user=>{
+          user.isFollowing= false
+          const followers = user.followers.map((follower) => follower._id.toString());
+          if (followers.includes(state._id)) {
+            user.isFollowing = true;
+          }
+        })
         setLoading(false);
-        setUsers(result);
+        console.log(result)
+        setUsers(result.filter(user=> !user.isFollowing ));
         console.log(state);
       });
   }, [state]);
@@ -201,6 +212,7 @@ function SideSuggestions() {
                 <SideSuggestionsList user={user}/>
             ))
           )}
+           {users.length === 0 && <p>There's no suggestions right now.  </p>}
         </div>
       </div>
     </Wrapper>

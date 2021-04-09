@@ -189,6 +189,7 @@ function Post({ item }) {
         {showModal && (
           <Modal>
             <DeleteModal
+              item={item}
               postId={del}
               handleDeletePost={deletePost}
               state={state}
@@ -196,7 +197,7 @@ function Post({ item }) {
             />
           </Modal>
         )}
-        {item.postedBy?._id === state._id && (
+
           <MoreIcon
             onClick={() => {
               setShowModal(true);
@@ -204,7 +205,7 @@ function Post({ item }) {
             }}
             style={{ float: "right" }}
           />
-        )}{" "}
+        {" "}
       </div>
 
       <div className="card-image">

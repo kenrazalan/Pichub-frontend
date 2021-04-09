@@ -19,6 +19,7 @@ const ModalContentWrapper = styled.div`
 `;
 
 function DeleteModal({
+    item,
     postId,
     closeModal,
     handleDeletePost,
@@ -30,20 +31,24 @@ function DeleteModal({
     return (
         <div>
             <ModalContentWrapper>
+      <span className="danger" onClick={() => {history.push(`/post/${item._id}`)}}>
+        Go to Post
+      </span>
+      {item.postedBy?._id !== state?._id ? null : 
+      
+      <span
+        className="danger"
+        onClick={() => {handleDeletePost(postId);closeModal();history.push('/')}}>Delete Post
+      </span>
+      }
+        <span
+        className="danger"
+        onClick={() =>closeModal()}>Report
+      </span>
       <span className="danger" onClick={closeModal}>
         Cancel
       </span>
 
-      <span
-        className="danger"
-        onClick={() => {
-          handleDeletePost(postId);
-          closeModal();
-          history.push('/')
-        }}
-      >
-        Delete Post
-      </span>
       {/* <DeletePost postId={postId} closeModal={closeModal} goToHome={true} /> */}
     </ModalContentWrapper>
             

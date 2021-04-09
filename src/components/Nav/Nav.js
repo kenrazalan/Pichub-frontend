@@ -1,6 +1,6 @@
 import React, { useContext, useRef, useEffect, useState } from "react";
 import styled from "styled-components";
-import { ExploreIcon, HomeIcon, SearchIcon } from "../assets/Icons";
+import { ExploreIcon, HomeIcon, InboxIcon, SearchIcon } from "../assets/Icons";
 import { Link, useHistory } from "react-router-dom";
 import { UserContext } from "../../App";
 import navlogo from "../../components/assets/logo1.png";
@@ -115,7 +115,9 @@ const Nav = () => {
             </div>
           </Link>
         </li>,
-
+        <li key="12">
+        <InboxIcon />
+         </li>,
         <li key="12">
           <NewPost />
         </li>,

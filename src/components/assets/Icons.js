@@ -2,7 +2,7 @@ import React from "react";
 
 export const HomeIcon = () => (
   <svg
-  style={{marginBottom:"-15px"}}
+  style={{marginBottom:"10px",marginTop: "10px"}}
     aria-label="Home"
     fill="#262626"
     height="22"
@@ -21,6 +21,7 @@ export const SearchIcon = () => (
 export const InboxIcon = (props) => (
   <svg
     {...props}
+    style={{marginBottom:"10px",marginTop: "10px"}}
     aria-label="Direct"
     fill="#262626"
     height="22"

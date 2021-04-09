@@ -104,7 +104,7 @@ const Wrapper = styled.div`
   
 `;
 const MWrapper = styled.div`
-@media (max-width:920px)  {
+@media (max-width:1000px)  {
     .sideSuggestions{
      display: none;
     }

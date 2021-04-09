@@ -154,12 +154,12 @@ svg{
 }
 .comment-name{
     //font-family: 'Roboto', sans-serif;
-    font-size: 14px;
+    font-size: 12px;
     font-weight: 700;
     padding:0 5px 0 5px;
 }
 .comment-text{
-    font-size: 14px;
+    font-size: 12px;
     font-weight: 100;
     //font-family: 'Roboto', sans-serif;
 }
@@ -466,11 +466,13 @@ function GoToPost() {
                 <Link to={post.postedBy?._id === state._id ? `/profile` : `/profile/${post.postedBy?._id}`}>
                     {post.postedBy?.username}
                 </Link> 
-             
-                    <span>  •</span>
+                      { state._id === post.postedBy?._id ? null : <span>  •</span> }
+                   
                 </div>    
                     <span>
-                     {!state.following.some((i) => i._id === post.postedBy?._id) ? (
+                     {
+                       state._id === post.postedBy?._id ? null :
+                     !state.following.some((i) => i._id === post.postedBy?._id) ? (
                       !load ? 
                       <Button className="btns follow" onClick={() => {followUser(post.postedBy?._id);setLoad(true);}}>Follow</Button>
                       : (
@@ -488,7 +490,6 @@ function GoToPost() {
                     )}
                       </span>    
           </div>
-            {post.postedBy?._id === state._id && (
                 <MoreIcon
                     onClick={() => {
                     setShowModal(true);
@@ -496,12 +497,13 @@ function GoToPost() {
                     }}
                     style={{ float: "right"}}
                 />
-                )}{" "}
+                {" "}
         </div>
       
         {showModal && (
           <Modal>
             <DeleteModal
+              item={post}
               postId={del}
               handleDeletePost={deletePost}
               state={state}
