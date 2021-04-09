@@ -48,7 +48,7 @@ const NavWrapper = styled.div`
     top: 6px;
    
     height: 29px;
-    margin:5px 0 5px 0;
+    margin:5px 0 5px 15px;
   }
 
   .nav-logo {
@@ -225,9 +225,10 @@ const Nav = () => {
     <NavWrapper>
       <div className="nav">
 
-      <div className="nav2 center">
+      <div className="nav2">
         <Link to={state ? "/" : "/signin"} className="brand-logo2">
           <img className="nav-logo2" src={navlogo} alt="logo" />
+          <InboxIcon style={{float: "right" ,marginTop: "14px",marginRight: "15px"}}/>
         </Link>
       </div>
 
