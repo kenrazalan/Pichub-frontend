@@ -91,6 +91,7 @@ const NavWrapper = styled.div`
   }
   .collection{
     max-height: 50vh;
+    min-height: 50vh;
     overflow: scroll;
   }
   @media screen and (max-width: 970px) {
