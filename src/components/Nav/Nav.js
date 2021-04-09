@@ -1,11 +1,13 @@
 import React, { useContext, useRef, useEffect, useState } from "react";
 import styled from "styled-components";
-import { ExploreIcon, HomeIcon, InboxIcon, SearchIcon } from "../assets/Icons";
+import { ExploreIcon, HomeIcon, InboxIcon, SearchIcon,AddPost, HeartIcon } from "../assets/Icons";
+import addpost from '../assets/addpost.svg'
 import { Link, useHistory } from "react-router-dom";
 import { UserContext } from "../../App";
 import navlogo from "../../components/assets/logo1.png";
 import NewPost from "../../components/Newpost/Newpost";
 import M from "materialize-css";
+import Search from "../Search/Search";
 
 const NavWrapper = styled.div`
   position: fixed;
@@ -71,21 +73,53 @@ const NavWrapper = styled.div`
   }
 
   li {
-    margin-left: 1rem;
+    margin-left: 1.5rem;
     font-weight: 400;
   }
-
+  .search-mobile{
+    display: none;
+  }
+  .input{
+    display: flex;
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #DBDBDB;
+  }
+  .modal-footer{
+    position: absolute;
+    bottom: 0;
+  }
+  .collection{
+    max-height: 50vh;
+    overflow: scroll;
+  }
   @media screen and (max-width: 970px) {
     .nav {
       width: 90%;
     }
+    .search{
+      margin-right: -150px;
+      
+    }
+    li{
+      margin-left: 1rem;
+    }
   }
 
-  @media screen and (max-width: 670px) {
-    input {
+  @media screen and (max-width: 600px) {
+    .search {
+      display: none;
+    }
+    .search-mobile{
+      display: block;
+    }
+  }
+  @media screen and (max-width: 600px) {
+    .heart-icon{
       display: none;
     }
   }
+
 `;
 
 const Nav = () => {
@@ -102,24 +136,30 @@ const Nav = () => {
     if (state) {
       return [
         // <li key="1"><i  data-target="modal1" className="large material-icons modal-trigger" style={{color:"black"}}>search</i></li>,
-      
+        <li className="search" style={{marginBottom:"10px",marginTop: "10px"}} key="1">
+        <Link >
+        <div data-target="modal1" className="modal-trigger">
+          <Search />
+          </div>
+        </Link>
+      </li>,
         <li key="1">
           <Link to="/">
             <HomeIcon />
           </Link>
         </li>,
-        <li style={{ margin: "auto !important" }} key="3">
+        <li className="search-mobile" style={{ margin: "auto !important" }} key="3">
           <Link>
             <div data-target="modal1" className="modal-trigger">
               <SearchIcon />
             </div>
           </Link>
         </li>,
-        <li key="12">
-        <InboxIcon />
+        <li className="heart-icon"  style={{marginBottom:"10px",marginTop: "10px"}} key="12">
+        <HeartIcon />
          </li>,
         <li key="12">
-          <NewPost />
+          <NewPost/>
         </li>,
         <li key="4">
           <Link to="/explore">
@@ -200,11 +240,12 @@ const Nav = () => {
           id="modal1"
           class="modal"
           ref={searchModal}
-          style={{ color: "black" }}
+          style={{ color: "black"}}
         >
           <div className="modal-content">
             <input
-              style={{ display: "flex" }}
+              style={{ display: "flex" ,width: "100%"}}
+              className="browser-default input"
               type="text"
               placeholder="Search"
               value={search}
@@ -239,7 +280,7 @@ const Nav = () => {
           </div>
           <div className="modal-footer">
             <button
-              className="modal-close waves-effect waves-green btn-flat"
+              className="modal-close waves-effect waves-green btn-flat fixed"
               onClick={() => setSearch("")}
             >
               Close
