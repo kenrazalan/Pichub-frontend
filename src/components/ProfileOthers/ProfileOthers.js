@@ -1,13 +1,14 @@
 import React, { useContext, useEffect, useState } from "react";
 import styled from "styled-components";
 import Button from "../assets/Button";
-import { CloseIcon, CommentIcon, HeartIcon, OptionsIcon, PostIcon, SavedIcon } from "../assets/Icons";
+import { CloseIcon, CommentIcon, FilledBookmarkIcon, HeartIcon, OptionsIcon, PostIcon, PostIcon2, SavedIcon } from "../assets/Icons";
 import { UserContext } from "../../App";
 import { useParams, useHistory, Link } from "react-router-dom";
 import Loader from "../assets/Loader";
 import Modal from "../Modal/Modal";
 import verified from '../assets/correct.svg'
 import ModalFollowersFollowings from '../ModalFollowersFollowings/ModalFollowersFollowings'
+import NewPost from "../Newpost/Newpost";
 
 const WrapperPost = styled.div`
  display: grid;
@@ -331,6 +332,8 @@ const ProfileOthers = (props) => {
   // const [showFollow,setShowfollow] =useState(state?!state.following.includes(userid):true)
   const [showFollow, setShowfollow] = useState(true);
   const userId = props.match.params.userid;
+  const [onpost, setSaved] = useState("POSTS");
+
   useEffect(() => {
     setShowfollow(state && !state.following.some((i) => i._id === userid));
   }, [state,userid]);
@@ -346,7 +349,7 @@ const ProfileOthers = (props) => {
         setProfile(result);
         console.log(result)
       });
-  }, []);
+  }, [userId]);
 
   const followUser = (id) => {
     fetch(`${process.env.REACT_APP_BACKEND_URL}/follow`, {
@@ -582,33 +585,72 @@ const ProfileOthers = (props) => {
 
           <div className="profile-tab">
             <div>
-              <PostIcon />
+            <div onClick={()=>{setSaved("POSTS")}}>
+            {onpost ==="SAVED" ?  <PostIcon2/> : <PostIcon/>}
               <span>Posts</span>
             </div>
+            </div>
             <div>
-              <SavedIcon />
+            <div onClick={()=>{setSaved("SAVED")}}>
+            {onpost ==="POSTS" ?  <SavedIcon/> : <FilledBookmarkIcon/>}
               <span>Saved</span>
+            </div>
             </div>
           </div>
           <hr className="profile-hr2"/>
 
           <WrapperPost>
-            {userProfile.posts.map((item) => (
+          {
+              onpost ==="POSTS" ?
+            userProfile.posts.length === 0 ? 
+            <>
+            <p></p>
+
+            <p className="pointer bold"
+            style={{fontSize:"15px",textAlign:"center",color: "#0095f6"}}>
+              No Posts Yet  
+              </p> 
+              </> :
+            userProfile.posts?.map((item) => (
               <div key={item._id} className="grid-container" onClick={() => history.push(`/post/${item._id}`)}>
                 <img src={item.photo} alt="post" />
                 <div className="overlay">
                 <div className="overlay-content">
                     <span>
-                      <HeartIcon /> {item.likes.length}
+                      <HeartIcon /> {item.likes?.length}
                     </span>
                     <span>
-                      <CommentIcon/>  {item.comments.length}
+                      <CommentIcon/>  {item.comments?.length}
                     </span>
-                    </div>
                   </div>
                 </div>
+              </div>
+            )) :
+            userProfile.user.savedPosts?.length === 0 ? 
+              <>
+              <p></p> 
+              <p className="pointer bold"
+               style={{fontSize:"15px",textAlign:"center",color: "#0095f6"}}>
+                {userProfile.user.name} has no saved posts yet.
+                </p> 
+                </> :
 
-            ))}
+            userProfile.user.savedPosts?.map((item) => (
+              <div key={item._id} className="grid-container" onClick={() => history.push(`/post/${item._id}`)}>
+                <img src={item.photo} alt="post" />
+                <div className="overlay">
+                <div className="overlay-content">
+                    <span>
+                      <HeartIcon /> {item.likes?.length}
+                    </span>
+                    <span>
+                      <CommentIcon/>  {item.comments?.length}
+                    </span>
+                  </div>
+                </div>
+              </div>
+            )) 
+            }
           </WrapperPost>
         </Wrappers>
       ) : (

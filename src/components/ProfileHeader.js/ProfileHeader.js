@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { useHistory, Link } from "react-router-dom";
 import Button from "../assets/Button";
 import Loader from "./../assets/Loader";
-import { OptionsIcon, PostIcon, SavedIcon, CloseIcon, CommentIcon, HeartIcon, NewPostIcon } from "../assets/Icons";
+import { OptionsIcon, PostIcon, SavedIcon, CloseIcon, CommentIcon, HeartIcon, NewPostIcon, BookmarkIcon, FilledBookmarkIcon, PostIcon2 } from "../assets/Icons";
 import { UserContext } from "../../App";
 import Modal from "../Modal/Modal";
 import LogoutModal from './LogoutModal'
@@ -598,19 +598,25 @@ const ProfileHeader = () => {
 
           <div className="profile-tab">
             <div>
-              <PostIcon />
-              <span onClick={()=>{setSaved("POSTS")}} className="bold">POSTS</span>
+              <div onClick={()=>{setSaved("POSTS")}}>
+              {onpost ==="SAVED" ?  <PostIcon2/> : <PostIcon/>}
+              <span  className="bold">POSTS</span>
             </div>
+            </div>
+            
             <div>
-              <SavedIcon />
-              <span onClick={()=>{setSaved("SAVED")}} className="bold">SAVED</span>
+              <div onClick={()=>{setSaved("SAVED")}}>
+              {onpost ==="POSTS" ?  <SavedIcon/> : <FilledBookmarkIcon/>}
+             
+              <span className="bold">SAVED</span>
+              </div>
             </div>
           </div>
           <hr className="profile-hr2"/>
 
           <WrapperPost>
             {/* {!loading ? */}
-            {mypics?.length === 0 && 
+            {/* {mypics?.length === 0 && 
             <>
             <p></p>
             <label htmlFor="upload-post">
@@ -622,10 +628,21 @@ const ProfileHeader = () => {
             
              <NewPost/>
               </>
-            }
+            } */}
             {
-              onpost ==="POSTS" &&
-
+              onpost ==="POSTS" ?
+            mypics.length === 0 ? 
+            <>
+            <p></p>
+            <label htmlFor="upload-post">
+            <p className="pointer bold"
+            style={{fontSize:"15px",textAlign:"center",color: "#0095f6"}}>
+              Share your first photo.  
+              </p> 
+             </label> 
+            
+             <NewPost/>
+              </> :
             mypics?.map((item) => (
               <div key={item._id} className="grid-container" onClick={() => history.push(`/post/${item._id}`)}>
                 <img src={item.photo} alt="post" />
@@ -640,10 +657,15 @@ const ProfileHeader = () => {
                   </div>
                 </div>
               </div>
-            )) 
-            }
-                        {
-              onpost ==="SAVED" &&
+            )) :
+            state.savedPosts?.length === 0 ? 
+              <>
+              <p></p> 
+              <p className="pointer bold"
+               style={{fontSize:"15px",textAlign:"center",color: "#0095f6"}}>
+                There's no Saved photos right now. 
+                </p> 
+                </> :
 
             state.savedPosts?.map((item) => (
               <div key={item._id} className="grid-container" onClick={() => history.push(`/post/${item._id}`)}>
@@ -661,6 +683,33 @@ const ProfileHeader = () => {
               </div>
             )) 
             }
+                        {/* {
+              onpost ==="SAVED" &&
+              state.savedPosts?.length === 0 ? 
+              <>
+              <p></p> 
+              <p className="pointer bold"
+               style={{fontSize:"15px",textAlign:"center",color: "#0095f6"}}>
+                There's no Saved photos right now. 
+                </p> 
+                </> :
+
+            state.savedPosts?.map((item) => (
+              <div key={item._id} className="grid-container" onClick={() => history.push(`/post/${item._id}`)}>
+                <img src={item.photo} alt="post" />
+                <div className="overlay">
+                <div className="overlay-content">
+                    <span>
+                      <HeartIcon /> {item.likes?.length}
+                    </span>
+                    <span>
+                      <CommentIcon/>  {item.comments?.length}
+                    </span>
+                  </div>
+                </div>
+              </div>
+            )) 
+            } */}
 
 
             {/* :

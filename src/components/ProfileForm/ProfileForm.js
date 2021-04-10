@@ -199,7 +199,9 @@ const ProfileForm = () => {
           <div className="change-profile bold">
             <h2 className="bold">{ state && state.username}</h2>
             <label htmlFor="change-avatar-link">
-              <span>Change Profile Photo</span>
+              <span>Change Profile 
+                
+              </span>
             </label>
             <input
               id="change-avatar-link"

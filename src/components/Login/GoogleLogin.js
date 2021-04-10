@@ -44,7 +44,7 @@ function LoginGoogle() {
                 <GoogleLogin 
                 clientId="292368699085-jb2puctimlk06qjc65noft4bp2v574bu.apps.googleusercontent.com"
                 className="google-btn"
-                buttonText="Google"
+                //buttonText="Google"
                 onSuccess={googleSuccess}
                 onFailure={googleFailure}
                 cookiePolicy={"single_host_origin"}
