@@ -83,9 +83,9 @@ const NewPost = () => {
       })
         .then((res) => res.json())
         .then((data) => {
-          console.log(data.url);
+          console.log(url);
 
-          setUrl(data.url);
+          setUrl(data.secure_url);
         })
         .catch((error) => {
           console.log(error);

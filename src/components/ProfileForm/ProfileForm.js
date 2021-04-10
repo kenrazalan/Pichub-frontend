@@ -119,7 +119,7 @@ const ProfileForm = () => {
         .then((res) => res.json())
         .then((data) => {
           
-          setNewProfile(data.url);
+          setNewProfile(data.secure_url);
           setLoader(false)
         })
         .catch((error) => {
