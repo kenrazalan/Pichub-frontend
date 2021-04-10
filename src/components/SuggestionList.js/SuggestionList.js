@@ -9,10 +9,13 @@ function SuggestionList({user}) {
     const history = useHistory()
     const { state, dispatch } = useContext(UserContext);
     const [showFollow, setShowfollow] = useState(true);
+    const [follow, setIsFollow] = useState(true);
 
     useEffect(() => {
-      setShowfollow(state && !state.following.some((i) => i._id === user._id));
-    }, [state,user]);
+      const followers = user.followers.map((follower) => follower._id.toString());
+      setIsFollow(followers?.includes(state?._id));
+      //setShowfollow(state && !state.following.some((i) => i._id === user._id));
+    }, []);
  
     const followUser = (id) => {
         fetch(`${process.env.REACT_APP_BACKEND_URL}/follow`, {
@@ -85,7 +88,15 @@ function SuggestionList({user}) {
                 <span className="secondary">{user.name}</span>
               </div>
             </div>
-            {!state.following.some((i) => i._id === user._id) ? (
+            {!follow ? (
+              
+      <Button className="btns" onClick={() => {followUser(user._id);setIsFollow(true);setLoad(true);}}>Follow</Button>
+
+    ) :
+      <Button className="following" onClick={() => {unfollowUser(user._id);setIsFollow(false); setLoad(true);}}>Following</Button>
+
+    }
+            {/* {!state.following.some((i) => i._id === user._id) ? (
               !load ? 
               <Button className="btns" onClick={() => {followUser(user._id);setLoad(true);}}>Follow</Button>
               : (
@@ -100,7 +111,7 @@ function SuggestionList({user}) {
                   <i className="fa fa-spinner fa-spin"></i>
                 </Button>
               )
-            )}
+            )} */}
           </div>
     )
 }

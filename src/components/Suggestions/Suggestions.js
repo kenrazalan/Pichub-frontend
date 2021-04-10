@@ -110,7 +110,7 @@ const Suggestions = () => {
       .then((result) => {
         setLoading(false);
         setUsers(result);
-        console.log(state);
+        console.log(result);
       });
   }, [state]);
 

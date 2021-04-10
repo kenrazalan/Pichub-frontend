@@ -1,4 +1,4 @@
-import React,{useState,useContext} from 'react'
+import React,{useState,useContext,useEffect} from 'react'
 import { useHistory } from 'react-router';
 import verified from '../assets/correct.svg'
 import Button from "../assets/Button";
@@ -9,6 +9,11 @@ function SideSuggestionsList({user}) {
     const [load,setLoad] = useState(false)
     const [showFollow, setShowfollow] = useState(true);
     const history = useHistory();
+    const [follow, setIsFollow] = useState(true);
+
+    useEffect(() => {
+      setIsFollow(user.followers?.includes(state._id));
+    }, [state._id,user.followers]);
 
     const followUser = (id) => {
         fetch(`${process.env.REACT_APP_BACKEND_URL}/follow`, {
@@ -65,22 +70,14 @@ function SideSuggestionsList({user}) {
           <div className="username">{user.username}</div>
         </div>
         
-        {!state.following.some((i) => i._id === user._id) ? (
-      !load ? 
-      <Button className="btns btn-follow" onClick={() => {followUser(user._id);setLoad(true);}}>Follow</Button>
-      : (
-        <Button className="btns btn-follow">
-          <i className="fa fa-spinner fa-spin"></i>
-        </Button>
-      )
-    ) : ( !load ? 
-      <Button className="btns following" onClick={() => {unfollowUser(user._id); setLoad(true);}}>Following</Button>
-      :  (
-        <Button className="btns following">
-          <i className="fa fa-spinner fa-spin"></i>
-        </Button>
-      )
-    )}
+        {/* {!state.following.some((i) => i._id === user._id) ? ( */}
+        {!follow ? (
+      <Button className="btns btn-follow" onClick={() => {followUser(user._id);setIsFollow(true);setLoad(true);}}>Follow</Button>
+
+    ) :
+      <Button className="btns following" onClick={() => {unfollowUser(user._id);setIsFollow(false); setLoad(true);}}>Following</Button>
+
+    }
       </div>
     )
 }
