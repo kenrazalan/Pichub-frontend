@@ -4,7 +4,7 @@ import { ExploreIcon, HomeIcon, InboxIcon, SearchIcon,AddPost, HeartIcon } from 
 import addpost from '../assets/addpost.svg'
 import { Link, useHistory } from "react-router-dom";
 import { UserContext } from "../../App";
-import navlogo from "../../components/assets/logo1.png";
+import navlogo from "../../components/assets/Untitled.png";
 import NewPost from "../../components/Newpost/Newpost";
 import M from "materialize-css";
 import Search from "../Search/Search";
