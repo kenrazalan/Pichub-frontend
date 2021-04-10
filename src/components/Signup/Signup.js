@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Link, useHistory } from "react-router-dom";
 import styled from "styled-components";
 import M from "materialize-css";
-import navlogo from "../../components/assets/Untitled.png";
+import navlogo from "../../components/assets/Untitled3.png";
 import LoginGoogle from "../Login/GoogleLogin";
 
 const Wrapper = styled.div`

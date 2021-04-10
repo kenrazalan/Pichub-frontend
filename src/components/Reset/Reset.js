@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Link, useHistory } from "react-router-dom";
-import navlogo from "../../components/assets/Untitled.png";
+import navlogo from "../../components/assets/Untitled3.png";
 import M from "materialize-css";
 import styled from "styled-components";
 
