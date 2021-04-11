@@ -431,13 +431,13 @@ const ProfileHeader = () => {
   };
   
 
-  if (loading) {
-    return <Loader />;
-  }
+  // if (loading) {
+  //   return <Loader />;
+  // }
 
   return (
     <>
-      {mypics ? (
+   
         <Wrappers>
           <Wrapper>
             <img
@@ -538,6 +538,8 @@ const ProfileHeader = () => {
               </div>
             </div>
           </Wrapper>
+
+          
           <MobileWrapper>
             <div className="mobile-profile-stats">
               <hr/>
@@ -615,23 +617,9 @@ const ProfileHeader = () => {
           <hr className="profile-hr2"/>
 
           <WrapperPost>
-            {/* {!loading ? */}
-            {/* {mypics?.length === 0 && 
-            <>
-            <p></p>
-            <label htmlFor="upload-post">
-            <p className="pointer bold"
-            style={{fontSize:"15px",textAlign:"center",color: "#0095f6"}}>
-              Share your first photo.  
-              </p> 
-             </label> 
-            
-             <NewPost/>
-              </>
-            } */}
             {
               onpost ==="POSTS" ?
-            mypics.length === 0 ? 
+            mypics.length === 0 && !loading ? 
             <>
             <p></p>
             <label htmlFor="upload-post">
@@ -658,7 +646,7 @@ const ProfileHeader = () => {
                 </div>
               </div>
             )) :
-            state.savedPosts?.length === 0 ? 
+            state.savedPosts?.length === 0 &&  !loading ? 
               <>
               <p></p> 
               <p className="pointer bold"
@@ -721,9 +709,7 @@ const ProfileHeader = () => {
            
           </WrapperPost>
         </Wrappers>
-      ) : (
-        <Loader />
-      )}
+
     </>
   );
 };

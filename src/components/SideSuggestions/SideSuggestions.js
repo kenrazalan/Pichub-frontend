@@ -218,7 +218,7 @@ function SideSuggestions() {
                 <SideSuggestionsList user={user}/>
             ))
           )}
-           {users.length === 0 && <p>There's no suggestions right now.  </p>}
+           {users.length === 0 && !loading && <p>There's no suggestions right now.  </p>}
         </div>
       </div>
     </Wrapper>
