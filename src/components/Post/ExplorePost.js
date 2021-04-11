@@ -1,11 +1,13 @@
 import React,{useContext,useEffect,useState} from 'react'
 import Loader from '../assets/Loader';
 import ExplorePostList from './ExplorePostList';
+import {AllpostContext} from '../context/AllpostContext'
 
 
 function ExplorePost() {
     const [post,setPost] = useState([])
     const [load, setLoad] = useState(true);
+    const { stateAllpost, dispatchAllpost} = useContext(AllpostContext);
 
     useEffect(() => {
         fetch(`${process.env.REACT_APP_BACKEND_URL}/allpost`, {
@@ -16,19 +18,20 @@ function ExplorePost() {
           .then((result) => {
           
             console.log(result.posts) 
-            setPost(result.posts)       
+            dispatchAllpost({type:"ALLPOST", payload:result.posts})     
             setLoad(false)
           });
+          
       }, []);
 
-    if(load){
-      return <Loader/>
-    }
+    // if(load ){
+    //   return <Loader/>
+    // }
 
     return (
         <div>
             <h5 className="browser-default bold" style={{marginBottom: "0",textAlign:"center"}}>Explore</h5>
-            <ExplorePostList posts={post}/>
+            <ExplorePostList posts={stateAllpost}/>
         </div>
     )
 }

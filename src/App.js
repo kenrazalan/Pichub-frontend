@@ -24,6 +24,7 @@ import PostProvider from "./components/context/PostContext";
 import ExplorePost from "./components/Post/ExplorePost";
 import GoToPost from "./components/Post/GoToPost";
 import Message from "./components/Message/Message";
+import AllpostProvider from "./components/context/AllpostContext";
 
 export const UserContext = createContext();
 
@@ -99,11 +100,13 @@ function App() {
   return (
     <UserContext.Provider value={{ state, dispatch }}>
       <PostProvider>
+        <AllpostProvider>
       <Router>
         { state ? <Nav /> : null }
         
         <Routing />
       </Router>
+      </AllpostProvider>
       </PostProvider>
     </UserContext.Provider>
   );
