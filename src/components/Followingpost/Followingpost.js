@@ -121,21 +121,22 @@ const Followingpost = () => {
   const [del, setDelete] = useState("");
   const [loading, setLoading] = useState(true);
   const [isLike,setIsLike] = useState(true)
-  const { feed, setFeed } = useContext(PostContext);
+  const { stateFeed, dispatchFeed } = useContext(PostContext);
 
-  useEffect(() => {
-    fetch(`${process.env.REACT_APP_BACKEND_URL}/followingpost`, {
-      headers: {
-        Authorization: "Bearer " + localStorage.getItem("jwt"),
-      },
-    }).then((res) => res.json())
-      .then((result) => {
+  // useEffect(() => {
+  //   fetch(`${process.env.REACT_APP_BACKEND_URL}/followingpost`, {
+  //     headers: {
+  //       Authorization: "Bearer " + localStorage.getItem("jwt"),
+  //     },
+  //   }).then((res) => res.json())
+  //     .then((result) => {
       
-        console.log(result.posts) 
-        setFeed(result.posts)       
-        setLoading(false)
-      });
-  }, [setFeed]);
+  //       console.log(result.posts) 
+  //       dispatchFeed({type:"FEED", payload:result.posts})
+  //       //setFeed(result.posts)       
+  //       setLoading(false)
+  //     });
+  // }, []);
 
   
     // if (loading) {
@@ -148,23 +149,25 @@ const Followingpost = () => {
        <div style={{display: "flex"}}>
       <Wrapper>
         <div className="home">
-        {loading ? 
-         <> 
-         <div style={{display: "flex"}}>
+        {
+        // loading ? 
+        //  <> 
+        //  <div style={{display: "flex"}}>
          
-            <Skeleton style={{marginBottom: "10px"}} animation="wave" variant="circle" width={40} height={40} />
-            <Skeleton style={{alignSelf: "center",marginBottom: "10px",
-                             marginLeft: "10px"}} animation="wave" height={30} width="40%" />
-         </div>
-         <Skeleton className="rect" animation="wave" variant="rect"  height={500} /> 
-         </>  
+        //     <Skeleton style={{marginBottom: "10px"}} animation="wave" variant="circle" width={40} height={40} />
+        //     <Skeleton style={{alignSelf: "center",marginBottom: "10px",
+        //                      marginLeft: "10px"}} animation="wave" height={30} width="40%" />
+        //  </div>
+        //  <Skeleton className="rect" animation="wave" variant="rect"  height={500} /> 
+        //  </>  
 
-          :
-          feed.map((post) => {
+        //   :
+          stateFeed.map((post) => {
             return (
               <Post item={post}/>
             )
-          })}
+          })
+          }
         </div>
       </Wrapper>
       <MWrapper>

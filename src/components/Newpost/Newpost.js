@@ -61,7 +61,7 @@ const NewPost = () => {
   const [image, setImage] = useState("");
   const [url, setUrl] = useState("");
   const history = useHistory();
-  const { feed, setFeed } = useContext(PostContext);
+  const { stateFeed, dispatchFeed } = useContext(PostContext);
 
   const handleUploadImage = (e) => {
     if (e.target.files[0]) {
@@ -113,7 +113,8 @@ const NewPost = () => {
           M.toast({ html: data.error, classes: "#e53935 red darken-1" });
         } else {
           console.log(data)
-          setFeed([data.post,...feed])
+          dispatchFeed({type:"NEWPOST", payload:[data.post,...stateFeed]})
+          //setFeed([data.post,...feed])
           // M.toast({ html: "Post Created", classes: "#66bb6a green lighten-1" });
           history.push("/");
           window.scrollTo(0, 0);

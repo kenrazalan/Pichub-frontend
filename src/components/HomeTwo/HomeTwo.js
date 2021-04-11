@@ -16,7 +16,7 @@ import {PostContext} from '../context/PostContext'
 const HomeTwo = () => {
   const [loading, setLoading] = useState(true);
   const [data, setData] = useState([]);
-  const { feed, setFeed } = useContext(PostContext);
+  const { stateFeed, dispatchFeed } = useContext(PostContext);
 
 
 
@@ -28,16 +28,18 @@ const HomeTwo = () => {
     })
       .then((res) => res.json())
       .then((result) => {
-        setFeed(result.posts);
-        setLoading(false);
+        //setFeed(result.posts);
+        dispatchFeed({type:"FEED", payload:result.posts})
+       setLoading(false);
       });
-  }, [setFeed]);
+       
+  }, [dispatchFeed]);
 
-   if (loading) {
+   if (stateFeed.length === 0 && loading) {
      return <Loader />;
    }
 
-    return <>{  feed.length > 0 ? <Followingpost /> : <Suggestions />}</>;
+    return <>{  stateFeed.length === 0 ? <Suggestions /> : <Followingpost />}</>;
   // return <Followingpost/>
 };
 

@@ -46,7 +46,7 @@ function Post({ item }) {
   const [likes,setLikes] = useState(null)
   const [comments,setComments] = useState([])
   const [text,setText] = useState("")
-  const { feed, setFeed } = useContext(PostContext);
+  const { stateFeed, dispatchFeed } = useContext(PostContext);
   const [isSave, setIsSave] = useState(false);
 
   useEffect(() => {
@@ -78,7 +78,7 @@ function Post({ item }) {
       .then((res) => res.json())
       .then((result) => {
         
-        const newData = feed.map((item) => {
+        const newData = stateFeed.map((item) => {
           if (item._id === result._id) {
             return result;
           } else {
@@ -86,7 +86,8 @@ function Post({ item }) {
           }
         });
         console.log(state)
-        setFeed(newData);
+        dispatchFeed({type:"FEED", payload:newData})
+        //setFeed(newData);
       })
       .catch((err) => {
         console.log(err);
@@ -157,7 +158,7 @@ function Post({ item }) {
     })
       .then((res) => res.json())
       .then((result) => {
-        const newData = feed.map((item) => {
+        const newData = stateFeed.map((item) => {
           if (item._id === result._id) {
             return result;
           } else {
@@ -165,7 +166,8 @@ function Post({ item }) {
           }
         })
         console.log(newData)
-        setFeed(newData);
+        dispatchFeed({type:"FEED", payload:newData})
+        //setFeed(newData);
       })
       .catch((error) => {
         console.log(error);
@@ -212,11 +214,12 @@ function Post({ item }) {
       .then((res) => res.json())
       .then((result) => {
         console.log(result);
-        const newData = feed.filter((item) => {
+        const newData = stateFeed.filter((item) => {
           return item._id !== result._id;
         });
         console.log(newData)
-        setFeed(newData);
+        dispatchFeed({type:"DELETE", payload:newData})
+        //setFeed(newData);
       }).catch((error=>{
         console.log(error)
       }));
