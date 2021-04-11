@@ -28,7 +28,7 @@ const Wrapper = styled.div`
     //margin-right: 10px;
     border: 1px solid #dbdbdb !important;
     box-shadow: none !important;
-    min-width: 300px;
+    min-width: 600px;
     max-width: 600px;
    height: max-content;
   }
@@ -98,7 +98,7 @@ const Wrapper = styled.div`
       width: 100vw;
       margin-left: calc(-53vw + 50%);
       max-width: unset;
-     
+      min-width: 300px;
     }
   }
   
@@ -146,7 +146,7 @@ const Followingpost = () => {
 
   return (
      
-       <div style={{display: "flex"}}>
+       <div style={{display: "flex",position:"relative"}}>
       <Wrapper>
         <div className="home">
         {
