@@ -630,9 +630,9 @@ const ProfileHeader = () => {
               </p> 
               </label> 
               : <div style={{width:"150px", display: "flex",justifyContent:"space-around"}}>
-              <Skeleton style={{background:"rgba(79,70,229)",marginRight:"unset" }} animation="wave" variant="circle" width={15} height={15} />
-              <Skeleton style={{background:"rgba(79,70,229)" }} animation="wave" variant="circle" width={15} height={15} /> 
-              <Skeleton style={{background:"rgba(79,70,229)" }} animation="wave" variant="circle" width={15} height={15} /> 
+              <Skeleton style={{marginRight:"unset" }} animation="wave" variant="circle" width={25} height={25} />
+              <Skeleton animation="wave" variant="circle" width={25} height={25} /> 
+              <Skeleton animation="wave" variant="circle" width={25} height={25} /> 
               </div> 
               }
            
