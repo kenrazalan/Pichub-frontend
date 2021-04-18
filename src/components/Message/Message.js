@@ -21,7 +21,10 @@ function Message({closeMessageModal}) {
                 <div><p className="bold">Coming Soon</p></div>
                 <CloseIcon  onClick={closeMessageModal}/>
               </div> 
-                <img style={{margin:"10px 0 10px 0"}} src={sign} alt="sign"/>
+              <div style={{minHeight:"154px",minWidth:"327"}}>
+                       <img style={{margin:"10px 0 10px 0"}} src={sign} alt="sign"/>
+              </div>
+         
                  
             </div>
            </div>
