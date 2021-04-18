@@ -1,14 +1,14 @@
 import React,{useEffect,useState,useContext} from 'react'
-import { BookmarkIcon, CommentIcon, FilledBookmarkIcon, FilledHeartIcon, HeartIcon, InboxIcon, MoreIcon, SavedIcon } from '../assets/Icons';
+import { BookmarkIcon, CommentIcon, FilledBookmarkIcon, FilledHeartIcon, HeartIcon, InboxIcon, MoreIcon, SavedIcon } from '../../assets/Icons';
 import { useParams, useHistory, Link } from "react-router-dom";
 import styled from 'styled-components'
 import { UserContext } from "../../App";
 import moment from 'moment';
-import Loader from '../assets/Loader';
+import Loader from '../../assets/Loader';
 import {PostContext} from '../../context/PostContext'
 import DeleteModal from '../DeleteModal/DeleteModal';
 import Modal from '../Modal/Modal';
-import Button from '../assets/Button';
+import Button from '../../assets/Button';
 import Message from '../Message/Message';
 
 const Wrapper = styled.div`

@@ -1,10 +1,7 @@
 import React, { useState, useEffect, useContext } from "react";
 import { useHistory } from "react-router-dom";
 import styled from "styled-components";
-import Loader from "../assets/Loader";
-import Button from "../assets/Button";
 import { UserContext } from "../../App";
-import verified from '../assets/correct.svg'
 import SuggestionList from '../SuggestionList.js/SuggestionList'
 import { Skeleton } from "@material-ui/lab";
 

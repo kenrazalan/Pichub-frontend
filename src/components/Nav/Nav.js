@@ -1,10 +1,10 @@
 import React, { useContext, useRef, useEffect, useState } from "react";
 import styled from "styled-components";
-import { ExploreIcon, HomeIcon, InboxIcon, SearchIcon,AddPost, HeartIcon } from "../assets/Icons";
-import addpost from '../assets/addpost.svg'
+import { ExploreIcon, HomeIcon, InboxIcon, SearchIcon,AddPost, HeartIcon } from "../../assets/Icons";
+import addpost from '../../assets/addpost.svg'
 import { Link, useHistory } from "react-router-dom";
 import { UserContext } from "../../App";
-import navlogo from "../../components/assets/Untitled3.png";
+import navlogo from '../../assets/Untitled3.png';
 import NewPost from "../../components/Newpost/Newpost";
 import M from "materialize-css";
 import Search from "../Search/Search";

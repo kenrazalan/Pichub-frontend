@@ -1,6 +1,6 @@
 import React,{useState,useEffect,useContext} from 'react'
 import { UserContext } from "../../App";
-import Button from "../assets/Button";
+import Button from "../../assets/Button";
 import { useHistory,Link } from 'react-router-dom';
 
 function FollowersFollowingList({user,loggedInUser,closeModal}) {

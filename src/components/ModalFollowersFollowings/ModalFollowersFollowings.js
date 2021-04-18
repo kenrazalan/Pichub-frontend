@@ -1,5 +1,5 @@
 import React from 'react'
-import { CloseIcon } from "../assets/Icons";
+import { CloseIcon } from "../../assets/Icons";
 import styled from "styled-components";
 import FollowersFollowingList from './FollowersFollowingList';
 

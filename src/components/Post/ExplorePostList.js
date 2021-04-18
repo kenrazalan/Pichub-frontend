@@ -1,7 +1,7 @@
 import React from "react";
 import { useHistory } from "react-router";
 import styled from "styled-components";
-import { CommentIcon, HeartIcon } from "../assets/Icons";
+import { CommentIcon, HeartIcon } from "../../assets/Icons";
 
 const Wrapper = styled.div`
   display: grid;

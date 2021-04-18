@@ -1,9 +1,9 @@
 import React, { useState, useContext, useEffect } from "react";
 import { useHistory } from "react-router-dom";
-import useInput from "../hooks/useInput";
+import useInput from "../../hooks/useInput";
 import styled from "styled-components";
-import Button from "../assets/Button";
-import gif from '../assets/771.gif'
+import Button from "../../assets/Button";
+import gif from '../../assets/771.gif'
 
 import { UserContext } from "../../App";
 import M from "materialize-css";

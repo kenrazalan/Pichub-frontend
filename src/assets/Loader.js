@@ -1,7 +1,7 @@
 import React from "react";
 import styled, { keyframes } from "styled-components";
 import { LoaderIcon } from "../assets/Icons";
-import load from '../assets/771.gif'
+
 
 // const rotate = keyframes`
 //   from {

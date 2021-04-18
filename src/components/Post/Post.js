@@ -1,12 +1,12 @@
 import React, { useState, useContext, useEffect } from "react";
 import { Link, useHistory } from "react-router-dom";
 import Modal from "../Modal/Modal";
-import verified from "../assets/correct.svg";
-import { BookmarkIcon, CommentIcon, FilledBookmarkIcon, InboxIcon, MoreIcon, SavedIcon } from "../assets/Icons";
+import verified from "../../assets/correct.svg";
+import { BookmarkIcon, CommentIcon, FilledBookmarkIcon, InboxIcon, MoreIcon, SavedIcon } from "../../assets/Icons";
 import DeleteModal from "../DeleteModal/DeleteModal";
 import { UserContext } from "./../../App";
 import { Skeleton } from "@material-ui/lab";
-import { HeartIcon, FilledHeartIcon } from "../assets/Icons";
+import { HeartIcon, FilledHeartIcon } from "../../assets/Icons";
 import moment from "moment";
 import {PostContext} from '../../context/PostContext'
 import styled from 'styled-components'

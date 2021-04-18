@@ -1,10 +1,10 @@
 import React, { useContext, useState } from "react";
 import styled from "styled-components";
 import Modal from "../Modal/Modal";
-import { AddPost, NewPostIcon } from "../assets/Icons";
+import { AddPost, NewPostIcon } from "../../assets/Icons";
 import M from "materialize-css";
 import { useHistory } from "react-router-dom";
-import Loader from "../assets/Loader";
+import Loader from "../../assets/Loader";
 import {PostContext} from '../../context/PostContext'
 
 const NewPostWrapper = styled.div`

@@ -1,7 +1,7 @@
 import React,{useState,useContext,useEffect} from 'react'
 import { useHistory } from 'react-router';
-import verified from '../assets/correct.svg'
-import Button from "../assets/Button";
+import verified from '../../assets/correct.svg'
+import Button from "../../assets/Button";
 import { UserContext } from "../../App";
 
 function SideSuggestionsList({user}) {

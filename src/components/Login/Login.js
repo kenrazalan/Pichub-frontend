@@ -2,10 +2,10 @@ import React, { useContext, useState } from "react";
 import { Link, useHistory } from "react-router-dom";
 import styled from "styled-components";
 import { UserContext } from "../../App";
-import navlogo from "../../components/assets/Untitled3.png";
+import navlogo from "../../assets/Untitled3.png";
 import LoginGoogle from "./GoogleLogin";
-import side from '../assets/side.png'
-import pic1 from '../assets/insta1.jpg'
+import side from '../../assets/side.png'
+import pic1 from '../../assets/insta1.jpg'
 
 const Wrapper = styled.div`
 .main{

@@ -1,5 +1,5 @@
 import React,{useContext,useEffect,useState} from 'react'
-import Loader from '../assets/Loader';
+import Loader from '../../assets/Loader';
 import ExplorePostList from './ExplorePostList';
 import {AllpostContext} from '../../context/AllpostContext'
 

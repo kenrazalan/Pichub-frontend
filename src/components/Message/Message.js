@@ -1,7 +1,7 @@
 import React from 'react'
-import { CloseIcon } from '../assets/Icons'
+import { CloseIcon } from '../../assets/Icons'
 import Modal from '../Modal/Modal'
-import sign from '../assets/construction.jpg'
+import sign from '../../assets/construction.jpg'
 
 function Message({closeMessageModal}) {
     return (

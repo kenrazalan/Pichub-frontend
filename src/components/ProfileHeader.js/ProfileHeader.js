@@ -1,15 +1,13 @@
 import React, { useContext, useEffect, useState } from "react";
 import styled from "styled-components";
 import { useHistory, Link } from "react-router-dom";
-import Button from "../assets/Button";
-import Loader from "./../assets/Loader";
-import { OptionsIcon, PostIcon, SavedIcon, CloseIcon, CommentIcon, HeartIcon, NewPostIcon, BookmarkIcon, FilledBookmarkIcon, PostIcon2 } from "../assets/Icons";
+import Button from "../../assets/Button";
+import { OptionsIcon, PostIcon, SavedIcon, CloseIcon, CommentIcon, HeartIcon, NewPostIcon, BookmarkIcon, FilledBookmarkIcon, PostIcon2 } from "../../assets/Icons";
 import { UserContext } from "../../App";
 import Modal from "../Modal/Modal";
 import LogoutModal from './LogoutModal'
-import verified from '../assets/correct.svg'
+import verified from '../../assets/correct.svg'
 import ModalFollowersFollowings from '../ModalFollowersFollowings/ModalFollowersFollowings'
-import { Skeleton } from "@material-ui/lab";
 import NewPost from "../Newpost/Newpost";
 
 const WrapperPost = styled.div`

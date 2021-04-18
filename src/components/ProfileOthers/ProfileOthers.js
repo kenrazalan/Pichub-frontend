@@ -1,12 +1,12 @@
 import React, { useContext, useEffect, useState } from "react";
 import styled from "styled-components";
-import Button from "../assets/Button";
-import { CloseIcon, CommentIcon, FilledBookmarkIcon, HeartIcon, OptionsIcon, PostIcon, PostIcon2, SavedIcon } from "../assets/Icons";
+import Button from "../../assets/Button";
+import { CloseIcon, CommentIcon, FilledBookmarkIcon, HeartIcon, OptionsIcon, PostIcon, PostIcon2, SavedIcon } from "../../assets/Icons";
 import { UserContext } from "../../App";
 import { useParams, useHistory, Link } from "react-router-dom";
-import Loader from "../assets/Loader";
+import Loader from "../../assets/Loader";
 import Modal from "../Modal/Modal";
-import verified from '../assets/correct.svg'
+import verified from '../../assets/correct.svg'
 import ModalFollowersFollowings from '../ModalFollowersFollowings/ModalFollowersFollowings'
 import NewPost from "../Newpost/Newpost";
 

@@ -1,5 +1,5 @@
 import React, { useEffect, createContext, useReducer, useContext } from "react";
-import Container from "./components/styles/Container";
+import Container from "./styles/Container";
 import "./App.css";
 import {
   BrowserRouter as Router,
@@ -15,7 +15,7 @@ import Createpost from "./components/Createpost/Createpost";
 import ProfileHeader from "./components/ProfileHeader.js/ProfileHeader";
 import ProfileOthers from "./components/ProfileOthers/ProfileOthers";
 import EditProfile from "./components/EditProfile/EditProfile";
-import HomeTwo from "./components/HomeTwo/HomeTwo";
+import HomeTwo from "./components/Home/HomeTwo";
 import Reset from "./components/Reset/Reset";
 import { reducer, initialState } from "./reducers/userReducer";
 import Suggestions from "./components/Suggestions/Suggestions";

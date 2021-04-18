@@ -2,7 +2,7 @@ import React, { useContext, useState, useEffect } from "react";
 import { Skeleton } from "@material-ui/lab";
 import styled from "styled-components";
 import { UserContext } from "../../App";
-import { OptionsIcon } from "../assets/Icons";
+import { OptionsIcon } from "../../assets/Icons";
 import Modal from "../Modal/Modal";
 import LogoutModal from "../ProfileHeader.js/LogoutModal";
 import { useHistory } from "react-router-dom";

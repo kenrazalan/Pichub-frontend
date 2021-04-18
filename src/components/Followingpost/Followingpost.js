@@ -1,14 +1,13 @@
 import React, { useState, useEffect, useContext } from "react";
 import { UserContext } from "./../../App";
 import { Link } from "react-router-dom";
-import Loader from "./../assets/Loader";
 import {Skeleton} from '@material-ui/lab'
-import {HeartIcon,FilledHeartIcon} from '../assets/Icons'
+import {HeartIcon,FilledHeartIcon} from '../../assets//Icons'
 import styled from "styled-components";
-import { MoreIcon } from "../assets/Icons";
+import { MoreIcon } from "../../assets/Icons";
 import Modal from "../Modal/Modal";
 import moment from 'moment'
-import verified from '../assets/correct.svg'
+import verified from '../../assets/correct.svg'
 import DeleteModal from '../DeleteModal/DeleteModal'
 import SideSuggestions from "../SideSuggestions/SideSuggestions";
 import Post from "../Post/Post";

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { HeartIcon, FilledHeartIcon } from "../assets/Icons";
+import { HeartIcon, FilledHeartIcon } from "../../assets/Icons";
 
 const LikePost = ({ isLiked, postId, incLikes, decLikes }) => {
   const [likedState, setLiked] = useState(isLiked);
