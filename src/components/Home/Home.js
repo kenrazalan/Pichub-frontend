@@ -4,6 +4,7 @@ import Suggestions from "../Suggestions/Suggestions";
 import Followingpost from "../Followingpost/Followingpost";
 import Loader from "../../assets/Loader";
 import {PostContext} from '../../context/PostContext'
+import Welcome from "../Welcome/Welcome";
 
 // const Wrapper = styled.div`
 //   @media screen and (max-width: 1040px) {
@@ -39,7 +40,7 @@ const HomeTwo = () => {
      return <Loader />;
    }
 
-    return <>{  stateFeed.length === 0 ? <Suggestions /> : <Followingpost />}</>;
+    return <>{  stateFeed.length === 0 ? <Welcome /> : <Followingpost />}</>;
   // return <Followingpost/>
 };
 

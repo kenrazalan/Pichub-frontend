@@ -1,6 +1,6 @@
 import React, { useEffect, createContext, useReducer, useContext } from "react";
 import Container from "./styles/Container";
-import "./App.css";
+import "./styles/App.css";
 import {
   BrowserRouter as Router,
   Route,
@@ -11,15 +11,13 @@ import {
 import Nav from "./components/Nav/Nav";
 import Login from "./components/Login/Login";
 import Signup from "./components/Signup/Signup";
-import Createpost from "./components/Createpost/Createpost";
 import ProfileHeader from "./components/ProfileHeader.js/ProfileHeader";
 import ProfileOthers from "./components/ProfileOthers/ProfileOthers";
 import EditProfile from "./components/EditProfile/EditProfile";
-import HomeTwo from "./components/Home/HomeTwo";
+import HomeTwo from "./components/Home/Home";
 import Reset from "./components/Reset/Reset";
 import { reducer, initialState } from "./reducers/userReducer";
 import Suggestions from "./components/Suggestions/Suggestions";
-import SideSuggestions from "./components/SideSuggestions/SideSuggestions";
 import PostProvider from "./context/PostContext";
 import ExplorePost from "./components/Post/ExplorePost";
 import GoToPost from "./components/Post/GoToPost";
@@ -52,23 +50,17 @@ const Routing = () => {
         </Route>
         <Route exact path="/signin"
           render={(props) => {
-            return  !state? <Login {...props} key={window.location.pathname}/>: <Redirect to="/" />;
-          }}>
+            return  !state? <Login {...props} key={window.location.pathname}/>: <Redirect to="/" />;}}>
         </Route>
         <Route  exact path="/signup"
           render={(props) => {
-            return  !state? <Signup {...props} key={window.location.pathname}/>: <Redirect to="/" />;
-          }}>
-        </Route>
-        <Route exact path="/create">
-          <Createpost />
+            return  !state? <Signup {...props} key={window.location.pathname}/>: <Redirect to="/" />;}}>
         </Route>
         <Route
           path="/profile/:userid"
           render={(props) => {
-            return  <ProfileOthers {...props} key={window.location.pathname} />;
-          }}
-        ></Route>
+            return  <ProfileOthers {...props} key={window.location.pathname} />;}}>
+       </Route>
         <Route exact path="/explore">
           <ExplorePost />
         </Route>
@@ -87,9 +79,6 @@ const Routing = () => {
         <Route exact path="/message">
           <Message/>
         </Route>
-        
-        
-        
       </Switch>
     </Container>
   );
