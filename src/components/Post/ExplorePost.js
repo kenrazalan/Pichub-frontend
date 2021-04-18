@@ -24,9 +24,9 @@ function ExplorePost() {
           
       }, []);
 
-    // if(load ){
-    //   return <Loader/>
-    // }
+    if(load ){
+      return <Loader/>
+    }
 
     return (
         <div>

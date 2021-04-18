@@ -9,6 +9,7 @@ import LogoutModal from './LogoutModal'
 import verified from '../../assets/correct.svg'
 import ModalFollowersFollowings from '../ModalFollowersFollowings/ModalFollowersFollowings'
 import NewPost from "../Newpost/Newpost";
+import { Skeleton } from "@material-ui/lab";
 
 const WrapperPost = styled.div`
    display: grid;
@@ -617,15 +618,24 @@ const ProfileHeader = () => {
           <WrapperPost>
             {
               onpost ==="POSTS" ?
-            mypics.length === 0 && !loading ? 
+            mypics.length === 0 ? 
             <>
             <p></p>
-            <label htmlFor="upload-post">
-            <p className="pointer bold"
-            style={{fontSize:"15px",textAlign:"center",color: "#0095f6"}}>
+            
+            { !loading ?     
+              <label htmlFor="upload-post">
+              <p className="pointer bold"
+              style={{fontSize:"15px",textAlign:"center",color: "#0095f6"}}>
               Share your first photo.  
               </p> 
-             </label> 
+              </label> 
+              : <div style={{width:"150px", display: "flex",justifyContent:"space-around"}}>
+              <Skeleton style={{background:"rgba(79,70,229)",marginRight:"unset" }} animation="wave" variant="circle" width={15} height={15} />
+              <Skeleton style={{background:"rgba(79,70,229)" }} animation="wave" variant="circle" width={15} height={15} /> 
+              <Skeleton style={{background:"rgba(79,70,229)" }} animation="wave" variant="circle" width={15} height={15} /> 
+              </div> 
+              }
+           
             
              <NewPost/>
               </> :
