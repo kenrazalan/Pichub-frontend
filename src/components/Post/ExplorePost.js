@@ -5,7 +5,6 @@ import {AllpostContext} from '../../context/AllpostContext'
 
 
 function ExplorePost() {
-    const [post,setPost] = useState([])
     const [load, setLoad] = useState(true);
     const { stateAllpost, dispatchAllpost} = useContext(AllpostContext);
 
@@ -21,10 +20,10 @@ function ExplorePost() {
             dispatchAllpost({type:"ALLPOST", payload:result.posts})     
             setLoad(false)
           });
-          
-      }, []);
 
-    if(load ){
+      }, [dispatchAllpost]);
+
+    if(load && stateAllpost.length === 0){
       return <Loader/>
     }
 

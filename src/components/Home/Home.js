@@ -41,7 +41,6 @@ const HomeTwo = () => {
    }
 
     return <>{  stateFeed.length === 0 ? <Welcome /> : <Followingpost />}</>;
-  // return <Followingpost/>
 };
 
 export default HomeTwo;
