@@ -23,6 +23,7 @@ import ExplorePost from "./components/Post/ExplorePost";
 import GoToPost from "./components/Post/GoToPost";
 import Message from "./components/Message/Message";
 import AllpostProvider from "./context/AllpostContext";
+import AAA from "./components/Notfound/Notfound";
 
 export const UserContext = createContext();
 
@@ -57,6 +58,7 @@ const Routing = () => {
             return  !state? <Signup {...props} key={window.location.pathname}/>: <Redirect to="/" />;}}>
         </Route>
         <Route
+         exact
           path="/profile/:userid"
           render={(props) => {
             return  <ProfileOthers {...props} key={window.location.pathname} />;}}>
@@ -64,7 +66,7 @@ const Routing = () => {
         <Route exact path="/explore">
           <ExplorePost />
         </Route>
-        <Route path="/accounts/edit">
+        <Route exact path="/accounts/edit">
           <EditProfile />
         </Route>
         <Route exact path="/reset">
@@ -79,6 +81,8 @@ const Routing = () => {
         <Route exact path="/message">
           <Message/>
         </Route>
+        <Route path='/404' component={AAA} />
+        <Redirect from='*' to='/404' />
       </Switch>
     </Container>
   );
