@@ -5,7 +5,7 @@ import styled from 'styled-components'
 import { UserContext } from "../../App";
 import moment from 'moment';
 import Loader from '../assets/Loader';
-import {PostContext} from '../context/PostContext'
+import {PostContext} from '../../context/PostContext'
 import DeleteModal from '../DeleteModal/DeleteModal';
 import Modal from '../Modal/Modal';
 import Button from '../assets/Button';

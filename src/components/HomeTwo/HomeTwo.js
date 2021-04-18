@@ -3,7 +3,7 @@ import styled from "styled-components";
 import Suggestions from "../Suggestions/Suggestions";
 import Followingpost from "../Followingpost/Followingpost";
 import Loader from "../assets/Loader";
-import {PostContext} from '../context/PostContext'
+import {PostContext} from '../../context/PostContext'
 
 // const Wrapper = styled.div`
 //   @media screen and (max-width: 1040px) {

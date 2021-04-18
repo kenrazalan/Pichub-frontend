@@ -5,7 +5,7 @@ import { AddPost, NewPostIcon } from "../assets/Icons";
 import M from "materialize-css";
 import { useHistory } from "react-router-dom";
 import Loader from "../assets/Loader";
-import {PostContext} from '../context/PostContext'
+import {PostContext} from '../../context/PostContext'
 
 const NewPostWrapper = styled.div`
   .newpost-header {

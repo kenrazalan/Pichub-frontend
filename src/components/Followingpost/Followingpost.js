@@ -12,7 +12,7 @@ import verified from '../assets/correct.svg'
 import DeleteModal from '../DeleteModal/DeleteModal'
 import SideSuggestions from "../SideSuggestions/SideSuggestions";
 import Post from "../Post/Post";
-import {PostContext} from '../context/PostContext'
+import {PostContext} from '../../context/PostContext'
 
 const Wrapper = styled.div`
 .verified{

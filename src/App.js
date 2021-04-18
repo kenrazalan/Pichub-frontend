@@ -20,11 +20,11 @@ import Reset from "./components/Reset/Reset";
 import { reducer, initialState } from "./reducers/userReducer";
 import Suggestions from "./components/Suggestions/Suggestions";
 import SideSuggestions from "./components/SideSuggestions/SideSuggestions";
-import PostProvider from "./components/context/PostContext";
+import PostProvider from "./context/PostContext";
 import ExplorePost from "./components/Post/ExplorePost";
 import GoToPost from "./components/Post/GoToPost";
 import Message from "./components/Message/Message";
-import AllpostProvider from "./components/context/AllpostContext";
+import AllpostProvider from "./context/AllpostContext";
 
 export const UserContext = createContext();
 

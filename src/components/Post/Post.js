@@ -8,7 +8,7 @@ import { UserContext } from "./../../App";
 import { Skeleton } from "@material-ui/lab";
 import { HeartIcon, FilledHeartIcon } from "../assets/Icons";
 import moment from "moment";
-import {PostContext} from '../context/PostContext'
+import {PostContext} from '../../context/PostContext'
 import styled from 'styled-components'
 import Message from "../Message/Message";
 
@@ -53,8 +53,8 @@ function Post({ item }) {
     setIsLike(item.likes?.includes(state._id));
     setLikes(item.likes?.length)
     setComments(item.comments)
-    const saveposts = state.savedPosts.map(save=> save._id)
-    setIsSave(saveposts.includes(item._id))
+    const saveposts = state.savedPosts?.map(save=> save._id)
+    setIsSave(saveposts?.includes(item._id))
   }, [item.likes,item._id,item.comments,state]);
 
   const handleText=(e)=>{
