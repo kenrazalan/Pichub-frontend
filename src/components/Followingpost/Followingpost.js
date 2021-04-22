@@ -59,11 +59,6 @@ const Wrapper = styled.div`
     background: none;
     margin-right: 20px;
   }
-  /* @media (max-width: 646px){
-    .post-btn{
-      padding-right: 10px ;
-    }
-  } */
   .post-btn:disabled{
     opacity: 0.3;
   }
@@ -91,7 +86,52 @@ const Wrapper = styled.div`
       max-width: unset;
       min-width: 300px;
     }
+    .myday-container{
+      width: 100vw;
+      margin-left: calc(-53vw + 50%);
+      margin-bottom: 0px !important;
+     margin-top: 0px !important;
+    }
+
   }
+  .myday-container{
+    width: 100%;
+    height: 118px;
+    position: relative;
+    display: flex;
+    align-items: center;
+    border: 1px solid #dbdbdb;
+    margin-bottom: 20px;
+    margin-top: 20px;
+    background: white !important;
+  }
+  .user-container{
+        width: 100%;
+    display: flex;
+    position: absolute;
+    overflow-y: hidden; ::-webkit-scrollbar{
+      display: none
+    }
+  }
+  .img-username{
+    height: 84px;
+    margin: 0 12px;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+  }
+  .myday-img{
+    border: 3px solid #d6249f;
+    width: 64px;
+    height: 64px;
+    background: green;
+    border-radius:50%;
+    margin:0;
+  }
+  p{
+    font-size: 12px;
+  }
+ 
   
 `;
 const MWrapper = styled.div`
@@ -105,13 +145,9 @@ const MWrapper = styled.div`
 
 
 const Followingpost = () => {
-  const [data, setData] = useState([]);
   const { state, dispatch } = useContext(UserContext);
   const [showModal, setShowModal] = useState(false);
-  const closeModal = () => setShowModal(false);
-  const [del, setDelete] = useState("");
-  const [loading, setLoading] = useState(true);
-  const [isLike,setIsLike] = useState(true)
+
   const { stateFeed, dispatchFeed } = useContext(PostContext);
 
   // useEffect(() => {
@@ -139,7 +175,27 @@ const Followingpost = () => {
      
        <div style={{display: "flex",position:"relative"}}>
       <Wrapper>
+        <div className="myday-container">
+        <div className="user-container">
+        {/* <div style={{height:"84px",margin:"0 12px",display:"flex",alignItems:"center",flexDirection:"column"}} >
+           <img alt="myday" src={state?.pic} style={{border: "3px solid #d6249f",width: "64px",height:"64px", background: "green" ,borderRadius:"50%",margin:"0"}}/>
+           <p>{state?.username}</p>
+        </div> */}
+
+           {state?.following.map(user =>{
+             return(
+           <div className="img-username pointer" style={{}} >
+           <img alt="myday" src={user.pic} className="myday-img"
+           style={{}}/>
+           <p>{user.username}</p>
+           </div>
+            )
+           })}
+
+      </div> 
+        </div>
         <div className="home">
+          
         {
         // loading ? 
         //  <> 
