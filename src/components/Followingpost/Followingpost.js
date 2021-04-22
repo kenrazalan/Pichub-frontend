@@ -4,6 +4,7 @@ import styled from "styled-components";
 import SideSuggestions from "../SideSuggestions/SideSuggestions";
 import Post from "../Post/Post";
 import {PostContext} from '../../context/PostContext'
+import { Link } from "react-router-dom";
 
 const Wrapper = styled.div`
 .verified{
@@ -127,6 +128,7 @@ const Wrapper = styled.div`
     background: green;
     border-radius:50%;
     margin:0;
+    object-fit: cover;
   }
   p{
     font-size: 12px;
@@ -187,7 +189,9 @@ const Followingpost = () => {
            <div className="img-username pointer" style={{}} >
            <img alt="myday" src={user.pic} className="myday-img"
            style={{}}/>
+           <Link to={`/profile/${user?._id}`}>
            <p>{user.username}</p>
+           </Link>
            </div>
             )
            })}
