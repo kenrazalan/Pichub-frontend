@@ -36,8 +36,8 @@ const HomeTwo = () => {
        
   }, [dispatchFeed]);
 
-   if (stateFeed?.length === 0 && loading) {
-     return <Loader />;
+   if (stateFeed === undefined && loading) {
+     return <Loader/>;
    }
 
     return <>{  stateFeed?.length === 0 ? <Welcome /> : <Followingpost />}</>;
