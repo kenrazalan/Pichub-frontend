@@ -125,7 +125,6 @@ const Wrapper = styled.div`
     border: 3px solid #d6249f;
     width: 64px;
     height: 64px;
-    background: green;
     border-radius:50%;
     margin:0;
     object-fit: cover;
@@ -213,7 +212,7 @@ const Followingpost = () => {
         //  </>  
 
         //   :
-          stateFeed.map((post) => {
+          stateFeed?.map((post) => {
             return (
               <Post item={post}/>
             )

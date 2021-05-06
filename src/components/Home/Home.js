@@ -40,7 +40,7 @@ const HomeTwo = () => {
      return <Loader />;
    }
 
-    return <>{  stateFeed.length === 0 ? <Welcome /> : <Followingpost />}</>;
+    return <>{  stateFeed?.length === 0 ? <Welcome /> : <Followingpost />}</>;
 };
 
 export default HomeTwo;
