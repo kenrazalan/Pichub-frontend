@@ -36,7 +36,7 @@ const HomeTwo = () => {
        
   }, [dispatchFeed]);
 
-   if (stateFeed.length === 0 && loading) {
+   if (stateFeed?.length === 0 && loading) {
      return <Loader />;
    }
 

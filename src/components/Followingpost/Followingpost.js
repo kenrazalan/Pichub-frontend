@@ -186,13 +186,13 @@ const Followingpost = () => {
 
            {state?.following.map(user =>{
              return(
-           <div className="img-username pointer" style={{}} >
-           <img alt="myday" src={user.pic} className="myday-img"
-           style={{}}/>
-           <Link to={`/profile/${user?._id}`}>
+            <Link to={`/profile/${user?._id}`}>
+           <div className="img-username pointer" >
+           <img alt="myday" src={user.pic} className="myday-img"/>
+          
            <p>{user.username}</p>
-           </Link>
-           </div>
+           </div>  
+            </Link>
             )
            })}
 
